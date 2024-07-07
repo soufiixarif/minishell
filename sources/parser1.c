@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 19:55:39 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/06 16:11:09 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/07 11:10:58 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@ t_syntax_err	d_quote(char *line)
 	}
 	return (syntx_err);
 }
-
-
 
 void	open_heredocs(char *line, int n)
 {
@@ -137,22 +135,10 @@ void	issyntax_err(char *line)
 
 
 
-void	parser(char *line)
+void	parser(t_token **token, char *line)
 {
-	
 	issyntax_err(line);
-	// if (!s_quote(line))
-	// 	printf("syntax error\n");
-	// if (!d_quote(line))
-	// 	printf("syntax error\n");
-	// if (!heredoc(line))
-	// 	printf("syntax error\n");
+	ft_tokenizer(token, line);
+	printf("here\n");
 }
 
-// int main(int ac, char **av)
-// {
-// 	if (ac > 2)
-// 	{
-// 		printf("%d", is_heredoc(av[1]));
-// 	}
-// }

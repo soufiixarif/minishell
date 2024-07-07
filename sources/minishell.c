@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:07:03 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/02 08:57:37 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/07 11:13:29 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,21 @@
 
 int	main()
 {
-	char *line;
+	t_token	*token;
+	char	*line;
 	
+	token = NULL;
 	while (1)
 	{
 		line = readline("Minishell$ ");
-		parser(line);
+		parser(&token, line);
+		while(token)
+		{
+			printf("string ==> %s\n", token->str);
+			printf("blank ==> %s\n", token->blank);
+			printf("operator ==> %s\n", token->op);
+			token = token->next;
+		}
+		free(line);
 	}
 }
