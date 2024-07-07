@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:07:03 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/07 14:29:51 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/07 15:23:22 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	main()
 	while (1)
 	{
 		line = readline("Minishell$ ");
+		if (!line)
+			exit(0);
 		add_history(line);
 		parser(&token, line);
 		while(token)
