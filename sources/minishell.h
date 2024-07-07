@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:14:17 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/07 11:25:28 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/07 14:30:09 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <readline/readline.h>
+#include <readline/history.h>
 
 typedef struct s_token
 {
@@ -27,6 +28,8 @@ typedef struct s_token
 	int		op_type;
 	struct s_token *next;
 }	t_token;
+
+// typedef struct s_
 
 typedef struct s_syntax_err
 {

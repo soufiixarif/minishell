@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 01:14:32 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/07 11:09:33 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/07 12:53:37 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	ft_tokenizer(t_token **token, char *line)
 		// if (ft_isblank(line[i]))
 		// {	
 		// 	token->blank = get_blank(line, &i);
-		// 	token = token->next;
+		// 	token = token->next;10
 		// }
 		i++;
 	}

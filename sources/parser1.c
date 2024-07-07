@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 19:55:39 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/07 11:10:58 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/07 13:17:15 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,6 @@ void	parser(t_token **token, char *line)
 {
 	issyntax_err(line);
 	ft_tokenizer(token, line);
-	printf("here\n");
+	// printf("here\n");
 }
 
