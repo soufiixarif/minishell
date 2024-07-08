@@ -6,20 +6,20 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 01:14:32 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/07 12:53:37 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/08 06:31:06 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int getlen_alnum(char *line, int index)
+int getlen_string(char *line, int index)
 {
 	int		i;
 	int		count;
 
 	i = index;
 	count = 0;
-	while (line[i] && ft_isalnum(line[i]))
+	while (line[i] && ft_isstring(line[i]))
 	{
 		count++;
 		i++;
@@ -40,8 +40,22 @@ int getlen_blank(char *line, int index)
 	}
 	return (count);
 }
+int getlen_op(char *line, int index)
+{
+	int		i;
+	int		count;
 
-char *get_alnum(char *line, int *index)
+	i = index;
+	count = 0;
+	while (line[i] && ft_isoperator(line[i]))
+	{
+		count++;
+		i++;
+	}
+	return (count);
+}
+
+char *get_string(char *line, int *index)
 {
 	int		i;
 	int		j;
@@ -49,8 +63,8 @@ char *get_alnum(char *line, int *index)
 
 	i = *index;
 	j = 0;
-	res = malloc(getlen_alnum(line, i) + 1);
-	while (line[i] && ft_isalnum(line[i]))
+	res = malloc(getlen_string(line, i) + 1);
+	while (line[i] && ft_isstring(line[i]))
 	{
 		res[j] = line[i];
 		j++;
@@ -79,6 +93,24 @@ char	*get_blank(char *line, int *index)
 	*index = i;
 	return (res);
 }
+char	*get_op(char *line, int *index)
+{
+	int		i;
+	int		j;
+	char	*res;
+
+	i = *index;
+	j = 0;
+	res = malloc(getlen_op(line, i));
+	while (line[i] && ft_isoperator(line[i]))
+	{
+		res[j] = line[i];
+		j++;
+		i++;
+	}
+	*index = i;
+	return (res);
+}
 
 void	ft_tokenizer(t_token **token, char *line)
 {
@@ -88,17 +120,24 @@ void	ft_tokenizer(t_token **token, char *line)
 	i = 0;
 	while (line[i])
 	{
-		if (ft_isalnum(line[i]))
+		if (ft_isstring(line[i]))
 		{
-			tmp_token = ft_lstnew(get_alnum(line, &i), 1);
+			tmp_token = ft_lstnew(get_string(line, &i), 1);
 			ft_lstadd_back(token, tmp_token);
 			continue ;
 		}
-		// if (ft_isblank(line[i]))
-		// {	
-		// 	token->blank = get_blank(line, &i);
-		// 	token = token->next;10
-		// }
+		if (ft_isblank(line[i]))
+		{
+			tmp_token = ft_lstnew(get_blank(line, &i), 2);
+			ft_lstadd_back(token, tmp_token);
+			continue ;
+		}
+		if (ft_isoperator(line[i]))
+		{
+			tmp_token = ft_lstnew(get_op(line, &i), 3);
+			ft_lstadd_back(token, tmp_token);
+			continue ;
+		}
 		i++;
 	}
 }
