@@ -1,36 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   is_utils2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/25 12:07:03 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/08 18:36:49 by kelmounj         ###   ########.fr       */
+/*   Created: 2024/07/08 10:22:03 by kelmounj          #+#    #+#             */
+/*   Updated: 2024/07/08 10:38:17 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main()
+int	ft_isoperator(char c)
 {
-	t_token	*token;
-	char	*line;
-	
-	token = NULL;
-	while (1)
-	{
-		line = readline("Minishell$ ");
-		if (!line)
-			exit(0);
-		add_history(line);
-		parser(&token, line);
-		while(token)
-		{
-			printf("token ==> %s\n", token->token);
-			printf("token ==> %u\n", token->type);
-			token = token->next;
-		}
-		free(line);
-	}
+	if (c == '|' || c == '<' || c == '>')
+		return (1);
+	else
+		return (0);
+}
+int	ft_ispipe(char c)
+{
+	if (c == '|')
+		return (1);
+	else
+		return (0);
+}
+
+int	ft_isin(char c)
+{
+	if (c == '<')
+		return (1);
+	else
+		return (0);
+}
+int	ft_isout(char c)
+{
+	if (c == '>')
+		return (1);
+	else
+		return (0);
 }

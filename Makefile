@@ -7,8 +7,7 @@ FLAGS = -Wextra -Wall -Werror -I/Users/kelmounj/.brew/opt/readline/include
 LDFLAGS = -lreadline -L/Users/kelmounj/.brew/opt/readline/lib 
 # -fsanitize=address -g
 
-SRCS = sources/minishell.c sources/parser1.c sources/parser2.c sources/utils1.c sources/utils2.c sources/utils3.c sources/init.c
-
+SRCS = sources/minishell.c sources/parser1.c sources/parser2.c sources/parser3.c sources/parser4.c sources/parser5.c sources/utils1.c sources/utils2.c sources/init.c sources/is_utils1.c sources/is_utils2.c sources/is_utils3.c 
 
 HEADERS = sources/minishell.h
 

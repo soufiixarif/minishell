@@ -6,110 +6,43 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 01:14:32 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/08 06:31:06 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/09 10:31:06 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int getlen_string(char *line, int index)
+void	handle_op(t_token **token, char *line, int *index)
 {
 	int		i;
-	int		count;
-
-	i = index;
-	count = 0;
-	while (line[i] && ft_isstring(line[i]))
-	{
-		count++;
-		i++;
-	}
-	return (count);
-}
-int getlen_blank(char *line, int index)
-{
-	int		i;
-	int		count;
-
-	i = index;
-	count = 0;
-	while (line[i] && ft_isblank(line[i]))
-	{
-		count++;
-		i++;
-	}
-	return (count);
-}
-int getlen_op(char *line, int index)
-{
-	int		i;
-	int		count;
-
-	i = index;
-	count = 0;
-	while (line[i] && ft_isoperator(line[i]))
-	{
-		count++;
-		i++;
-	}
-	return (count);
-}
-
-char *get_string(char *line, int *index)
-{
-	int		i;
-	int		j;
-	char	*res;
+	t_token *tmp_token;
 
 	i = *index;
-	j = 0;
-	res = malloc(getlen_string(line, i) + 1);
-	while (line[i] && ft_isstring(line[i]))
+	if (ft_ispipe(line[i]))
 	{
-		res[j] = line[i];
-		j++;
-		i++;
+		handle_pipe(line, i);
+		tmp_token = ft_lstnew(get_pipe(line, &i), PIPE);
+		ft_lstadd_back(token, tmp_token);
 	}
-	res[j] = '\0';
-	*index = i;
-	return (res);
-}
-
-char	*get_blank(char *line, int *index)
-{
-	int		i;
-	int		j;
-	char	*res;
-
-	i = *index;
-	j = 0;
-	res = malloc(getlen_blank(line, i));
-	while (line[i] && ft_isblank(line[i]))
+	else if (ft_isin(line[i]))
 	{
-		res[j] = line[i];
-		j++;
-		i++;
+		handle_in(token, line, &i);
+		if (i == *index)
+		{
+			tmp_token = ft_lstnew(get_in(line, &i), IN);
+			ft_lstadd_back(token, tmp_token);	
+		}
+	}
+	else if (ft_isout(line[i]))
+	{
+		handle_out(token, line, &i);
+		if (i == *index)
+		{
+			tmp_token = ft_lstnew(get_out(line, &i), OUT);
+			ft_lstadd_back(token, tmp_token);
+		}
 	}
 	*index = i;
-	return (res);
-}
-char	*get_op(char *line, int *index)
-{
-	int		i;
-	int		j;
-	char	*res;
-
-	i = *index;
-	j = 0;
-	res = malloc(getlen_op(line, i));
-	while (line[i] && ft_isoperator(line[i]))
-	{
-		res[j] = line[i];
-		j++;
-		i++;
-	}
-	*index = i;
-	return (res);
 }
 
 void	ft_tokenizer(t_token **token, char *line)
@@ -122,19 +55,37 @@ void	ft_tokenizer(t_token **token, char *line)
 	{
 		if (ft_isstring(line[i]))
 		{
-			tmp_token = ft_lstnew(get_string(line, &i), 1);
+			tmp_token = ft_lstnew(get_string(line, &i), TEXT);
 			ft_lstadd_back(token, tmp_token);
 			continue ;
 		}
-		if (ft_isblank(line[i]))
+		else if (ft_issnglqs(line[i]))
 		{
-			tmp_token = ft_lstnew(get_blank(line, &i), 2);
+			tmp_token = ft_lstnew(get_sq(line, &i), S_QUOTE);
 			ft_lstadd_back(token, tmp_token);
 			continue ;
 		}
-		if (ft_isoperator(line[i]))
+		else if (ft_isdblqs(line[i]))
 		{
-			tmp_token = ft_lstnew(get_op(line, &i), 3);
+			tmp_token = ft_lstnew(get_dq(line, &i), D_QUOTE);
+			ft_lstadd_back(token, tmp_token);
+			continue ;
+		}
+		else if (ft_isblank(line[i]))
+		{
+			tmp_token = ft_lstnew(get_blank(line, &i), BLANK);
+			ft_lstadd_back(token, tmp_token);
+			continue ;
+		}
+		else if (ft_isoperator(line[i]))
+		{
+			handle_op(token, line, &i);
+			continue ;
+			exit(0);
+		}
+		else if (ft_isexpand(line[i]))
+		{
+			tmp_token = ft_lstnew(get_exp(line, &i), EXP);
 			ft_lstadd_back(token, tmp_token);
 			continue ;
 		}

@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:14:17 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/08 06:29:48 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/09 10:34:49 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,30 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
-typedef struct s_token
+typedef enum e_type
+{
+	PIPE,        	   //0
+	S_QUOTE,    	  //1
+	D_QUOTE,   		 //2
+	TEXT,     		//3
+	EXP,     	   //4
+	BLANK,  	  //5
+	IN,    		 //6
+	OUT,    	//7
+	APPEND,    //8
+	HERDOC,   //9
+} t_type;
+
+typedef struct s_operator
 {
 	char	*op;
-	char	*str;
-	char	*blank;
-	char	*exp;
-	int		op_type;
+	t_type	op_type;
+}	t_operator;
+
+typedef struct s_token
+{
+	char	*token;
+	t_type	type;
 	struct s_token *next;
 }	t_token;
 
@@ -45,13 +62,44 @@ char		*ft_strjoin(char const *s1, char const *s2);
 int			ft_isalnum(int c);
 int			ft_isblank(char c);
 int			ft_isstring(char c);
+int			ft_issnglqs(char c);
+int			ft_isdblqs(char c);
 int			ft_isoperator(char c);
-t_token		*ft_lstnew(void *content, int bool);
+int			ft_isexpand(char c);
+int			ft_ispipe(char c);
+int			ft_isin(char c);
+int			ft_isout(char c);
+t_token		*ft_lstnew(void *content, t_type type);
 t_garbage	*ft_garnew(t_garbage **garbage, void *content);
 void		ft_free(t_garbage **garbage, int boole);
 void		ft_lstadd_back(t_token **lst, t_token *new);
 void		ft_garadd_back(t_garbage **lst, t_garbage *new);
 void		ft_garclear(t_garbage **lst);
+int			getlen_string(char *line, int index);
+int			getlen_sq(char *line, int index);
+int			getlen_dq(char *line, int index);
+int			getlen_blank(char *line, int index);
+int			getlen_op(char *line, int index);
+int			getlen_exp(char *line, int index);
+int 		getlen_pipe(char *line, int index);
+int			getlen_in(char *line, int index);
+int			getlen_out(char *line, int index);
+char		*get_string(char *line, int *index);
+char		*get_sq(char *line, int *index);
+char		*get_dq(char *line, int *index);
+char		*get_blank(char *line, int *index);
+char		*get_op(char *line, int *index);
+char		*get_exp(char *line, int *index);
+char		*get_pipe(char *line, int *index);
+char		*get_in(char *line, int *index);
+char		*get_out(char *line, int *index);
+char		*get_herdoc(char *line, int *index);
+char		*get_append(char *line, int *index);
+void		handle_pipe(char *line, int index);
+void		handle_in(t_token **token, char *line, int *index);
+void		handle_out(t_token **token, char *line, int *index);
+void		handle_herdoc(char *line, int index);
+void		handle_append(char *line, int index);
 void		ft_tokenizer(t_token **token, char *line);
 void		parser(t_token **token, char *line);
 

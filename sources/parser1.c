@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 19:55:39 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/07 13:17:15 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/08 12:35:50 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,14 +88,22 @@ void	issyntax_err(char *line)
 	if (syntx_err1.bool == 1)
 	{
 		open_heredocs(line, syntx_err1.index);
-		printf("syntax error '\n");
+		printf("syntax error near unexpected token '\n");
 	}
 	if (syntx_err2.bool == 1)
 	{
 		open_heredocs(line, syntx_err2.index);
-		printf("syntax error \"\n");
+		printf("syntax error near unexpected token \"\n");
 	}
 }
+
+void	parser(t_token **token, char *line)
+{
+	issyntax_err(line);
+	ft_tokenizer(token, line);
+	// printf("here\n");
+}
+
 
 // int	is_spaces(char *line, int *i)
 // {
@@ -132,13 +140,4 @@ void	issyntax_err(char *line)
 // 	}
 // 	return (1);
 // }
-
-
-
-void	parser(t_token **token, char *line)
-{
-	issyntax_err(line);
-	ft_tokenizer(token, line);
-	// printf("here\n");
-}
 

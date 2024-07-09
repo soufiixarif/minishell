@@ -5,44 +5,86 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/26 16:38:54 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/08 06:28:00 by kelmounj         ###   ########.fr       */
+/*   Created: 2024/07/07 10:20:25 by kelmounj          #+#    #+#             */
+/*   Updated: 2024/07/08 18:34:27 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_isstring(char c)
+t_token	*ft_lstnew(void *content, t_type type)
 {
-	if (c != ' ' && c != '|' && c != '$' && c != '"' && c != '\'' 
-		&& c != '<' && c != '>')
-		return (1);
-	else
-		return (0);
+	t_token	*token;
+
+	token = (t_token *)malloc(sizeof(t_token));
+	if (!token)
+		return (NULL);
+	token->token = content;
+	token->type = type;
+	token->next = NULL;
+	return (token);
 }
 
-int	ft_isoperator(char c)
+void	ft_lstadd_back(t_token **lst, t_token *new)
 {
-	if (c == ' ' || c == '|' || c == '$' || c == '"' || c == '\'' 
-		|| c == '<' || c == '>')
-		return (1);
-	else
-		return (0);
+	t_token	*tmp;
+
+	if (lst && new)
+	{
+		if (*lst)
+		{
+			tmp = *lst;
+			while (tmp -> next)
+				tmp = tmp -> next;
+			(tmp)-> next = new;
+		}
+		else 
+			*lst = new;
+	}
 }
 
-int	ft_isalnum(int c)
+t_garbage	*ft_garnew(t_garbage **all, void *content)
 {
-	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122) 
-		|| (c >= 48 && c <= 57)) 
-		return (1);
-	else
-		return (0);
+	t_garbage	*garbage;
+
+	garbage = (t_garbage *)malloc(sizeof(t_garbage));
+	if (!garbage)
+		return (ft_free(all, 1), NULL);
+	garbage ->node = content;
+	garbage -> next = NULL;
+	return (garbage);
 }
 
-int	ft_isblank(char c)
+void	ft_garadd_back(t_garbage **lst, t_garbage *new)
 {
-	if (c == ' ' || (c >= 9 && c <= 13))
-		return (1);
-	else
-		return (0);
+	t_garbage	*tmp;
+
+	if (lst && new)
+	{
+		if (*lst)
+		{
+			tmp = *lst;
+			while (tmp -> next)
+				tmp = tmp -> next;
+			(tmp)-> next = new;
+		}
+		else 
+			*lst = new;
+	}
+}
+
+void	ft_garclear(t_garbage **lst)
+{
+	t_garbage	*tmp;
+
+	if (lst && *lst)
+	{
+		while (*lst)
+		{
+			tmp = (*lst)->next;
+			free((*lst)->node);
+			free(*lst);
+			*lst = tmp;
+		}
+	}
 }

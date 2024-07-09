@@ -1,36 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   is_utils3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/25 12:07:03 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/08 18:36:49 by kelmounj         ###   ########.fr       */
+/*   Created: 2024/07/08 10:22:01 by kelmounj          #+#    #+#             */
+/*   Updated: 2024/07/08 10:24:27 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main()
+int	ft_isexpand(char c)
 {
-	t_token	*token;
-	char	*line;
-	
-	token = NULL;
-	while (1)
-	{
-		line = readline("Minishell$ ");
-		if (!line)
-			exit(0);
-		add_history(line);
-		parser(&token, line);
-		while(token)
-		{
-			printf("token ==> %s\n", token->token);
-			printf("token ==> %u\n", token->type);
-			token = token->next;
-		}
-		free(line);
-	}
+	if (c == '$' )
+		return (1);
+	else
+		return (0);
+}
+
+int	ft_isblank(char c)
+{
+	if (c == ' ' || (c >= 9 && c <= 13))
+		return (1);
+	else
+		return (0);
 }
