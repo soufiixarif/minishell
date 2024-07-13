@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 01:14:32 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/12 20:18:17 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/13 14:14:08 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	handle_op(t_minishell **minishell, char *line, int *index)
 	i = *index;
 	if (ft_ispipe(line[i]))
 	{
-		handle_pipe(line, i);
+		handle_pipe(minishell ,line, i);
 		tmp_token = ft_lstnew(minishell ,get_pipe(line, &i), PIPE);
 		ft_lstadd_back(&(*minishell)->token, tmp_token);
 	}

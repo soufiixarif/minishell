@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 19:55:39 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/12 20:16:33 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/13 14:17:47 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,12 +109,12 @@ void	issyntax_err(char *line)
 	if (syntx_err1.bool == 1)
 	{
 		open_heredocs(line, syntx_err1.index);
-		printf("syntax error near unexpected token '\n");
+		printf("minishell: syntax error near unexpected token '\n");
 	}
 	if (syntx_err2.bool == 1)
 	{
 		open_heredocs(line, syntx_err2.index);
-		printf("syntax error near unexpected token \"\n");
+		printf("minishell: syntax error near unexpected token \"\n");
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:14:17 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/12 20:28:24 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/13 14:11:30 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,12 +115,14 @@ char		*get_out(char *line, int *index);
 char		*get_herdoc(char *line, int *index);
 char		*get_append(char *line, int *index);
 void		handle_op(t_minishell **minishell, char *line, int *index);
-void		handle_pipe(char *line, int index);
+void		handle_pipe(t_minishell **minishell, char *line, int index);
 void		handle_in(t_minishell **minishell, char *line, int *index);
 void		handle_out(t_minishell **minishell, char *line, int *index);
-void		handle_herdoc(char *line, int index);
-void		handle_append(char *line, int index);
+void		handle_herdoc(t_minishell **minishell, char *line, int index);
+void		handle_append(t_minishell **minishell, char *line, int index);
 void		ft_tokenizer(t_minishell **minishell, char *line);
+void		syntax_errorb(t_minishell **minishell, char *line, int index);
+void		syntax_errora(t_minishell **minishell, char *line, int index);
 void		open_heredocs(char *line, int n);
 void		parser(t_minishell *minishell, char *line);
 
