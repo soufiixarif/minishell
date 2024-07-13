@@ -126,8 +126,9 @@ void		open_heredocs(char *line, int n);
 void		parser(t_minishell *minishell, char *line);
 
 //soufiix
-char **ft_getenv();
+char 	**ft_getfullenv();
 char	*ft_strdup(const char *s1);
 size_t	ft_strlen(const char *s);
-
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
+char	*ft_getenv(char *var, t_minishell *minishell);
 # endif

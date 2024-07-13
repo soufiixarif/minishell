@@ -1,46 +1,34 @@
 #include "minishell.h"
 
-char	*ft_strdup(const char *s1)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	char	*p;
+	size_t	i;
+
+	i = 0;
+	while (i < n && s1[i] && s2[i] && s1[i] == s2[i])
+	{
+		i++;
+	}
+	if (i == n)
+		return (0);
+	else
+		return (((unsigned char)s1[i] - (unsigned char)s2[i]));
+}
+
+char	*ft_getenv(char *var, t_minishell *minishell)
+{
+	char	*tmp;
 	int		i;
-	int		len;
 
-	i = -1;
-	len = ft_strlen((char *)s1);
-	p = malloc(len + 1);
-	if (!p)
-		return (NULL);
-	while (++i < len && s1[i])
-		*(p + i) = s1[i];
-	*(p + i) = 0;
-	return (p);
-}
-
-static int ft_countline(char **environ)
-{
-    int i;
-
-    i = 0;
-    while (environ[i])
-    {
-        i++;
-    }
-    return(i);
-}
-char **ft_getenv()
-{
-    extern char **environ;
-    char        **env;
-    int         i;
-
-    i = 0;
-    env = (char **)malloc(sizeof (char *) * ft_countline(environ));
-    while (environ[i])
-    {
-        env[i] = ft_strdup(environ[i]);
-        i++;
-    }
-    env[i] = NULL;
-    return(env);
+	i = 0;
+	while (minishell->env[i])
+	{
+		tmp = ft_strdup(minishell->env[i]);
+		if (ft_strncmp(var, minishell->env[i], ft_strlen(var)) == 0)
+			return (tmp);
+		free(tmp);
+		i++;
+	}
+	tmp = ft_strdup("");
+	return (tmp);
 }
