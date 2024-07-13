@@ -20,6 +20,7 @@ int	main()
 	minishell.token = NULL;
 	minishell.global = NULL;
 	minishell.local = NULL;
+	minishell.env = ft_getenv();
 	while (1)
 	{
 		line = readline("Minishell$ ");
