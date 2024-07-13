@@ -6,19 +6,17 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 10:20:25 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/08 18:34:27 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/12 11:03:15 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_token	*ft_lstnew(void *content, t_type type)
+t_token	*ft_lstnew(t_minishell **minishell, void *content, t_type type)
 {
 	t_token	*token;
 
-	token = (t_token *)malloc(sizeof(t_token));
-	if (!token)
-		return (NULL);
+	token = (t_token *)ft_malloc(&(*minishell)->local ,sizeof(t_token));
 	token->token = content;
 	token->type = type;
 	token->next = NULL;

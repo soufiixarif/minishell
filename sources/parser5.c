@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 10:49:04 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/09 10:33:23 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/12 20:14:21 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,11 @@ void	 handle_pipe(char *line, int index)
 	{
 		while(ft_isblank(line[i]))
 			i++;
-		if(ft_ispipe(line[i]))	
+		if(ft_ispipe(line[i]))
+		{
+			open_heredocs(line, s_quote(line).index);
 			printf("syntax error near unexpected token1 `|'\n");
+		}
 	}
 	else if(ft_ispipe(line[i]))
 		printf("syntax error near unexpected token2 `|'\n");
@@ -48,7 +51,7 @@ void	handle_herdoc(char *line, int index)
 	}
 }
 
-void	handle_in(t_token **token, char *line, int *index)
+void	handle_in(t_minishell **minishell, char *line, int *index)
 {
 	int		i;
 	t_token *tmp_token;
@@ -58,8 +61,8 @@ void	handle_in(t_token **token, char *line, int *index)
 	if (line[i] == '<')
 	{
 		handle_herdoc(line, i);
-		tmp_token = ft_lstnew(get_herdoc(line, &i), HERDOC);
-		ft_lstadd_back(token, tmp_token);
+		tmp_token = ft_lstnew(minishell ,get_herdoc(line, &i), HERDOC);
+		ft_lstadd_back(&(*minishell)->token, tmp_token);
 		*index = i;
 	}
 	else if (line[i] == '|' || line[i] == '>' || line[i] == '\0')
@@ -73,7 +76,7 @@ void	handle_in(t_token **token, char *line, int *index)
 	}
 }
 
-void	handle_out(t_token **token, char *line, int *index)
+void	handle_out(t_minishell **minishell, char *line, int *index)
 {
 	int		i;
 	t_token *tmp_token;
@@ -83,8 +86,8 @@ void	handle_out(t_token **token, char *line, int *index)
 	if (line[i] == '>')
 	{
 		handle_append(line,i);
-		tmp_token = ft_lstnew(get_append(line, &i), APPEND);
-		ft_lstadd_back(token, tmp_token);
+		tmp_token = ft_lstnew(minishell ,get_append(line, &i), APPEND);
+		ft_lstadd_back(&(*minishell)->token, tmp_token);
 		*index = i;
 	}
 	else if (line[i] == '|' || line[i] == '<' || line[i] == '\0')
