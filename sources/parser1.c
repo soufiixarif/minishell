@@ -98,14 +98,14 @@ void	open_heredocs(char *line, int n)
 
 void	issyntax_err(char *line)
 {
-	int	i;
+	// int	i;
 	t_syn_err syntx_err1;
 	t_syn_err syntx_err2;
 
 	syntx_err1 = s_quote(line);
 	syntx_err2 = d_quote(line);
 
-	i = 0;
+	// i = 0;
 	if (syntx_err1.bool == 1)
 	{
 		open_heredocs(line, syntx_err1.index);

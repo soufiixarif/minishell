@@ -134,11 +134,11 @@ char	*get_out(char *line, int *index)
 char	*get_herdoc(char *line, int *index)
 {
 	int		i;
-	int		j;
+	// int		j;
 	char	*res;
 
 	i = *index;
-	j = 0;
+	// j = 0;
 	res = malloc(3);
 	ft_isin(line[i]);
 	res[0] = '<';
@@ -152,11 +152,11 @@ char	*get_herdoc(char *line, int *index)
 char	*get_append(char *line, int *index)
 {
 	int		i;
-	int		j;
+	// int		j;
 	char	*res;
 
 	i = *index;
-	j = 0;
+	// j = 0;
 	res = malloc(3);
 	ft_isout(line[i]);
 	res[0] = '>';
