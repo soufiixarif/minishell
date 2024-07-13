@@ -28,21 +28,25 @@ static int ft_countline(char **environ)
     }
     return(i);
 }
-char **ft_getfullenv()
+char **ft_getfullenv(t_minishell *minishell)
 {
     extern char **environ;
     char        **env;
     int         i;
 
     i = 0;
-    // if(!env || !*env)
-    //     ft_setenv();
-    env = (char **)malloc(sizeof (char *) * ft_countline(environ));
-    while (environ[i])
+    minishell->shlvl = 1;
+    if(!environ || !*environ)
+        env = ft_setenv(minishell);
+    else
     {
-        env[i] = ft_strdup(environ[i]);
-        i++;
+        env = (char **)malloc(sizeof (char *) * ft_countline(environ));
+        while (environ[i])
+        {
+            env[i] = ft_strdup(environ[i]);
+            i++;
+        }
+        env[i] = NULL;
     }
-    env[i] = NULL;
     return(env);
 }

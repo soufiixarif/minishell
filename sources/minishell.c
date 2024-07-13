@@ -16,11 +16,12 @@ int	main()
 {
 	t_minishell minishell;
 	char	*line;
+	int i = 0;
 
 	minishell.token = NULL;
 	minishell.global = NULL;
 	minishell.local = NULL;
-	minishell.env = ft_getfullenv();
+	minishell.env = ft_getfullenv(&minishell);
 	while (1)
 	{
 		line = readline("Minishell$ ");
