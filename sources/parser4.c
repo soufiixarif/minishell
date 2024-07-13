@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 07:59:55 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/09 10:34:11 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/13 06:48:26 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,18 +196,18 @@ char	*get_sq(char *line, int *index)
 	i = *index;
 	j = 0;
 	res = malloc(getlen_sq(line, i) + 1);
-	res[j] = line[i];
+	// res[j] = line[i];
 	i++;
-	j++;
+	// j++;
 	while (!ft_issnglqs(line[i]))
 	{
 		res[j] = line[i];
 		j++;
 		i++;
 	}
-	res[j] = line[i];
+	// res[j] = line[i];
 	i++;
-	j++;
+	// j++;
 	res[j] = '\0';
 	*index = i;
 	return (res);
@@ -221,18 +221,18 @@ char	*get_dq(char *line, int *index)
 	i = *index;
 	j = 0;
 	res = malloc(getlen_dq(line, i) + 1);
-	res[j] = line[i];
+	// res[j] = line[i];
 	i++;
-	j++;
+	// j++;
 	while (!ft_isdblqs(line[i]))
 	{
 		res[j] = line[i];
 		j++;
 		i++;
 	}
-	res[j] = line[i];
+	// res[j] = line[i];
 	i++;
-	j++;
+	// j++;
 	res[j] = '\0';
 	*index = i;
 	return (res);
