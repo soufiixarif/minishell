@@ -18,6 +18,7 @@
 #include <stdio.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+#include <limits.h> // for PATH_MAX :D
 
 typedef enum e_type
 {
@@ -72,10 +73,11 @@ typedef struct s_minishell
 	t_garbage	*global;
 	t_garbage	*local;
 	char		**env;
+	int			shlvl;
 }	t_minishell;
 
 
-// char		*ft_strjoin(char const *s1, char const *s2);
+char		*ft_strjoin(char const *s1, char const *s2);
 t_syn_err	s_quote(char *line);
 t_syn_err	d_quote(char *line);
 int			ft_isalnum(int c);
@@ -128,9 +130,14 @@ void		open_heredocs(char *line, int n);
 void		parser(t_minishell *minishell, char *line);
 
 //soufiix
-char 	**ft_getfullenv();
+char 	**ft_getfullenv(t_minishell *minishell);
 char	*ft_strdup(const char *s1);
 size_t	ft_strlen(const char *s);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_getenv(char *var, t_minishell *minishell);
+char	*ft_strcat(char *dest, char *src);
+char **ft_setenv(t_minishell *minishell);
+char	*ft_itoa(int n);
+int    ft_openhd(char *line, int *i);
+int	ft_strcmp(char *s1, char *s2);
 # endif
