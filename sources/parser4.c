@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 07:59:55 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/13 06:48:26 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/14 06:20:25 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,11 +134,9 @@ char	*get_out(char *line, int *index)
 char	*get_herdoc(char *line, int *index)
 {
 	int		i;
-	// int		j;
 	char	*res;
 
 	i = *index;
-	// j = 0;
 	res = malloc(3);
 	ft_isin(line[i]);
 	res[0] = '<';
@@ -152,11 +150,9 @@ char	*get_herdoc(char *line, int *index)
 char	*get_append(char *line, int *index)
 {
 	int		i;
-	// int		j;
 	char	*res;
 
 	i = *index;
-	// j = 0;
 	res = malloc(3);
 	ft_isout(line[i]);
 	res[0] = '>';
@@ -167,7 +163,7 @@ char	*get_append(char *line, int *index)
 	return (res);
 }
 
-char	*get_exp(char *line, int *index)
+char	*get_exp(int *index)
 {
 	int		i;
 	int		j;
@@ -175,14 +171,10 @@ char	*get_exp(char *line, int *index)
 
 	i = *index;
 	j = 0;
-	res = malloc(getlen_exp(line, i) + 1);
-	while (line[i] && ft_isexpand(line[i]))
-	{
-		res[j] = line[i];
-		j++;
-		i++;
-	}
-	res[j] = '\0';
+	res = malloc(2);
+	res[0] = '$';
+	res[1] = '\0';
+	i++;
 	*index = i;
 	return (res);
 }
@@ -196,18 +188,14 @@ char	*get_sq(char *line, int *index)
 	i = *index;
 	j = 0;
 	res = malloc(getlen_sq(line, i) + 1);
-	// res[j] = line[i];
 	i++;
-	// j++;
 	while (!ft_issnglqs(line[i]))
 	{
 		res[j] = line[i];
 		j++;
 		i++;
 	}
-	// res[j] = line[i];
 	i++;
-	// j++;
 	res[j] = '\0';
 	*index = i;
 	return (res);
@@ -221,18 +209,14 @@ char	*get_dq(char *line, int *index)
 	i = *index;
 	j = 0;
 	res = malloc(getlen_dq(line, i) + 1);
-	// res[j] = line[i];
 	i++;
-	// j++;
 	while (!ft_isdblqs(line[i]))
 	{
 		res[j] = line[i];
 		j++;
 		i++;
 	}
-	// res[j] = line[i];
 	i++;
-	// j++;
 	res[j] = '\0';
 	*index = i;
 	return (res);

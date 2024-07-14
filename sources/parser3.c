@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 07:57:03 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/13 06:47:27 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/14 06:15:12 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,21 +99,6 @@ int	getlen_out(char *line, int index)
 	return (count);
 }
 
-int	getlen_exp(char *line, int index)
-{
-	int		i;
-	int		count;
-
-	i = index;
-	count = 0;
-	while (line[i] && ft_isexpand(line[i]))
-	{
-		count++;
-		i++;
-	}
-	return (count);
-}
-
 int	getlen_sq(char *line, int index)
 {
 	int	i;
@@ -121,14 +106,12 @@ int	getlen_sq(char *line, int index)
 
 	i = index;
 	count = 0;
-	// count++;
 	i++;
 	while (!ft_issnglqs(line[i]))
 	{
 		count++;
 		i++;
 	}
-	// count++;
 	return (count);
 }
 int	getlen_dq(char *line, int index)
@@ -138,13 +121,11 @@ int	getlen_dq(char *line, int index)
 
 	i = index;
 	count = 0;
-	// count++;
 	i++;
 	while (!ft_isdblqs(line[i]))
 	{
 		count++;
 		i++;
 	}
-	// count++;
 	return (count);
 }

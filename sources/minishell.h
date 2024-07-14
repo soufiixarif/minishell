@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:14:17 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/13 14:11:30 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/14 06:21:01 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int			getlen_sq(char *line, int index);
 int			getlen_dq(char *line, int index);
 int			getlen_blank(char *line, int index);
 int			getlen_op(char *line, int index);
-int			getlen_exp(char *line, int index);
+// int			getlen_exp(int index);
 int 		getlen_pipe(char *line, int index);
 int			getlen_in(char *line, int index);
 int			getlen_out(char *line, int index);
@@ -109,7 +109,7 @@ char		*get_sq(char *line, int *index);
 char		*get_dq(char *line, int *index);
 char		*get_blank(char *line, int *index);
 char		*get_op(char *line, int *index);
-char		*get_exp(char *line, int *index);
+char		*get_exp(int *index);
 char		*get_pipe(char *line, int *index);
 char		*get_in(char *line, int *index);
 char		*get_out(char *line, int *index);

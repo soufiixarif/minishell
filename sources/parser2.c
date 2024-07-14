@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 01:14:32 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/13 14:14:08 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/14 06:21:13 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	ft_tokenizer(t_minishell **minishell, char *line)
 		}
 		else if (ft_isexpand(line[i]))
 		{
-			tmp_token = ft_lstnew(minishell, get_exp(line, &i), EXP);
+			tmp_token = ft_lstnew(minishell, get_exp(&i), EXP);
 			ft_lstadd_back(&(*minishell)->token, tmp_token);
 			continue ;
 		}
