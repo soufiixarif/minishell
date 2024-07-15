@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:14:17 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/15 18:01:33 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/15 18:07:15 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef enum e_type
 	HERDOC,   //9
 	Q_HERDOC,   //10
 	Q_EXP,    //11
+	DEL,        //12
 } t_type;
 
 typedef struct s_token
