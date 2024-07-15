@@ -77,7 +77,7 @@ typedef struct s_minishell
 }	t_minishell;
 
 
-char		*ft_strjoin(char const *s1, char const *s2);
+char		*ft_strjoin(char const *s1, char const *s2); 
 t_syn_err	s_quote(char *line);
 t_syn_err	d_quote(char *line);
 int			ft_isalnum(int c);
@@ -126,6 +126,7 @@ void		handle_append(char *line, int index);
 void		ft_tokenizer(t_minishell **minishell, char *line);
 void		open_heredocs(char *line, int n);
 void		parser(t_minishell *minishell, char *line);
+size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize); //added here by soufiix
 
 //soufiix
 char 	**ft_getfullenv(t_minishell *minishell);
@@ -138,4 +139,8 @@ char 	**ft_setenv(t_minishell *minishell);
 char	*ft_itoa(int n);
 int		ft_openhd(char *line, int *i);
 int		ft_strcmp(char *s1, char *s2);
+void	execution(t_minishell *ms, char *line);
+char	**ft_split(char const *s, char c);
+int		ft_atoi(const char *str);
+
 # endif

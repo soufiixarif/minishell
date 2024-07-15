@@ -32,6 +32,7 @@ char **ft_getfullenv(t_minishell *minishell)
 {
     extern char **environ;
     char        **env;
+    char        **lvl;
     int         i;
 
     i = 0;
@@ -43,6 +44,12 @@ char **ft_getfullenv(t_minishell *minishell)
         env = (char **)malloc(sizeof (char *) * ft_countline(environ));
         while (environ[i])
         {
+            if(!ft_strncmp("SHLVL=",environ[i],6))
+            {
+                lvl = ft_split(environ[i],'=');
+                minishell->shlvl = ft_atoi(lvl[1]) + 1;
+                environ[i] = ft_strjoin("SHLVL=",ft_itoa(minishell->shlvl));
+            }
             env[i] = ft_strdup(environ[i]);
             i++;
         }

@@ -28,6 +28,7 @@ int	main()
 			exit(0);
 		add_history(line);
 		parser(&minishell, line);
+		execution(&minishell,line);
 		while(minishell.token)
 		{
 			printf("token ==> %s\n", minishell.token->token);
