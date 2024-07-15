@@ -134,8 +134,8 @@ size_t	ft_strlen(const char *s);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_getenv(char *var, t_minishell *minishell);
 char	*ft_strcat(char *dest, char *src);
-char **ft_setenv(t_minishell *minishell);
+char 	**ft_setenv(t_minishell *minishell);
 char	*ft_itoa(int n);
-int    ft_openhd(char *line, int *i);
-int	ft_strcmp(char *s1, char *s2);
+int		ft_openhd(char *line, int *i);
+int		ft_strcmp(char *s1, char *s2);
 # endif

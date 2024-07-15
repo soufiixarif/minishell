@@ -89,9 +89,7 @@ void	open_heredocs(char *line, int n)
 		if (line[i]	== '\'' && !d)
 			s = !s;
 		if (s == 0 && d == 0 && is_del(line, i, n) && line[i] == '<' && line[i + 1] == '<' && line[i + 2])
-		{
 			i = ft_openhd(line, &i);
-		}
 		i++;
 	}
 }
