@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 05:25:03 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/15 17:15:24 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/15 19:50:33 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ char **ft_getfullenv(t_minishell *minishell)
 {
     extern char **environ;
     char        **env;
+    char        **lvl;
     int         i;
 
     i = 0;
@@ -39,6 +40,12 @@ char **ft_getfullenv(t_minishell *minishell)
         env = (char **)ft_malloc(minishell, &minishell->global, sizeof (char *) * ft_countline(environ));
         while (environ[i])
         {
+            if(!ft_strncmp("SHLVL=",environ[i],6))
+            {
+                lvl = ft_split(environ[i],'=');
+                minishell->shlvl = ft_atoi(lvl[1]) + 1;
+                environ[i] = ft_strjoin(minishell ,"SHLVL=",ft_itoa(minishell ,minishell->shlvl));
+            }
             env[i] = ft_strdup(minishell, &minishell->global, environ[i]);
             i++;
         }

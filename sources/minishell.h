@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:14:17 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/15 18:07:15 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/15 19:47:37 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,7 @@ void		open_heredocs(t_minishell *minishell, char *line, int n);
 void		token_handler(t_minishell *minishell);
 void		Qexp_handler(t_minishell *minishell);
 void		parser(t_minishell *minishell, char *line);
+size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize); //added here by soufiix
 
 //soufiix
 // char 	**ft_getfullenv(t_minishell *minishell);
@@ -154,4 +155,7 @@ void		parser(t_minishell *minishell, char *line);
 // char	*ft_itoa(int n);
 // int    ft_openhd(char *line, int *i);
 // int	ft_strcmp(char *s1, char *s2);
+void	execution(t_minishell *ms, char *line);
+char	**ft_split(char const *s, char c);
+int		ft_atoi(const char *str);
 # endif
