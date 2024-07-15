@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:44:01 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/06/25 14:46:47 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/15 14:17:28 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 // 	str[j] = '\0';
 // 	return (str);
 // }
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(t_minishell *minishell, char const *s1, char const *s2)
 {
 	int		i;
 	int		j;
@@ -105,7 +105,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (NULL);
 	len = ft_strlen(s1) + ft_strlen(s2);
 	i = -1;
-	str = malloc (len + 1);
+	str = ft_malloc(minishell, &minishell->local, len + 1);
 	if (!str)
 		return (NULL);
 	while (i++, s1[i])

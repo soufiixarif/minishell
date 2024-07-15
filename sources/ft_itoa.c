@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/14 20:45:31 by kelmounj          #+#    #+#             */
+/*   Updated: 2024/07/15 17:45:13 by kelmounj         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static int	ft_nbrlen(long nbr)
@@ -20,7 +32,7 @@ static int	ft_nbrlen(long nbr)
 	return (len);
 }
 
-char	*ft_itoa(int n)
+char	*ft_itoa(t_minishell *minishell, int n)
 {
 	char	*str;
 	int		len;
@@ -28,7 +40,7 @@ char	*ft_itoa(int n)
 
 	nb = (long)n;
 	len = ft_nbrlen(nb);
-	str = malloc(len + 1);
+	str = ft_malloc(minishell, &minishell->local, len + 1);
 	if (!str)
 		return (NULL);
 	str[len] = '\0';

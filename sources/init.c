@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 14:38:27 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/07 17:30:29 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/15 16:45:07 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_free(t_garbage **garbage, int boole)
 	}
 }
 
-void	*ft_malloc(t_garbage **garbage, size_t size)
+void	*ft_malloc(t_minishell *minishell, t_garbage **garbage, size_t size)
 {
 	t_garbage	*tmp_garbage;
 	void		*new;
@@ -30,8 +30,8 @@ void	*ft_malloc(t_garbage **garbage, size_t size)
 	tmp_garbage = NULL;
 	new = malloc(size);
 	if (!new)
-		return (ft_free(garbage, 1), NULL);
-	tmp_garbage = ft_garnew(garbage, new);
+		return (ft_free(&minishell->local, 0), ft_free(&minishell->global, 1), NULL);
+	tmp_garbage = ft_garnew(minishell, new);
 	ft_garadd_back(garbage, tmp_garbage);
 	return (new);
 }

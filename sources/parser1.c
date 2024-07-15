@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 19:55:39 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/13 14:17:47 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/15 17:52:58 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	is_del(char *line, int i, int n)
 		return (0);
 }
 
-void	open_heredocs(char *line, int n)
+void	open_heredocs(t_minishell *minishell, char *line, int n)
 {
 	int	i;
 	int	s;
@@ -90,39 +90,36 @@ void	open_heredocs(char *line, int n)
 			s = !s;
 		if (s == 0 && d == 0 && is_del(line, i, n) && line[i] == '<' && line[i + 1] == '<' && line[i + 2])
 		{
-			i = ft_openhd(line, &i);
+			i = ft_openhd(minishell, line, &i);
 		}
 		i++;
 	}
 }
 
-void	issyntax_err(char *line)
+void	issyntax_err(t_minishell *minishell, char *line)
 {
-	// int	i;
 	t_syn_err syntx_err1;
 	t_syn_err syntx_err2;
 
 	syntx_err1 = s_quote(line);
 	syntx_err2 = d_quote(line);
-
-	// i = 0;
 	if (syntx_err1.bool == 1)
 	{
-		open_heredocs(line, syntx_err1.index);
+		open_heredocs(minishell, line, syntx_err1.index);
 		printf("minishell: syntax error near unexpected token '\n");
 	}
 	if (syntx_err2.bool == 1)
 	{
-		open_heredocs(line, syntx_err2.index);
+		open_heredocs(minishell, line, syntx_err2.index);
 		printf("minishell: syntax error near unexpected token \"\n");
 	}
 }
 
 void	parser(t_minishell *minishell, char *line)
 {
-	issyntax_err(line);
-	ft_tokenizer(&minishell, line);
-	// token_handler();
+	issyntax_err(minishell, line);
+	ft_tokenizer(minishell, line);
+	token_handler(minishell);
 }
 
 

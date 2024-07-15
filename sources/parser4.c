@@ -6,13 +6,13 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 07:59:55 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/14 06:20:25 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/15 14:05:12 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char *get_string(char *line, int *index)
+char *get_string(t_minishell *minishell, char *line, int *index)
 {
 	int		i;
 	int		j;
@@ -20,7 +20,7 @@ char *get_string(char *line, int *index)
 
 	i = *index;
 	j = 0;
-	res = malloc(getlen_string(line, i) + 1);
+	res = ft_malloc(minishell, &minishell->local, getlen_string(line, i) + 1);
 	while (line[i] && ft_isstring(line[i]))
 	{
 		res[j] = line[i];
@@ -32,7 +32,7 @@ char *get_string(char *line, int *index)
 	return (res);
 }
 
-char	*get_blank(char *line, int *index)
+char	*get_blank(t_minishell *minishell, char *line, int *index)
 {
 	int		i;
 	int		j;
@@ -40,7 +40,7 @@ char	*get_blank(char *line, int *index)
 
 	i = *index;
 	j = 0;
-	res = malloc(getlen_blank(line, i) + 1);
+	res = ft_malloc(minishell, &minishell->local, getlen_blank(line, i) + 1);
 	while (line[i] && ft_isblank(line[i]))
 	{
 		res[j] = line[i];
@@ -51,7 +51,7 @@ char	*get_blank(char *line, int *index)
 	*index = i;
 	return (res);
 }
-char	*get_op(char *line, int *index)
+char	*get_op(t_minishell *minishell, char *line, int *index)
 {
 	int		i;
 	int		j;
@@ -59,7 +59,7 @@ char	*get_op(char *line, int *index)
 
 	i = *index;
 	j = 0;
-	res = malloc(getlen_op(line, i) + 1);
+	res = ft_malloc(minishell, &minishell->local, getlen_op(line, i) + 1);
 	while (line[i] && ft_isoperator(line[i]))
 	{
 		res[j] = line[i];
@@ -71,7 +71,7 @@ char	*get_op(char *line, int *index)
 	return (res);
 }
 
-char	*get_pipe(char *line, int *index)
+char	*get_pipe(t_minishell *minishell, char *line, int *index)
 {
 	int		i;
 	int		j;
@@ -79,7 +79,7 @@ char	*get_pipe(char *line, int *index)
 
 	i = *index;
 	j = 0;
-	res = malloc(getlen_pipe(line, i) + 1);
+	res = ft_malloc(minishell, &minishell->local, getlen_pipe(line, i) + 1);
 	while (ft_ispipe(line[i]))
 	{
 		res[j] = line[i];
@@ -91,7 +91,7 @@ char	*get_pipe(char *line, int *index)
 	return (res);
 }
 
-char	*get_in(char *line, int *index)
+char	*get_in(t_minishell *minishell, char *line, int *index)
 {
 	int		i;
 	int		j;
@@ -99,7 +99,7 @@ char	*get_in(char *line, int *index)
 
 	i = *index;
 	j = 0;
-	res = malloc(getlen_in(line, i) + 1);
+	res = ft_malloc(minishell, &minishell->local, getlen_in(line, i) + 1);
 	while (ft_isin(line[i]))
 	{
 		res[j] = line[i];
@@ -111,7 +111,7 @@ char	*get_in(char *line, int *index)
 	return (res);
 }
 
-char	*get_out(char *line, int *index)
+char	*get_out(t_minishell *minishell, char *line, int *index)
 {
 	int		i;
 	int		j;
@@ -119,7 +119,7 @@ char	*get_out(char *line, int *index)
 
 	i = *index;
 	j = 0;
-	res = malloc(getlen_out(line, i) + 1);
+	res = ft_malloc(minishell, &minishell->local, getlen_out(line, i) + 1);
 	while (ft_isout(line[i]))
 	{
 		res[j] = line[i];
@@ -131,13 +131,13 @@ char	*get_out(char *line, int *index)
 	return (res);
 }
 
-char	*get_herdoc(char *line, int *index)
+char	*get_herdoc(t_minishell *minishell, char *line, int *index)
 {
 	int		i;
 	char	*res;
 
 	i = *index;
-	res = malloc(3);
+	res = ft_malloc(minishell, &minishell->local, 3);
 	ft_isin(line[i]);
 	res[0] = '<';
 	res[1] = '<';
@@ -147,13 +147,13 @@ char	*get_herdoc(char *line, int *index)
 	return (res);
 }
 
-char	*get_append(char *line, int *index)
+char	*get_append(t_minishell *minishell, char *line, int *index)
 {
 	int		i;
 	char	*res;
 
 	i = *index;
-	res = malloc(3);
+	res = ft_malloc(minishell, &minishell->local, 3);
 	ft_isout(line[i]);
 	res[0] = '>';
 	res[1] = '>';
@@ -163,7 +163,7 @@ char	*get_append(char *line, int *index)
 	return (res);
 }
 
-char	*get_exp(int *index)
+char	*get_exp(t_minishell *minishell, int *index)
 {
 	int		i;
 	int		j;
@@ -171,7 +171,7 @@ char	*get_exp(int *index)
 
 	i = *index;
 	j = 0;
-	res = malloc(2);
+	res = ft_malloc(minishell, &minishell->local, 2);
 	res[0] = '$';
 	res[1] = '\0';
 	i++;
@@ -179,7 +179,7 @@ char	*get_exp(int *index)
 	return (res);
 }
 
-char	*get_sq(char *line, int *index)
+char	*get_sq(t_minishell *minishell, char *line, int *index)
 {
 	int		i;
 	int		j;
@@ -187,7 +187,7 @@ char	*get_sq(char *line, int *index)
 
 	i = *index;
 	j = 0;
-	res = malloc(getlen_sq(line, i) + 1);
+	res = ft_malloc(minishell, &minishell->local, getlen_sq(line, i) + 1);
 	i++;
 	while (!ft_issnglqs(line[i]))
 	{
@@ -200,7 +200,7 @@ char	*get_sq(char *line, int *index)
 	*index = i;
 	return (res);
 }
-char	*get_dq(char *line, int *index)
+char	*get_dq(t_minishell *minishell, char *line, int *index)
 {
 	int		i;
 	int		j;
@@ -208,7 +208,7 @@ char	*get_dq(char *line, int *index)
 
 	i = *index;
 	j = 0;
-	res = malloc(getlen_dq(line, i) + 1);
+	res = ft_malloc(minishell, &minishell->local, getlen_dq(line, i) + 1);
 	i++;
 	while (!ft_isdblqs(line[i]))
 	{
