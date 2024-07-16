@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:14:17 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/16 15:21:12 by sarif            ###   ########.fr       */
+/*   Updated: 2024/07/16 23:16:46 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <limits.h> // for PATH_MAX :D
+#include <fcntl.h>
 
 typedef enum e_type
 {
@@ -61,6 +62,7 @@ typedef struct s_tokens
 	char			*node;
 	char			*typee;
 	t_type			type;
+	int				t_idx;
 	struct s_tokens	*next;
 }	t_tokens;
 
@@ -69,6 +71,7 @@ typedef struct s_command
 	t_tokens			*tokens;
 	int					input;
 	int					output;
+	int					c_idx;
 	struct s_command	*next;
 }	t_cmd;
 
@@ -161,5 +164,9 @@ char	*ft_strdupp(const char *s1);
 void	execution(t_minishell *ms, char *line);
 char	**ft_split(char const *s, char c);
 int		ft_atoi(const char *str);
-void    ft_open(t_minishell *msh);
+void    ft_openfd(t_minishell *msh);
+void 	ft_in(t_minishell *msh, int t_idx, int c_idx);
+t_tokens *ft_getoken(t_minishell *msh, int t_idx, int c_idx);
+t_cmd   *ft_getcmd(t_minishell *msh, int c_idx);
+void	printfderror(char *bash, char *infile);
 # endif

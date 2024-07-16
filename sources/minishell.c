@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:07:03 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/16 01:19:55 by sarif            ###   ########.fr       */
+/*   Updated: 2024/07/16 23:15:58 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main()
 			exit(0);
 		add_history(line);
 		parser(&minishell, line);
-		ft_open(&minishell);
+		ft_openfd(&minishell);
 		execution(&minishell,line);
 		while(minishell.token)
 		{
