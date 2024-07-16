@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getenv.c                                        :+:      :+:    :+:   */
+/*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/15 20:49:53 by sarif             #+#    #+#             */
-/*   Updated: 2024/07/15 20:49:55 by sarif            ###   ########.fr       */
+/*   Created: 2024/07/15 20:49:41 by sarif             #+#    #+#             */
+/*   Updated: 2024/07/15 20:49:44 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_getenv(char *var, t_minishell *minishell)
+void execution(t_minishell *ms, char *line)
 {
-	char	*tmp;
-	int		i;
-
-	i = 0;
-	while (minishell->env[i])
-	{
-		tmp = ft_strdup(minishell, &minishell->global, minishell->env[i]);
-		if (ft_strncmp(var, minishell->env[i], ft_strlen(var)) == 0)
-			return (tmp);
-		free(tmp);
-		i++;
-	}
-	tmp = ft_strdup(minishell, &minishell->global, "");
-	return (tmp);
+    int i = 0;
+    if (!ft_strcmp(line,"env"))
+    {
+        while (ms->env[i])
+        {
+            printf("%s\n",ms->env[i]);
+            i++;
+        }
+    }
 }

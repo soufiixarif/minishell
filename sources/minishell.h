@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:14:17 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/15 19:47:37 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/16 15:21:12 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct s_syntax_err
 typedef struct s_tokens
 {
 	char			*node;
+	char			*typee;
 	t_type			type;
 	struct s_tokens	*next;
 }	t_tokens;
@@ -74,10 +75,12 @@ typedef struct s_command
 typedef struct s_minishell
 {
 	t_token		*token;
+	t_cmd		*cmd;
 	t_garbage	*global;
 	t_garbage	*local;
 	char		**env;
 	int			shlvl;
+	int			fd_max;
 }	t_minishell;
 
 
@@ -144,9 +147,9 @@ void		Qexp_handler(t_minishell *minishell);
 void		parser(t_minishell *minishell, char *line);
 size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize); //added here by soufiix
 
-//soufiix
+// soufiix
 // char 	**ft_getfullenv(t_minishell *minishell);
-// char	*ft_strdup(const char *s1);
+char	*ft_strdupp(const char *s1);
 // size_t	ft_strlen(const char *s);
 // int		ft_strncmp(const char *s1, const char *s2, size_t n);
 // char	*ft_getenv(char *var, t_minishell *minishell);
@@ -158,4 +161,5 @@ size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize); //added here by 
 void	execution(t_minishell *ms, char *line);
 char	**ft_split(char const *s, char c);
 int		ft_atoi(const char *str);
+void    ft_open(t_minishell *msh);
 # endif

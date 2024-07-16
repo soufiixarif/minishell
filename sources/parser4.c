@@ -166,11 +166,11 @@ char	*get_append(t_minishell *minishell, char *line, int *index)
 char	*get_exp(t_minishell *minishell, int *index)
 {
 	int		i;
-	int		j;
+	// int		j;
 	char	*res;
 
 	i = *index;
-	j = 0;
+	// j = 0;
 	res = ft_malloc(minishell, &minishell->local, 2);
 	res[0] = '$';
 	res[1] = '\0';
