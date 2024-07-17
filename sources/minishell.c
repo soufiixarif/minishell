@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:07:03 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/15 17:57:33 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/17 11:33:59 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main()
 			exit(0);
 		add_history(line);
 		parser(&minishell, line);
-		execution(&minishell,line);
+		// execution(&minishell,line);
 		while(minishell.token)
 		{
 			printf("token ==> %s\n", minishell.token->token);
@@ -38,3 +38,4 @@ int	main()
 		free(line);
 	}
 }
+

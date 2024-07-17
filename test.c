@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execution.c                                        :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/16 15:09:45 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/16 15:09:46 by kelmounj         ###   ########.fr       */
+/*   Created: 2024/07/16 13:52:33 by kelmounj          #+#    #+#             */
+/*   Updated: 2024/07/16 13:55:48 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <fcntl.h>
+#include <stdio.h>
+#include <unistd.h>
 
-void execution(t_minishell *ms, char *line)
+int main()
 {
-    int i = 0;
-    if (!ft_strcmp(line,"env"))
-    {
-        while (ms->env[i])
-        {
-            printf("%s\n",ms->env[i]);
-            i++;
-        }
-    }
+	int fd;
+	
+	fd = open("hmrabet", O_RDWR | O_CREAT, 0777);
+	printf("%d\n", fd);
+	// close(fd);
+	fd = open("hmrabet", O_RDWR | O_CREAT, 0777);
+	printf("%d\n", fd);
 }

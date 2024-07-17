@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:14:17 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/15 19:47:37 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/15 20:36:58 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,7 @@ void		syntax_errora(t_minishell *minishell, char *line, int index);
 void		open_heredocs(t_minishell *minishell, char *line, int n);
 void		token_handler(t_minishell *minishell);
 void		Qexp_handler(t_minishell *minishell);
+void		get_del(t_minishell *minishell);
 void		parser(t_minishell *minishell, char *line);
 size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize); //added here by soufiix
 
