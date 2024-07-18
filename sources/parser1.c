@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 19:55:39 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/15 19:48:16 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/18 01:44:58 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	open_heredocs(t_minishell *minishell, char *line, int n)
 			s = !s;
 		if (s == 0 && d == 0 && is_del(line, i, n) && line[i] == '<' && line[i + 1] == '<' && line[i + 2])
 		{
-			i = ft_openhd(minishell, line, &i);
+			i = ft_openhd_se(minishell, line, &i);
 		}
 		i++;
 	}

@@ -6,13 +6,13 @@
 /*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 20:50:02 by sarif             #+#    #+#             */
-/*   Updated: 2024/07/15 20:50:04 by sarif            ###   ########.fr       */
+/*   Updated: 2024/07/18 04:49:42 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int ft_countline(char **environ)
+int ft_countline(char **environ)
 {
     int i;
 

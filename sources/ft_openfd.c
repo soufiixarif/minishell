@@ -79,6 +79,7 @@ void ft_in(t_minishell *msh, int t_idx, int c_idx)
 void    ft_openfd(t_minishell *msh)
 {
     datainit(msh);
+    ft_openhd(msh);
     while(msh->cmd)
     {
         while(msh->cmd->tokens)

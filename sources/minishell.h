@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:14:17 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/16 23:16:46 by sarif            ###   ########.fr       */
+/*   Updated: 2024/07/18 04:49:54 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ typedef struct s_syntax_err
 typedef struct s_tokens
 {
 	char			*node;
-	char			*typee;
 	t_type			type;
 	int				t_idx;
 	struct s_tokens	*next;
@@ -96,7 +95,7 @@ char		*ft_itoa(t_minishell *minishell, int n);
 char 		**ft_getfullenv(t_minishell *minishell);
 char		**ft_setenv(t_minishell *minishell);
 char		*ft_getenv(char *var, t_minishell *minishell);
-int			ft_openhd(t_minishell *minishell, char *line, int *i);
+int			ft_openhd_se(t_minishell *minishell, char *line, int *i);
 t_syn_err	s_quote(char *line);
 t_syn_err	d_quote(char *line);
 int			ft_isalnum(int c);
@@ -152,7 +151,7 @@ size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize); //added here by 
 
 // soufiix
 // char 	**ft_getfullenv(t_minishell *minishell);
-char	*ft_strdupp(const char *s1);
+// char	*ft_strdupp(const char *s1);
 // size_t	ft_strlen(const char *s);
 // int		ft_strncmp(const char *s1, const char *s2, size_t n);
 // char	*ft_getenv(char *var, t_minishell *minishell);
@@ -169,4 +168,9 @@ void 	ft_in(t_minishell *msh, int t_idx, int c_idx);
 t_tokens *ft_getoken(t_minishell *msh, int t_idx, int c_idx);
 t_cmd   *ft_getcmd(t_minishell *msh, int c_idx);
 void	printfderror(char *bash, char *infile);
+void    ft_openhd(t_minishell *msh);
+char	*ft_creatfd_forhd(t_minishell *msh, char **input);
+char    *ft_getfile_name(t_minishell *msh);
+char	**ft_addnl(char **input);
+int		ft_countline(char **environ);
 # endif
