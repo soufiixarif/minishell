@@ -12,5 +12,10 @@
         "unordered_map": "c",
         "vector": "c",
         "chrono": "c"
+    },
+    "workbench.colorCustomizations": {
+        "activityBar.background": "#083517",
+        "titleBar.activeBackground": "#0B4A21",
+        "titleBar.activeForeground": "#F0FDF4"
     }
 }
