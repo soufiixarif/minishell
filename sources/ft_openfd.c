@@ -2,10 +2,11 @@
 #include <string.h>
 
 static t_tokens *create_token(const char *node, t_type type, int t_idx) {
-    t_tokens *new_token = malloc(sizeof(t_token));
+    t_tokens *new_token = malloc(sizeof(t_tokens));
     new_token->node = strdup(node);
     new_token->type = type;
     new_token->t_idx = t_idx;
+    new_token->fd = -1;
     new_token->next = NULL;
     return new_token;
 }

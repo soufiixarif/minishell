@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:14:17 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/18 04:49:54 by sarif            ###   ########.fr       */
+/*   Updated: 2024/07/20 05:45:54 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct s_tokens
 	char			*node;
 	t_type			type;
 	int				t_idx;
+	int				fd;
 	struct s_tokens	*next;
 }	t_tokens;
 
@@ -169,8 +170,8 @@ t_tokens *ft_getoken(t_minishell *msh, int t_idx, int c_idx);
 t_cmd   *ft_getcmd(t_minishell *msh, int c_idx);
 void	printfderror(char *bash, char *infile);
 void    ft_openhd(t_minishell *msh);
-char	*ft_creatfd_forhd(t_minishell *msh, char **input);
+int		ft_creatfd_forhd(t_minishell *msh, char **input);
 char    *ft_getfile_name(t_minishell *msh);
-char	**ft_addnl(char **input);
+// char	**ft_addnl(char **input);
 int		ft_countline(char **environ);
 # endif

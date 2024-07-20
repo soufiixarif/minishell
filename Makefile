@@ -2,7 +2,7 @@ NAME = minishell
 
 CC = cc
 
-FLAGS = -Wextra -Wall -Werror -I/Users/kelmounj/.brew/opt/readline/include 
+FLAGS = -Wextra -Wall -Werror -I/Users/kelmounj/.brew/opt/readline/include  -fsanitize=address -g
 
 LDFLAGS = -lreadline -L/Users/kelmounj/.brew/opt/readline/lib   -fsanitize=address -g
 
