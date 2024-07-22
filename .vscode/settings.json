@@ -11,6 +11,12 @@
         "string_view": "c",
         "unordered_map": "c",
         "vector": "c",
-        "chrono": "c"
+        "chrono": "c",
+        "ostream": "c"
+    },
+    "workbench.colorCustomizations": {
+        "activityBar.background": "#083517",
+        "titleBar.activeBackground": "#0B4A21",
+        "titleBar.activeForeground": "#F0FDF4"
     }
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:44:01 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/15 14:17:28 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/20 05:33:57 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ size_t	ft_strlen(const char *s)
 {
 	size_t	i;
 
+	if(!s)
+		return (0);
 	i = 0;
 	while (s[i])
 	{
@@ -101,17 +103,17 @@ char	*ft_strjoin(t_minishell *minishell, char const *s1, char const *s2)
 	int		len;
 	char	*str;
 
-	if (!s1 || !s2)
-		return (NULL);
+	if (!s1)
+		return (ft_strdup(minishell, &minishell->global, s2));
 	len = ft_strlen(s1) + ft_strlen(s2);
 	i = -1;
 	str = ft_malloc(minishell, &minishell->local, len + 1);
 	if (!str)
 		return (NULL);
-	while (i++, s1[i])
+	while (s1 && s1[++i])
 		str[i] = s1[i];
 	j = 0;
-	while (s2[j])
+	while (s2 && s2[j])
 		str[i++] = s2[j++];
 	str[i] = '\0';
 	return (str);

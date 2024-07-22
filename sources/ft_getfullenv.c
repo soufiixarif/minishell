@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_getfullenv.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/14 05:25:03 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/15 19:50:33 by kelmounj         ###   ########.fr       */
+/*   Created: 2024/07/15 20:50:02 by sarif             #+#    #+#             */
+/*   Updated: 2024/07/20 05:13:00 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int ft_countline(char **environ)
+int ft_countline(char **environ)
 {
     int i;
 
@@ -37,7 +37,7 @@ char **ft_getfullenv(t_minishell *minishell)
         env = ft_setenv(minishell);
     else
     {
-        env = (char **)ft_malloc(minishell, &minishell->global, sizeof (char *) * ft_countline(environ));
+        env = (char **)ft_malloc(minishell, &minishell->global, sizeof (char *) * (ft_countline(environ) + 1));
         while (environ[i])
         {
             if(!ft_strncmp("SHLVL=",environ[i],6))

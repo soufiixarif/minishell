@@ -6,19 +6,21 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:14:17 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/22 01:32:00 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/22 08:53:59 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef MINISHELL_H
+#ifndef MINISHELL_H
 # define MINISHELL_H
 
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <limits.h> // for PATH_MAX :D
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <limits.h> // for PATH_MAX :D
+# include <fcntl.h>
+# include <paths.h>
 
 typedef enum e_type
 {
@@ -67,6 +69,8 @@ typedef struct s_tokens
 {
 	char			*node;
 	t_type			type;
+	int				t_idx;
+	int				fd;
 	struct s_tokens	*next;
 }	t_tokens;
 
@@ -75,16 +79,20 @@ typedef struct s_command
 	t_tokens			*tokens;
 	int					input;
 	int					output;
+	int					c_idx;
+	int					fd[2];
 	struct s_command	*next;
 }	t_cmd;
 
 typedef struct s_minishell
 {
 	t_token		*token;
+	t_cmd		*cmd;
 	t_garbage	*global;
 	t_garbage	*local;
 	char		**env;
 	int			shlvl;
+	int			fd_max;
 }	t_minishell;
 
 
@@ -99,7 +107,7 @@ char		*ft_strtrim(t_minishell *minishell, char const *s1, char const *set);
 char 		**ft_getfullenv(t_minishell *minishell);
 char		**ft_setenv(t_minishell *minishell);
 char		*ft_getenv(char *var, t_minishell *minishell);
-int			ft_openhd(t_minishell *minishell, char *line, int *i);
+int			ft_openhd_se(t_minishell *minishell, char *line, int *i);
 t_syn_err	s_quote(char *line);
 t_syn_err	d_quote(char *line);
 int			ft_isalnum(int c);
@@ -156,9 +164,9 @@ void		expainding(t_minishell *minishell);
 void		parser(t_minishell *minishell, char *line);
 size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize); //added here by soufiix
 
-//soufiix
+// soufiix
 // char 	**ft_getfullenv(t_minishell *minishell);
-// char	*ft_strdup(const char *s1);
+// char	*ft_strdupp(const char *s1);
 // size_t	ft_strlen(const char *s);
 // int		ft_strncmp(const char *s1, const char *s2, size_t n);
 // char	*ft_getenv(char *var, t_minishell *minishell);
@@ -167,7 +175,17 @@ size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize); //added here by 
 // char	*ft_itoa(int n);
 // int    ft_openhd(char *line, int *i);
 // int	ft_strcmp(char *s1, char *s2);
-void	execution(t_minishell *ms, char *line);
+void	execution(t_minishell *ms);
 char	**ft_split(char const *s, char c);
 int		ft_atoi(const char *str);
-# endif
+void    ft_openfd(t_minishell *msh);
+void 	ft_in(t_minishell *msh, int t_idx, int c_idx);
+t_tokens *ft_getoken(t_minishell *msh, int t_idx, int c_idx);
+t_cmd   *ft_getcmd(t_minishell *msh, int c_idx);
+void	printfderror(char *bash, char *infile);
+void    ft_openhd(t_minishell *msh);
+int		ft_creatfd_forhd(t_minishell *msh, char **input);
+char    *ft_getfile_name(t_minishell *msh);
+int		ft_countline(char **environ);
+void	datainit(t_minishell *msh);
+#endif
