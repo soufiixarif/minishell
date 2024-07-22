@@ -6,18 +6,47 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 08:40:57 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/15 14:15:28 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/21 19:21:14 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	Qexp_handler(t_minishell *minishell)
+char	*get_value(t_minishell *minishell, t_token **tmp_token, char *token, int *index)
 {
-	t_token *tmp_token;
+	char	*str;
+	char	*tmp;
 	int		i;
 
 	i = 0;
+	tmp = ft_strdup(minishell, &minishell->local, "");
+	(*index)++;
+	while (token[*index] && !ft_isexpand(token[*index]))
+	{
+		tmp[i] = token[*index];
+		i++;
+		(*index)++;
+	}
+	(*index)--;
+	str = ft_getenv(tmp, minishell);
+	if (is_ambiguous(str) == TRUE)
+		(*tmp_token)->bool = TRUE;
+	return(ft_strtrim(minishell, str, " \t"));
+	
+}
+
+void	qexp_handler(t_minishell *minishell)
+{
+	t_token *tmp_token;
+	char	*tmp;
+	int		i;
+	int		j;
+	int		count;
+
+	i = 0;
+	j = 0;
+	count = 0;
+	tmp = ft_strdup(minishell, &minishell->local, "");
 	tmp_token = minishell->token;
 	while (tmp_token)
 	{
@@ -25,26 +54,18 @@ void	Qexp_handler(t_minishell *minishell)
 		{
 			while (tmp_token->token[i])
 			{
-				if (tmp_token->token[i] == '$')
-					tmp_token->type = Q_EXP;
+				if (!ft_isexpand(tmp_token->token[i]) || (ft_isexpand(tmp_token->token[i]) && ft_isexpand(tmp_token->token[i + 1])))
+					tmp[j++] = tmp_token->token[i];
+				else if (tmp_token->token[i] == '$' && tmp_token->token[i + 1] != '$')
+				{
+					tmp = ft_strjoin(minishell, tmp, get_value(minishell, &tmp_token, tmp_token->token, &i));
+					j = ft_strlen(tmp);
+				}
 				i++;
 			}
+			tmp_token->token = tmp;
 		}
 		tmp_token = tmp_token->next;
 	}
 }
 
-// void	concat_exp(t_minishell *minishell)
-// {
-// 	t_token	*tmp_token;
-// 	t_token	*tmp_token;
-
-// 	tmp_token = minishell->token;
-// 	while (tmp_token)
-// 	{
-// 		if (tmp_token->type == EXP)
-// 		{
-			
-// 		}
-// 	}
-// }

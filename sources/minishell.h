@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:14:17 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/15 20:36:58 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/22 01:32:00 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,17 @@ typedef enum e_type
 	DEL,        //12
 } t_type;
 
+typedef enum e_bool
+{
+	FALSE,
+	TRUE,
+}	t_bool;
+
 typedef struct s_token
 {
 	char	*token;
 	t_type	type;
+	t_bool	bool;
 	struct s_token *next;
 }	t_token;
 
@@ -87,6 +94,8 @@ char		*ft_strdup(t_minishell *minishell, t_garbage **garbage, const char *s1);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 int			ft_strcmp(char *s1, char *s2);
 char		*ft_itoa(t_minishell *minishell, int n);
+char		*ft_strchr(const char *s, int c);
+char		*ft_strtrim(t_minishell *minishell, char const *s1, char const *set);
 char 		**ft_getfullenv(t_minishell *minishell);
 char		**ft_setenv(t_minishell *minishell);
 char		*ft_getenv(char *var, t_minishell *minishell);
@@ -103,6 +112,7 @@ int			ft_isexpand(char c);
 int			ft_ispipe(char c);
 int			ft_isin(char c);
 int			ft_isout(char c);
+t_bool		is_ambiguous(char *str);
 t_token		*ft_lstnew(t_minishell *minishell ,void *content, t_type type);
 t_garbage	*ft_garnew(t_minishell *m, void *node);
 void		*ft_malloc(t_minishell *minishell ,t_garbage **garbage, size_t size);
@@ -129,6 +139,7 @@ char		*get_in(t_minishell *minishell, char *line, int *index);
 char		*get_out(t_minishell *minishell, char *line, int *index);
 char		*get_herdoc(t_minishell *minishell, char *line, int *index);
 char		*get_append(t_minishell *minishell, char *line, int *index);
+void		get_del(t_minishell *minishell);
 void		handle_op(t_minishell *minishell, char *line, int *index);
 void		handle_pipe(t_minishell *minishell, char *line, int index);
 void		handle_in(t_minishell *minishell, char *line, int *index);
@@ -140,8 +151,8 @@ void		syntax_errorb(t_minishell *minishell, char *line, int index);
 void		syntax_errora(t_minishell *minishell, char *line, int index);
 void		open_heredocs(t_minishell *minishell, char *line, int n);
 void		token_handler(t_minishell *minishell);
-void		Qexp_handler(t_minishell *minishell);
-void		get_del(t_minishell *minishell);
+void		qexp_handler(t_minishell *minishell);
+void		expainding(t_minishell *minishell);
 void		parser(t_minishell *minishell, char *line);
 size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize); //added here by soufiix
 
