@@ -16,10 +16,12 @@ static t_cmd *create_cmd(int c_idx) {
     new_cmd->tokens = NULL;
     new_cmd->c_idx = c_idx;
     new_cmd->next = NULL;
+    new_cmd->input = 0;
+    new_cmd->output = 1;
     return new_cmd;
 }
 
-static void datainit(t_minishell *msh) {
+void datainit(t_minishell *msh) {
     int c_idx = 0;
     int t_idx = 0;
     t_cmd *cmd1 = create_cmd(c_idx++);
@@ -79,8 +81,8 @@ void ft_in(t_minishell *msh, int t_idx, int c_idx)
 
 void    ft_openfd(t_minishell *msh)
 {
-    datainit(msh);
-    ft_openhd(msh);
+    // datainit(msh);
+    // ft_openhd(msh);
     while(msh->cmd)
     {
         while(msh->cmd->tokens)

@@ -1,26 +1,69 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   execution.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/15 20:49:41 by sarif             #+#    #+#             */
-/*   Updated: 2024/07/15 20:49:44 by sarif            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "minishell.h"
-
-void execution(t_minishell *ms, char *line)
+int ft_open(t_tokens *token, int check)
 {
-    int i = 0;
-    if (!ft_strcmp(line,"env"))
+    int fd;
+
+    fd = -1;
+    if (check == 1)
     {
-        while (ms->env[i])
+        fd = open(token->node, O_RDONLY);
+        if (fd == -1)
+            perror(token->node);
+    }
+    else if (check == 2)
+        fd = open(token->node, O_CREAT,O_WRONLY);
+    else if (check == 3)
+        fd = open(token->node, O_CREAT, O_APPEND , O_WRONLY);
+    return(fd);
+}
+
+int ft_opperation(t_cmd *cmd)
+{
+    int fd;
+    t_tokens *token;
+
+    token = cmd->tokens;
+    while(token)
+    {
+        if(token->type == IN)
         {
-            printf("%s\n",ms->env[i]);
-            i++;
+            fd = ft_open(token->next, 1);
+            if(fd == -1)
+                return(-1);
+            cmd->input = fd;
         }
+        else if(token->type == OUT)
+        {
+            fd = ft_open(token->next, 2);
+            cmd->output = fd;
+        }
+        else if (token->type == APPEND)
+        {
+            fd = ft_open(token->next, 3);
+            cmd->output = fd;
+        }
+        token = token->next;
+    }
+    return (0);
+}
+void execution(t_minishell *ms)
+{
+    t_cmd *cmd = ms->cmd;
+    // pid_t pid;
+
+    while(cmd)
+    {
+        // pid = fork();
+        // if(pid == 0)
+        // {
+            if(ft_opperation(cmd) == -1)
+            {
+                cmd = cmd->next;
+                continue;
+            }
+            printf("input %d output %d\n",cmd->input, cmd->output);
+        // }
+        cmd = cmd->next;
     }
 }

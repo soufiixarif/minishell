@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser6.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 13:52:19 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/15 17:53:46 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/22 00:53:04 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,46 +33,6 @@ void	syntax_errora(t_minishell *minishell, char *line, int index)
 	ft_free(&minishell->local, 0);
 	//exit(258);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // cmd : cat Makefile -> | -> ls
 // iofiles : < input1 -> > out -> << 3 -> >> app -> > s -> < input2

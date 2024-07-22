@@ -1,36 +1,6 @@
 
 #include "minishell.h"
 
-// char	**ft_addnl(char **input)
-// {
-// 	char	**line;
-// 	int		len;
-// 	int		i;
-// 	int		j;
-
-// 	len = ft_countline(input);
-// 	i = 0;
-// 	line = (char **) malloc(len + 1 * sizeof (char *));
-// 	while (i < len)
-// 	{
-// 		line[i] = malloc(ft_strlen(input[i]) + 2 * sizeof(char *));
-// 		j = -1;
-// 		while(input[i][++j])
-// 			line[i][j] = input[i][j];
-// 		if (i != len - 1)
-// 		{	
-// 			line[i][j] = '\n';
-// 			line[i][j + 1] = '\0';
-// 		}
-// 		else
-// 			line[i][j] = '\0';
-// 		free(input[i]);
-// 		i++;
-// 	}
-// 	free(input);
-// 	line[i] = NULL;
-// 	return(line);	
-// }
 char    *ft_getfile_name(t_minishell *msh)
 {
 	char	*name;
@@ -79,20 +49,24 @@ void    ft_openhd(t_minishell *msh)
 	char *store;
 	char *line;
 	int i;
+	t_cmd	*cmd;
+	t_tokens *token;
 
+	cmd = msh->cmd;
 	store = NULL;
-	while (msh->cmd)
+	while (cmd)
 	{
-		while (msh->cmd->tokens)
+		token = cmd->tokens;
+		while (token)
 		{
-			if (msh->cmd->tokens->type == HERDOC)
+			if (token->type == HERDOC)
 			{
 				i = 0;
 				store = NULL;
 				while(1)
 				{
 					line = readline(">");
-					if (!line || !ft_strcmp(line, msh->cmd->tokens->next->node))
+					if (!line || !ft_strcmp(line, token->next->node))
 						break ;
 					store = ft_strjoin(msh, store, line);
 					store = ft_strjoin(msh, store, "\n");
@@ -100,12 +74,12 @@ void    ft_openhd(t_minishell *msh)
 					i++;
 				}
 				input = ft_split(store, '\n');
-				msh->cmd->tokens->fd = ft_creatfd_forhd(msh, input);
+				token->fd = ft_creatfd_forhd(msh, input);
 				free(store);
 			}
-			msh->cmd->tokens = msh->cmd->tokens->next;
+			token = token->next;
 		}
-		msh->cmd = msh->cmd->next;
+		cmd = cmd->next;
 	}
 }
 

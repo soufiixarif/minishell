@@ -6,20 +6,21 @@
 /*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:14:17 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/20 05:45:54 by sarif            ###   ########.fr       */
+/*   Updated: 2024/07/22 01:33:13 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef MINISHELL_H
+#ifndef MINISHELL_H
 # define MINISHELL_H
 
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <limits.h> // for PATH_MAX :D
-#include <fcntl.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <limits.h> // for PATH_MAX :D
+# include <fcntl.h>
+# include <paths.h>
 
 typedef enum e_type
 {
@@ -72,6 +73,7 @@ typedef struct s_command
 	int					input;
 	int					output;
 	int					c_idx;
+	int					fd[2];
 	struct s_command	*next;
 }	t_cmd;
 
@@ -161,7 +163,7 @@ size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize); //added here by 
 // char	*ft_itoa(int n);
 // int    ft_openhd(char *line, int *i);
 // int	ft_strcmp(char *s1, char *s2);
-void	execution(t_minishell *ms, char *line);
+void	execution(t_minishell *ms);
 char	**ft_split(char const *s, char c);
 int		ft_atoi(const char *str);
 void    ft_openfd(t_minishell *msh);
@@ -172,6 +174,6 @@ void	printfderror(char *bash, char *infile);
 void    ft_openhd(t_minishell *msh);
 int		ft_creatfd_forhd(t_minishell *msh, char **input);
 char    *ft_getfile_name(t_minishell *msh);
-// char	**ft_addnl(char **input);
 int		ft_countline(char **environ);
-# endif
+void	datainit(t_minishell *msh);
+#endif
