@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 19:55:39 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/18 01:44:58 by sarif            ###   ########.fr       */
+/*   Updated: 2024/07/23 01:26:09 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_syn_err	s_quote(char *line)
 
 	i = 0;
 	d = 0;
-	syntx_err.bool = 0;
+	syntx_err.boole = 0;
 	syntx_err.index = 0;
 	while (line[i])
 	{
@@ -28,7 +28,7 @@ t_syn_err	s_quote(char *line)
 			d = !d;
 		if (line[i] == '\'' && d == 0)
 		{
-			syntx_err.bool = !syntx_err.bool;
+			syntx_err.boole = !syntx_err.boole;
 			syntx_err.index = i;
 		}
 		i++;
@@ -44,7 +44,7 @@ t_syn_err	d_quote(char *line)
 
 	i = 0;
 	s = 0;
-	syntx_err.bool = 0;
+	syntx_err.boole = 0;
 	syntx_err.index = 0;
 	while (line[i])
 	{
@@ -52,7 +52,7 @@ t_syn_err	d_quote(char *line)
 			s = !s;
 		if (line[i] == '"' && s == 0)
 		{
-			syntx_err.bool = !syntx_err.bool;
+			syntx_err.boole = !syntx_err.boole;
 			syntx_err.index = i;
 		}
 		i++;
@@ -103,12 +103,12 @@ void	issyntax_err(t_minishell *minishell, char *line)
 
 	syntx_err1 = s_quote(line);
 	syntx_err2 = d_quote(line);
-	if (syntx_err1.bool == 1)
+	if (syntx_err1.boole == 1)
 	{
 		open_heredocs(minishell, line, syntx_err1.index);
 		printf("minishell: syntax error near unexpected token '\n");
 	}
-	if (syntx_err2.bool == 1)
+	if (syntx_err2.boole == 1)
 	{
 		open_heredocs(minishell, line, syntx_err2.index);
 		printf("minishell: syntax error near unexpected token \"\n");

@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:14:17 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/22 01:33:13 by sarif            ###   ########.fr       */
+/*   Updated: 2024/07/24 03:17:00 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <readline/history.h>
 # include <limits.h> // for PATH_MAX :D
 # include <fcntl.h>
-# include <paths.h>
+# include <stdbool.h>
 
 typedef enum e_type
 {
@@ -39,6 +39,8 @@ typedef enum e_type
 	DEL,        //12
 } t_type;
 
+typedef struct s_command t_cmd;
+
 typedef struct s_token
 {
 	char	*token;
@@ -54,7 +56,7 @@ typedef struct s_garbage
 
 typedef struct s_syntax_err
 {
-	int	bool;
+	int	boole;
 	int	index;
 }	t_syn_err;
 
@@ -63,19 +65,24 @@ typedef struct s_tokens
 	char			*node;
 	t_type			type;
 	int				t_idx;
+	t_cmd			*cmd;
 	int				fd;
+	char			**av;
 	struct s_tokens	*next;
 }	t_tokens;
+
+typedef struct s_minishell t_minishell;
 
 typedef struct s_command
 {
 	t_tokens			*tokens;
+	t_minishell			*msh;
 	int					input;
 	int					output;
 	int					c_idx;
 	int					fd[2];
 	struct s_command	*next;
-}	t_cmd;
+} t_cmd;
 
 typedef struct s_minishell
 {
@@ -86,6 +93,7 @@ typedef struct s_minishell
 	char		**env;
 	int			shlvl;
 	int			fd_max;
+	bool		env_checker;
 }	t_minishell;
 
 

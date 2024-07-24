@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 20:50:02 by sarif             #+#    #+#             */
-/*   Updated: 2024/07/20 05:13:00 by sarif            ###   ########.fr       */
+/*   Updated: 2024/07/23 01:30:01 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ char **ft_getfullenv(t_minishell *minishell)
         env = ft_setenv(minishell);
     else
     {
+        minishell->env_checker = true;
         env = (char **)ft_malloc(minishell, &minishell->global, sizeof (char *) * (ft_countline(environ) + 1));
         while (environ[i])
         {
