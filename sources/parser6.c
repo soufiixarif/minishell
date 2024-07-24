@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser6.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 13:52:19 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/22 00:53:04 by sarif            ###   ########.fr       */
+/*   Updated: 2024/07/22 08:54:19 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 void	token_handler(t_minishell *minishell)
 {
-	Qexp_handler(minishell);
+	get_del(minishell);
+	expainding(minishell);
+	qexp_handler(minishell);
 	// concat_exp(minishell);
 }
 
