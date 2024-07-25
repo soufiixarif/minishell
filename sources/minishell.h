@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:14:17 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/24 15:54:04 by sarif            ###   ########.fr       */
+/*   Updated: 2024/07/24 23:28:39 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef struct s_token
 {
 	char	*token;
 	t_type	type;
-	t_bool	bool;
+	bool	boole;
 	struct s_token *next;
 }	t_token;
 
@@ -68,7 +68,6 @@ typedef struct s_tokens
 	int				t_idx;
 	t_cmd			*cmd;
 	int				fd;
-	char			**av;
 	struct s_tokens	*next;
 }	t_tokens;
 
@@ -82,6 +81,7 @@ typedef struct s_command
 	int					output;
 	int					c_idx;
 	int					fd[2];
+	char				**av;
 	struct s_command	*next;
 } t_cmd;
 
@@ -94,6 +94,7 @@ typedef struct s_minishell
 	char		**env;
 	int			shlvl;
 	int			fd_max;
+	int			pipes;
 	bool		env_checker;
 }	t_minishell;
 
@@ -122,7 +123,7 @@ int			ft_isexpand(char c);
 int			ft_ispipe(char c);
 int			ft_isin(char c);
 int			ft_isout(char c);
-t_bool		is_ambiguous(char *str);
+bool		is_ambiguous(char *str);
 t_token		*ft_lstnew(t_minishell *minishell ,void *content, t_type type);
 t_garbage	*ft_garnew(t_minishell *m, void *node);
 void		*ft_malloc(t_minishell *minishell ,t_garbage **garbage, size_t size);
@@ -190,4 +191,6 @@ int		ft_creatfd_forhd(t_minishell *msh, char **input);
 char    *ft_getfile_name(t_minishell *msh);
 int		ft_countline(char **environ);
 void	datainit(t_minishell *msh);
+int		ft_lstsize(t_cmd *lst);
+void	args_maker(t_cmd *cmd);
 #endif

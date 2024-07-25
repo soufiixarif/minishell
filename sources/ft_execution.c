@@ -1,66 +1,77 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_execution.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/24 23:08:44 by sarif             #+#    #+#             */
+/*   Updated: 2024/07/25 01:01:38 by sarif            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
-
-
-int ft_open(t_tokens *token, int check)
+#include <string.h>
+int	getavlen(t_cmd *cmd)
 {
-	int fd;
+	int 		counter;
+	t_tokens	*token;
 
-	fd = -1;
-	if (check == 1)
-	{
-		fd = open(token->node, O_RDONLY , 0644);
-		if (fd == -1)
-			perror(token->node);
-	}
-	else if (check == 2)
-		fd = open(token->node, O_CREAT | O_WRONLY, 0644);
-	else if (check == 3)
-		fd = open(token->node, O_CREAT | O_APPEND | O_WRONLY, 0644);
-	return(fd);
-}
-
-int ft_opperation(t_cmd *cmd)
-{
-	int fd;
-	t_tokens *token;
-
+	counter = 0;
 	token = cmd->tokens;
 	while(token)
 	{
-		if(token->type == IN)
-		{
-			fd = ft_open(token->next, 1);
-			if(fd == -1)
-				return(-1);
-			cmd->input = fd;
-		}
-		else if(token->type == OUT)
-		{
-			fd = ft_open(token->next, 2);
-			cmd->output = fd;
-		}
-		else if (token->type == APPEND)
-		{
-			fd = ft_open(token->next, 3);
-			cmd->output = fd;
-		}
-		else if (token->type == HERDOC)
-			cmd->input = token->fd;
+		if(token->type != TEXT)
+			token = token->next;
+		else
+			counter++;
 		token = token->next;
 	}
-	return (0);
+	return(counter);
 }
+void	args_maker(t_cmd *cmd)
+{
+	t_tokens *token;
+	t_cmd	*commande;
+	int		i;
+
+	i = 0;
+	commande = cmd;
+	while(commande)
+	{
+		// commande->av = (char**)malloc(sizeof(char *) * getavlen(commande));
+		token = commande->tokens;
+		while (token)
+		{
+			printf("%p\n",token->node);
+			// if (token->type != TEXT)
+			// 	token = token->next;
+			// else
+			// 		commande->av[i++] = strdup(token->node);
+			// 	i++;
+			token = token->next;
+		}
+		// commande->av[i] = NULL;
+		commande = commande->next;
+	}
+	// exit(0);
+}
+// void ft_onepipe(t_cmd	*cmd)
+// {
+	
+// }
 void execution(t_minishell *ms)
 {
-	t_cmd *cmd = ms->cmd;
+	t_cmd *commande;
 
-	while(cmd)
+	commande = ms->cmd;
+	args_maker(commande);
+	while(commande)
 	{
-		if(ft_opperation(cmd) == -1)
-		{
-			cmd = cmd->next;
-			continue;
-		}
-		cmd = cmd->next;
+		for(int i = 0; commande->av[i];i++)
+			printf("==> %s\n",commande->av[i]);
+		commande = commande->next;
 	}
+// 	if(ms->pipes == 1)
+// 		ft_onepipe(commande);
 }

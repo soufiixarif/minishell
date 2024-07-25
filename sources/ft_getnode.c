@@ -1,5 +1,20 @@
 #include "minishell.h"
 
+int	ft_lstsize(t_cmd *lst)
+{
+	int	len;
+
+	if (!lst)
+		return (0);
+	len = 1;
+	while (lst -> next != NULL)
+	{
+		len++;
+		lst = lst ->next;
+	}
+	return (len);
+}
+
 t_cmd   *ft_getcmd(t_minishell *msh, int c_idx)
 {
     t_cmd *tmp_cmd = msh->cmd;

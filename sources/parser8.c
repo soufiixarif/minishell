@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser8.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 18:06:16 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/22 01:50:04 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/24 23:01:47 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	get_del(t_minishell *minishell)
 	}
 }
 
-t_bool	is_ambiguous(char *str)
+bool	is_ambiguous(char *str)
 {
 	int		i;
 
@@ -47,10 +47,10 @@ t_bool	is_ambiguous(char *str)
 	while (str[i])
 	{
 		if (str[i] == ' ' || str[i] == '\t')
-			return(TRUE);
+			return(true);
 		i++;
 	}
-	return(FALSE);
+	return(false);
 }
 
 void	expainding(t_minishell *minishell)
@@ -68,8 +68,8 @@ void	expainding(t_minishell *minishell)
 			if (tmp_token && (tmp_token->type == TEXT))
 			{
 				tmp = ft_getenv(tmp_token->token, minishell);
-				if (is_ambiguous(tmp) == TRUE)
-					tmp_token->bool = TRUE;
+				if (is_ambiguous(tmp) == true)
+					tmp_token->boole = true;
 				tmp_token->token = ft_strdup(minishell, &minishell->local, tmp);
 			}
 		}

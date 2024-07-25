@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_getenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 05:24:49 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/22 08:52:57 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/24 23:03:12 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ char	*ft_getenv(char *var, t_minishell *minishell)
 		{
 			tmp = tmp + len + 1;
 			return (tmp);
+		}
 		i++;
 	}
 	tmp = ft_strdup(minishell, &minishell->global, "");

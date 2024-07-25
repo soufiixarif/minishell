@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser7.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 08:40:57 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/21 19:21:14 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/24 23:02:03 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ char	*get_value(t_minishell *minishell, t_token **tmp_token, char *token, int *i
 	}
 	(*index)--;
 	str = ft_getenv(tmp, minishell);
-	if (is_ambiguous(str) == TRUE)
-		(*tmp_token)->bool = TRUE;
+	if (is_ambiguous(str) == true)
+		(*tmp_token)->boole = true;
 	return(ft_strtrim(minishell, str, " \t"));
 	
 }
