@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:14:17 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/24 23:28:39 by sarif            ###   ########.fr       */
+/*   Updated: 2024/07/25 17:08:26 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,5 +192,5 @@ char    *ft_getfile_name(t_minishell *msh);
 int		ft_countline(char **environ);
 void	datainit(t_minishell *msh);
 int		ft_lstsize(t_cmd *lst);
-void	args_maker(t_cmd *cmd);
+void	args_maker(t_minishell *msh);
 #endif

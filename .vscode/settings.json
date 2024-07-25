@@ -12,7 +12,8 @@
         "unordered_map": "c",
         "vector": "c",
         "chrono": "c",
-        "ostream": "c"
+        "ostream": "c",
+        "__node_handle": "c"
     },
     "workbench.colorCustomizations": {
         "activityBar.background": "#083517",
