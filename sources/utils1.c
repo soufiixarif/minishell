@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:44:01 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/20 05:33:57 by sarif            ###   ########.fr       */
+/*   Updated: 2024/07/23 21:18:42 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,12 @@ char	*ft_strjoin(t_minishell *minishell, char const *s1, char const *s2)
 	int		len;
 	char	*str;
 
+	if (!s1 && !s2)
+		return(NULL); 
 	if (!s1)
 		return (ft_strdup(minishell, &minishell->global, s2));
+	if (!s2)
+		return (ft_strdup(minishell,&minishell->global,s1));
 	len = ft_strlen(s1) + ft_strlen(s2);
 	i = -1;
 	str = ft_malloc(minishell, &minishell->local, len + 1);

@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 18:06:16 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/22 01:50:04 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/26 17:22:45 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,11 @@ void	get_del(t_minishell *minishell)
 	t_token	*tmp_token;
 	t_token	*tmp_token2;
 	char	*tmp;
+	bool	b;
 
 	tmp = ft_strdup(minishell, &minishell->local , "");
 	tmp_token = minishell->token;
+	b = false;
 	while (tmp_token)
 	{
 		if (tmp_token->next && tmp_token->type == HERDOC)
@@ -30,8 +32,18 @@ void	get_del(t_minishell *minishell)
 			if (tmp_token2->type == TEXT || tmp_token2->type == EXP || tmp_token2->type == S_QUOTE || tmp_token2->type == D_QUOTE)
 			{
 				while (tmp_token2 && (tmp_token2->type == TEXT || tmp_token2->type == EXP || tmp_token2->type == S_QUOTE || tmp_token2->type == D_QUOTE))
+				{
+					if (tmp_token2->type == D_QUOTE)
+						b = true;
 					(1) && (tmp = ft_strjoin(minishell, tmp, tmp_token2->token), tmp_token2 = tmp_token2->next);
-				(1) && (tmp_token = tmp_token->next , tmp_token->token = tmp, tmp_token->type = DEL, tmp_token->next = tmp_token2) ;
+				}
+				tmp_token = tmp_token->next;
+				tmp_token->token = tmp;
+				if (b == true)
+					tmp_token->type = Q_DEL;
+				else
+					tmp_token->type = DEL;
+				tmp_token->next = tmp_token2;
 			}
 		}
 		tmp = ft_strdup(minishell, &minishell->local , "");
@@ -39,7 +51,7 @@ void	get_del(t_minishell *minishell)
 	}
 }
 
-t_bool	is_ambiguous(char *str)
+bool	is_ambiguous(char *str)
 {
 	int		i;
 
@@ -47,10 +59,10 @@ t_bool	is_ambiguous(char *str)
 	while (str[i])
 	{
 		if (str[i] == ' ' || str[i] == '\t')
-			return(TRUE);
+			return(true);
 		i++;
 	}
-	return(FALSE);
+	return(false);
 }
 
 void	expainding(t_minishell *minishell)
@@ -69,7 +81,7 @@ void	expainding(t_minishell *minishell)
 			{
 				tmp = ft_getenv(tmp_token->token, minishell);
 				if (is_ambiguous(tmp) == TRUE)
-					tmp_token->bool = TRUE;
+					tmp_token->boole = TRUE;
 				tmp_token->token = ft_strdup(minishell, &minishell->local, tmp);
 			}
 		}

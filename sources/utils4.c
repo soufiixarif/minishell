@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 16:47:16 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/18 23:07:36 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/24 10:24:32 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,32 @@ char	*ft_strtrim(t_minishell *minishell, char const *s1, char const *set)
 		return (NULL);
 	str = ft_memcpy(str, (s1 + i), size);
 	str[size] = '\0';
+	return (str);
+}
+
+char	*ft_substr(t_minishell *minishell, char const *s, unsigned int start, size_t len)
+{
+	char	*str;
+	size_t	i;
+	size_t	n;
+
+	i = 0;
+	if (!s)
+		return (NULL);
+	n = ft_strlen(s);
+	if (n < start)
+		return (ft_strdup(minishell, &minishell->local, ""));
+	if (len > n - start)
+		len = n - start;
+	str = ft_malloc(minishell, &minishell->local, (len + 1));
+	if (!str)
+		return (NULL);
+	while (i < len)
+	{
+		str[i] = s[start];
+		i++;
+		start++;
+	}
+	str[i] = '\0';
 	return (str);
 }

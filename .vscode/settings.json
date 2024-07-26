@@ -15,8 +15,8 @@
         "ostream": "c"
     },
     "workbench.colorCustomizations": {
-        "activityBar.background": "#083517",
-        "titleBar.activeBackground": "#0B4A21",
+        // "activityBar.background": "#083517",
+        // "titleBar.activeBackground": "#0B4A21",
         "titleBar.activeForeground": "#F0FDF4"
     }
 }

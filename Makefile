@@ -2,9 +2,11 @@ NAME = minishell
 
 CC = cc
 
-FLAGS = -Wextra -Wall -Werror -I/Users/kelmounj/.brew/opt/readline/include  -fsanitize=address -g
+FLAGS = -Wextra -Wall -Werror -I/Users/kelmounj/.brew/opt/readline/include 
+# -fsanitize=address -g
 
-LDFLAGS = -lreadline -L/Users/kelmounj/.brew/opt/readline/lib   -fsanitize=address -g
+LDFLAGS = -lreadline -L/Users/kelmounj/.brew/opt/readline/lib  
+# -fsanitize=address -g
 
 SRCS = sources/minishell.c sources/parser1.c sources/parser2.c sources/parser3.c sources/parser4.c \
 		sources/parser5.c sources/parser6.c sources/parser7.c sources/parser8.c sources/utils1.c \

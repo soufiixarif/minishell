@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:14:17 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/22 08:53:59 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/26 17:17:25 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <limits.h> // for PATH_MAX :D
 # include <fcntl.h>
 # include <paths.h>
+# include <stdbool.h>
 
 typedef enum e_type
 {
@@ -34,8 +35,8 @@ typedef enum e_type
 	OUT,         //7
 	APPEND,   //8
 	HERDOC,   //9
-	Q_HERDOC,   //10
-	Q_EXP,    //11
+	Q_EXP,    //10
+	Q_DEL,   //11
 	DEL,        //12
 } t_type;
 
@@ -49,7 +50,7 @@ typedef struct s_token
 {
 	char	*token;
 	t_type	type;
-	t_bool	bool;
+	t_bool	boole;
 	struct s_token *next;
 }	t_token;
 
@@ -61,7 +62,7 @@ typedef struct s_garbage
 
 typedef struct s_syntax_err
 {
-	int	bool;
+	int	boole;
 	int	index;
 }	t_syn_err;
 
@@ -81,6 +82,7 @@ typedef struct s_command
 	int					output;
 	int					c_idx;
 	int					fd[2];
+	char				**args;
 	struct s_command	*next;
 }	t_cmd;
 
@@ -104,6 +106,7 @@ int			ft_strcmp(char *s1, char *s2);
 char		*ft_itoa(t_minishell *minishell, int n);
 char		*ft_strchr(const char *s, int c);
 char		*ft_strtrim(t_minishell *minishell, char const *s1, char const *set);
+char		*ft_substr(t_minishell *minishell, char const *s, unsigned int start, size_t len);
 char 		**ft_getfullenv(t_minishell *minishell);
 char		**ft_setenv(t_minishell *minishell);
 char		*ft_getenv(char *var, t_minishell *minishell);
@@ -120,7 +123,7 @@ int			ft_isexpand(char c);
 int			ft_ispipe(char c);
 int			ft_isin(char c);
 int			ft_isout(char c);
-t_bool		is_ambiguous(char *str);
+bool		is_ambiguous(char *str);
 t_token		*ft_lstnew(t_minishell *minishell ,void *content, t_type type);
 t_garbage	*ft_garnew(t_minishell *m, void *node);
 void		*ft_malloc(t_minishell *minishell ,t_garbage **garbage, size_t size);

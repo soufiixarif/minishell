@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 05:24:49 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/22 08:52:57 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/26 17:49:29 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,10 @@ char	*ft_getenv(char *var, t_minishell *minishell)
 		if (!check && minishell->env[i][len] == '=')
 		{
 			tmp = tmp + len + 1;
-			return (tmp);
+			return (ft_strtrim(minishell, tmp, " \t"));
+		}
 		i++;
 	}
 	tmp = ft_strdup(minishell, &minishell->global, "");
-	return (ft_strtrim(minishell, tmp, " \t"));
+	return (tmp);
 }
