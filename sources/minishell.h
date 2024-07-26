@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:14:17 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/26 17:17:25 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/26 22:40:32 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include <readline/history.h>
 # include <limits.h> // for PATH_MAX :D
 # include <fcntl.h>
-# include <paths.h>
 # include <stdbool.h>
+
 
 typedef enum e_type
 {
@@ -40,17 +40,13 @@ typedef enum e_type
 	DEL,        //12
 } t_type;
 
-typedef enum e_bool
-{
-	FALSE,
-	TRUE,
-}	t_bool;
+typedef struct s_command t_cmd;
 
 typedef struct s_token
 {
 	char	*token;
 	t_type	type;
-	t_bool	boole;
+	bool	boole;
 	struct s_token *next;
 }	t_token;
 
@@ -71,20 +67,25 @@ typedef struct s_tokens
 	char			*node;
 	t_type			type;
 	int				t_idx;
+	t_cmd			*cmd;
 	int				fd;
 	struct s_tokens	*next;
 }	t_tokens;
 
+typedef struct s_minishell t_minishell;
+
 typedef struct s_command
 {
 	t_tokens			*tokens;
+	t_minishell			*msh;
 	int					input;
 	int					output;
 	int					c_idx;
 	int					fd[2];
-	char				**args;
+	bool				fd_fail;
+	char				**av;
 	struct s_command	*next;
-}	t_cmd;
+} t_cmd;
 
 typedef struct s_minishell
 {
@@ -95,6 +96,8 @@ typedef struct s_minishell
 	char		**env;
 	int			shlvl;
 	int			fd_max;
+	int			pipes;
+	bool		env_checker;
 }	t_minishell;
 
 
@@ -178,17 +181,33 @@ size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize); //added here by 
 // char	*ft_itoa(int n);
 // int    ft_openhd(char *line, int *i);
 // int	ft_strcmp(char *s1, char *s2);
-void	execution(t_minishell *ms);
-char	**ft_split(char const *s, char c);
-int		ft_atoi(const char *str);
-void    ft_openfd(t_minishell *msh);
-void 	ft_in(t_minishell *msh, int t_idx, int c_idx);
-t_tokens *ft_getoken(t_minishell *msh, int t_idx, int c_idx);
-t_cmd   *ft_getcmd(t_minishell *msh, int c_idx);
-void	printfderror(char *bash, char *infile);
-void    ft_openhd(t_minishell *msh);
-int		ft_creatfd_forhd(t_minishell *msh, char **input);
-char    *ft_getfile_name(t_minishell *msh);
-int		ft_countline(char **environ);
-void	datainit(t_minishell *msh);
+void		execution(t_minishell *ms);
+char		**ft_split(char const *s, char c);
+int			ft_atoi(const char *str);
+t_tokens	*ft_getoken(t_minishell *msh, int t_idx, int c_idx);
+t_cmd		*ft_getcmd(t_minishell *msh, int c_idx);
+void		printfderror(char *bash, char *infile);
+void    	ft_openhd(t_minishell *msh);
+int			ft_creatfd_forhd(t_minishell *msh, char **input);
+char		*ft_getfile_name(t_minishell *msh);
+int			ft_countline(char **environ);
+void		datainit(t_minishell *msh);
+int			ft_lstsize(t_cmd *lst);
+void		args_maker(t_minishell *msh);
+void		ft_onepipe(t_cmd	*cmd);
+int			getavlen(t_cmd *cmd);
+int			isbuiltin(char *av);
+void		execute_onecmd(t_cmd *cmd);
+int			ft_openfd(t_cmd *cmd);
+int			ft_in(t_tokens *token);
+int			ft_out(t_tokens *token);
+int			ft_append(t_tokens *token);
+char		*getlinepath(char *path, char *commande, t_cmd *cmd);
+char		*ft_strcpy(char *s1, char *s2);
+char		*ft_strcat(char *dest, char *src);
+void		put_stderr(char *s);
+
+
+
+
 #endif

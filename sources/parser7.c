@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 08:40:57 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/26 17:48:56 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/26 22:46:58 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ char	*get_value(t_minishell *minishell, t_token **tmp_token, char *token, int *i
 	if (ft_isexpand(token[*index]) || ft_isblank(token[*index]))
 		(*index)--;
 	str = ft_getenv(tmp, minishell);
-	if (is_ambiguous(str) == TRUE)
-		(*tmp_token)->boole = TRUE;
+	if (is_ambiguous(str) == true)
+		(*tmp_token)->boole = true;
 	return(ft_strtrim(minishell, str, " \t"));
 	
 }
@@ -116,8 +116,8 @@ void	qexp_handler(t_minishell *minishell)
 						str = ft_substr(minishell, tmp_token->token, i, get_lenexp(tmp_token->token, i));
 						i = i + get_lenexp(tmp_token->token, i);
 						tmp = ft_getenv(str, minishell);
-						if (is_ambiguous(tmp) == TRUE)
-							tmp_token->boole = TRUE;
+						if (is_ambiguous(tmp) == true)
+							tmp_token->boole = true;
 					}
 					tmp2 = ft_strjoin(minishell, tmp2, tmp);
 				}

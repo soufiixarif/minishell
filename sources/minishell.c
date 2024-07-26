@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:07:03 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/22 10:04:23 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/26 22:42:11 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,22 @@ int	main()
 			exit(0);
 		add_history(line);
 		parser(&minishell, line);
-		// datainit(&minishell);
-		// ft_openhd(&minishell);
-		// execution(&minishell);
-		while(minishell.token)
-		{
-			printf("token ==> %s\n", minishell.token->token);
-			printf("token ==> %u\n", minishell.token->type);
-			minishell.token = minishell.token->next;
-		}
+		datainit(&minishell);
+		// while(minishell.cmd){
+		// 	while(minishell.cmd->tokens){
+		// 		printf("%s\n",minishell.cmd->tokens->node);
+		// 	minishell.cmd->tokens = minishell.cmd->tokens->next;
+		// 	}
+		// 	minishell.cmd = minishell.cmd->next;
+		// }
+		ft_openhd(&minishell);
+		execution(&minishell);
+		// while(minishell.token)
+		// {
+		// 	// printf("token ==> %s\n", minishell.token->token);
+		// 	// printf("token ==> %u\n", minishell.token->type);
+		// 	minishell.token = minishell.token->next;
+		// }
 		free(line);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 18:06:16 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/26 17:22:45 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/26 22:47:24 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ void	expainding(t_minishell *minishell)
 			if (tmp_token && (tmp_token->type == TEXT))
 			{
 				tmp = ft_getenv(tmp_token->token, minishell);
-				if (is_ambiguous(tmp) == TRUE)
-					tmp_token->boole = TRUE;
+				if (is_ambiguous(tmp) == true)
+					tmp_token->boole = true;
 				tmp_token->token = ft_strdup(minishell, &minishell->local, tmp);
 			}
 		}
