@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:07:03 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/25 15:02:00 by sarif            ###   ########.fr       */
+/*   Updated: 2024/07/26 20:36:44 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ int	main()
 		// }
 		ft_openhd(&minishell);
 		execution(&minishell);
-		while(minishell.token)
-		{
-			// printf("token ==> %s\n", minishell.token->token);
-			// printf("token ==> %u\n", minishell.token->type);
-			minishell.token = minishell.token->next;
-		}
+		// while(minishell.token)
+		// {
+		// 	// printf("token ==> %s\n", minishell.token->token);
+		// 	// printf("token ==> %u\n", minishell.token->type);
+		// 	minishell.token = minishell.token->next;
+		// }
 		free(line);
 	}
 }

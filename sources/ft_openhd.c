@@ -3,17 +3,33 @@
 
 char    *ft_getfile_name(t_minishell *msh)
 {
-	char	*name;
+	int		name;
 	char	*path;
 
-	name = malloc(1);
-	if (!name)
-		return (perror("malloc"), NULL);
-	path = ft_strjoin(msh, "/tmp/.tmp",ft_itoa(msh, (int)name));
-	if (path)
-		return (free(name), path);
-	return(perror("malloc"), NULL);
+	name = 0;
+	while(name < OPEN_MAX)
+	{
+		path = ft_strjoin(msh, "/tmp/", ft_itoa(msh, name));
+		if (access(path, F_OK) == -1)
+			return(path);
+		name++;
+	}
+	return(NULL);
 }
+
+// char    *ft_getfile_name(t_minishell *msh)
+// {
+// 	char	*name;
+// 	char	*path;
+
+// 	name = malloc(1);
+// 	if (!name)
+// 		return (perror("malloc"), NULL);
+// 	path = ft_strjoin(msh, "/tmp/.tmp",ft_itoa(msh, (int)name));
+// 	if (path)
+// 		return (free(name), path);
+// 	return(perror("malloc"), NULL);
+// }
 
 int	ft_creatfd_forhd(t_minishell *msh, char **input)
 {
@@ -48,7 +64,6 @@ void    ft_openhd(t_minishell *msh)
 	char **input;
 	char *store;
 	char *line;
-	int i;
 	t_cmd	*cmd;
 	t_tokens *token;
 
@@ -61,7 +76,6 @@ void    ft_openhd(t_minishell *msh)
 		{
 			if (token->type == HERDOC)
 			{
-				i = 0;
 				store = NULL;
 				while(1)
 				{
@@ -71,7 +85,6 @@ void    ft_openhd(t_minishell *msh)
 					store = ft_strjoin(msh, store, line);
 					store = ft_strjoin(msh, store, "\n");
 					free(line);
-					i++;
 				}
 				input = ft_split(store, '\n');
 				token->fd = ft_creatfd_forhd(msh, input);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils4.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 16:47:16 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/18 23:07:36 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/26 01:08:46 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ char	*ft_strchr(const char *s, int c)
 {
 	int		i;
 	char	*ptr;
-	int		len;
+	// int		len;
 
-	len = ft_strlen(s);
+	// len = ft_strlen(s);
 	ptr = (char *)s;
 	i = 0;
 	while (s[i])

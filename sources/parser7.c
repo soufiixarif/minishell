@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser7.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 08:40:57 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/24 23:02:03 by sarif            ###   ########.fr       */
+/*   Updated: 2024/07/26 01:08:34 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ void	qexp_handler(t_minishell *minishell)
 	char	*tmp;
 	int		i;
 	int		j;
-	int		count;
+	// int		count;
 
 	i = 0;
 	j = 0;
-	count = 0;
+	// count = 0;
 	tmp = ft_strdup(minishell, &minishell->local, "");
 	tmp_token = minishell->token;
 	while (tmp_token)
