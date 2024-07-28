@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:14:17 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/26 20:13:35 by sarif            ###   ########.fr       */
+/*   Updated: 2024/07/27 20:02:54 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,6 +204,9 @@ char		*getlinepath(char *path, char *commande, t_cmd *cmd);
 char		*ft_strcpy(char *s1, char *s2);
 char		*ft_strcat(char *dest, char *src);
 void		put_stderr(char *s);
+void ft_multi_pipes(t_minishell *msh);
+void execute_childe(t_cmd *cmd);
+void	ft_redirection(t_cmd *cmd);
 
 
 
