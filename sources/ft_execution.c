@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 23:08:44 by sarif             #+#    #+#             */
-/*   Updated: 2024/07/28 06:04:39 by sarif            ###   ########.fr       */
+/*   Updated: 2024/07/28 20:05:19 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char	*getlinepath(char *path, char *commande, t_cmd *cmd)
 
 	i = 0;
 	if (ft_strchr(commande, '/') != NULL)
-		return (strdup(commande));
+		return (strdup(commande));// forbiden function TO CHANGE IT LATER
 	envpath = ft_split(path, ':');
 	while (envpath[i])
 	{
@@ -195,10 +195,8 @@ void execute_childe(t_cmd *cmd)
 {
 	char *path;
 	char *line;
-	// printf("index %d\n", cmd->c_idx);
 	path = ft_getenv("PATH", cmd->msh);
 	line = getlinepath(path, cmd->av[0], cmd);
-	printf("Line [%s]\n",line);
 	if (execve(line,cmd->av,cmd->msh->env) == -1)
 	{
 		perror("Error: ");

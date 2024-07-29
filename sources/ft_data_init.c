@@ -45,36 +45,41 @@ void datainit(t_minishell *msh) {
     int t_idx = 0;
     t_cmd *cmd1 = create_cmd(c_idx++, msh);
     t_cmd *cmd2 = create_cmd(c_idx++, msh);
-    t_cmd *cmd3 = create_cmd(c_idx++, msh);
+    // t_cmd *cmd3 = create_cmd(c_idx++, msh);
 
     msh->cmd = cmd1;
     cmd1->next = cmd2;
-    cmd2->next = cmd3;
+    // cmd2->next = cmd3;
 
     // Initialize tokens for cmd1
     cmd1->tokens = create_token("ls", TEXT, t_idx++,cmd1);
-    cmd1->tokens->next = create_token("-l", TEXT, t_idx++,cmd1);
-    cmd1->tokens->next->next = create_token("-a", TEXT, t_idx++,cmd1);
-    // cmd1->tokens->next = create_token("<", IN, t_idx++,cmd1);
-    // cmd1->tokens->next->next = create_token("Makefile", TEXT, t_idx++,cmd1);
+    // cmd1->tokens->next = create_token(">", OUT, t_idx++,cmd1);
+    // cmd1->tokens->next->next = create_token("Ma", TEXT, t_idx++,cmd1);
     // cmd1->tokens->next->next->next = create_token("-l", TEXT, t_idx++,cmd1);
-    // cmd1->tokens->next->next->next->next = create_token("<", IN, t_idx++,cmd1);
-    // cmd1->tokens->next->next->next->next->next = create_token("Makefile", TEXT, t_idx++,cmd1);
+    // cmd1->tokens->next->next->next->next = create_token(">", OUT, t_idx++,cmd1);
+    // cmd1->tokens->next->next->next->next->next = create_token("Make", TEXT, t_idx++,cmd1);
     // cmd1->tokens->next->next->next->next->next->next = create_token("<<", HERDOC, t_idx++,cmd1);
     // cmd1->tokens->next->next->next->next->next->next->next = create_token("del", TEXT, t_idx++,cmd1);
     // cmd1->tokens->next->next->next->next->next->next->next->next = create_token("-a", TEXT, t_idx++,cmd1);
+    // cmd1->tokens->next = create_token("-l", TEXT, t_idx++,cmd1);
+    // cmd1->tokens->next->next = create_token("-a", TEXT, t_idx++,cmd1);
 
     // // // Initialize tokens for cmd2
     cmd2->tokens = create_token("grep", TEXT, t_idx++,cmd2);
-    cmd2->tokens->next = create_token("mini", TEXT, t_idx++,cmd2);
-    // // cmd2->tokens->next = create_token("<<", HERDOC, t_idx++,cmd1);
-    // // cmd2->tokens->next->next = create_token("1", DEL, t_idx++,cmd1);
-    // // cmd2->tokens->next->next->next = create_token("<<", HERDOC, t_idx++,cmd1);
-    // // cmd2->tokens->next->next->next->next = create_token("2", DEL, t_idx++,cmd1);
+    cmd2->tokens->next = create_token("Ma", TEXT, t_idx++,cmd2);
+    cmd2->tokens->next->next = create_token(">>", APPEND, t_idx++,cmd2);
+    cmd2->tokens->next->next->next = create_token("Make", TEXT, t_idx++,cmd2);
+    // cmd2->tokens->next = create_token("<<", HERDOC, t_idx++,cmd1);
+    // cmd2->tokens->next->next = create_token("1", DEL, t_idx++,cmd1);
+    // cmd2->tokens->next->next->next = create_token("<<", HERDOC, t_idx++,cmd1);
+    // cmd2->tokens->next->next->next->next = create_token("2", DEL, t_idx++,cmd1);
 
     // // // Initialize tokens for cmd3
-    cmd3->tokens = create_token("rev", TEXT, t_idx++,cmd1);
-    // cmd3->tokens->next = create_token("<", IN, t_idx++,cmd1);
+    // cmd3->tokens = create_token("rev", TEXT, t_idx++,cmd1);
+    // cmd3->tokens->next = create_token("", TEXT, t_idx++,cmd1);
+    // cmd3->tokens->next->next = create_token("lim3", TEXT, t_idx++,cmd1);
+    // cmd3->tokens->next->next->next = create_token(">", OUT, t_idx++,cmd1);
+    // cmd3->tokens->next = create_token(">", OUT, t_idx++,cmd1);
     // cmd3->tokens->next->next = create_token("lim3", TEXT, t_idx++,cmd1);
     // cmd3->tokens->next->next->next = create_token(">", OUT, t_idx++,cmd1);
     // cmd3->tokens->next->next->next->next = create_token("f2", TEXT, t_idx++,cmd1);
@@ -82,7 +87,7 @@ void datainit(t_minishell *msh) {
 
     // t_cmd *cmd = msh->cmd;
     // while (cmd) 
-    // {`
+    // {
     //     printf("c_idx: %d\n",cmd->c_idx);
     //     t_tokens *token = cmd->tokens;
     //     while (token) {

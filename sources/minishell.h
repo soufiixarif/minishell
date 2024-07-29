@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:14:17 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/27 20:02:54 by sarif            ###   ########.fr       */
+/*   Updated: 2024/07/28 22:12:03 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ typedef enum e_type
 	HERDOC,   //9
 	Q_HERDOC,   //10
 	Q_EXP,    //11
-	DEL,        //12
+	DEL,// to expande;
+	Q_DEL,      //12
 } t_type;
 
 typedef struct s_command t_cmd;
