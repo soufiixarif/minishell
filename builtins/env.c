@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/12 01:04:16 by sarif             #+#    #+#             */
-/*   Updated: 2024/07/30 01:34:24 by sarif            ###   ########.fr       */
+/*   Created: 2024/07/29 22:57:18 by sarif             #+#    #+#             */
+/*   Updated: 2024/07/30 00:55:41 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../sources/minishell.h"
 
-void ft_exit(t_minishell *msh, t_cmd *cmd) // get the next node to exit
+void    ft_env(t_minishell *msh)
 {
-    (void)msh;
-    (void)cmd;
-    if(cmd->av[1])
-        exit(ft_atoi(cmd->av[1]));
-    else
-        exit(0); // replace 0 with the last exit status
+    int i;
+
+    i = -1;
+    while(msh->env[++i])
+    {
+        if(!msh->env_checker && !ft_strncmp("PATH=",msh->env[i],5))
+            i++;
+        printf("%s",msh->env[i]);
+        printf("\n");
+    }
 }

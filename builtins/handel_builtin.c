@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   handel_builtin.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/12 01:04:16 by sarif             #+#    #+#             */
-/*   Updated: 2024/07/30 01:34:24 by sarif            ###   ########.fr       */
+/*   Created: 2024/07/29 23:04:10 by sarif             #+#    #+#             */
+/*   Updated: 2024/07/30 01:34:30 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../sources/minishell.h"
 
-void ft_exit(t_minishell *msh, t_cmd *cmd) // get the next node to exit
+void    handel_builtins(t_minishell *msh, t_cmd *cmd)
 {
-    (void)msh;
-    (void)cmd;
-    if(cmd->av[1])
-        exit(ft_atoi(cmd->av[1]));
-    else
-        exit(0); // replace 0 with the last exit status
+    if(!ft_strcmp(cmd->av[0],"env"))
+        ft_env(msh);
+    if(!ft_strcmp(cmd->av[0],"exit"))
+        ft_exit(msh, cmd);
+    if(!ft_strcmp(cmd->av[0],"pwd"))
+        ft_pwd(msh, cmd);
+    if(!ft_strcmp(cmd->av[0],"unset"))
+        ft_unset(msh, cmd);
+    if(!ft_strcmp(cmd->av[0],"echo"))
+        ft_echo(msh, cmd);
 }

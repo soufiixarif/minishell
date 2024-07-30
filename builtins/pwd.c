@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/12 01:04:16 by sarif             #+#    #+#             */
-/*   Updated: 2024/07/30 01:34:24 by sarif            ###   ########.fr       */
+/*   Created: 2024/07/29 23:24:15 by sarif             #+#    #+#             */
+/*   Updated: 2024/07/30 01:34:09 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../sources/minishell.h"
 
-void ft_exit(t_minishell *msh, t_cmd *cmd) // get the next node to exit
+void    ft_pwd(t_minishell *msh, t_cmd *cmd)
 {
     (void)msh;
     (void)cmd;
-    if(cmd->av[1])
-        exit(ft_atoi(cmd->av[1]));
-    else
-        exit(0); // replace 0 with the last exit status
+    char *path;
+
+    path = getcwd(NULL,0);
+    printf("%s\n",path);
+    free(path);
 }

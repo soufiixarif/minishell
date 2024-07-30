@@ -12,7 +12,8 @@ SRCS = sources/minishell.c sources/parser1.c sources/parser2.c sources/parser3.c
 		sources/is_utils3.c sources/ft_getfullenv.c sources/ft_getenv.c sources/ft_setenv.c \
 		sources/ft_itoa.c sources/ft_openhd.c sources/ft_execution.c sources/ft_split.c sources/ft_atoi.c \
 		sources/ft_openfd.c sources/ft_getnode.c sources/ft_printferror.c sources/ft_redirection.c\
-		sources/ft_data_init.c 
+		sources/ft_data_init.c  builtins/env.c builtins/handel_builtin.c builtins/exit.c builtins/pwd.c\
+		builtins/unset.c builtins/echo.c
 
 HEADERS = sources/minishell.h
 

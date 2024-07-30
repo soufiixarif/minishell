@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execution.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 23:08:44 by sarif             #+#    #+#             */
-/*   Updated: 2024/07/28 20:05:19 by sarif            ###   ########.fr       */
+/*   Updated: 2024/07/29 23:12:46 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,8 +167,8 @@ void	args_maker(t_minishell *msh)
 void ft_onepipe(t_cmd	*cmd)
 {
 	
-	if (isbuiltin(cmd->av[0]));
-		// noforkbuilting(av);//TO DO
+	if (isbuiltin(cmd->av[0]))
+		handel_builtins(cmd->msh, cmd);//TO DO 
 	else if (!isbuiltin(cmd->av[0]))
 		execute_onecmd(cmd);
 }

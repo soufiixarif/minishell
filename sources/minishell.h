@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:14:17 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/28 22:12:03 by sarif            ###   ########.fr       */
+/*   Updated: 2024/07/30 04:37:53 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,9 +205,24 @@ char		*getlinepath(char *path, char *commande, t_cmd *cmd);
 char		*ft_strcpy(char *s1, char *s2);
 char		*ft_strcat(char *dest, char *src);
 void		put_stderr(char *s);
-void ft_multi_pipes(t_minishell *msh);
-void execute_childe(t_cmd *cmd);
-void	ft_redirection(t_cmd *cmd);
+void		ft_multi_pipes(t_minishell *msh);
+void		execute_childe(t_cmd *cmd);
+void		ft_redirection(t_cmd *cmd);
+void    	handel_builtins(t_minishell *msh, t_cmd *cmd);
+void		ft_env(t_minishell *msh);
+void		ft_exit(t_minishell *msh, t_cmd *cmd);
+void    	ft_pwd(t_minishell *msh, t_cmd *cmd);
+void	    ft_unset(t_minishell *msh, t_cmd *cmd);
+void	    sort_env(t_minishell *msh, int len);
+int			check_invalid_id(char *str);
+void	    ft_echo(t_minishell *msh, t_cmd *cmd);
+void		print_echo(char **av, int i);
+int			ft_isdigit(char c);
+int			isvalid_flag(char **av);
+
+
+
+
 
 
 
