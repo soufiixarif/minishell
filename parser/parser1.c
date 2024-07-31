@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser7.c                                          :+:      :+:    :+:   */
+/*   parser1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 08:40:57 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/26 22:46:58 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/31 11:29:36 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../sources/minishell.h"
 
-char	*get_value(t_minishell *minishell, t_token **tmp_token, char *token, int *index)
+char	*get_value(t_minishell *minishell, t_tokens **tmp_token, char *token, int *index)
 {
 	char	*str;
 	char	*tmp;
@@ -83,18 +83,14 @@ int	get_len(char *token, int index)
 
 void	qexp_handler(t_minishell *minishell)
 {
-	t_token *tmp_token;
+	t_tokens *tmp_token;
 	int		i;
 	int		len;
 	char	*tmp;
 	char	*tmp2;
 	char	*str;
 
-	tmp_token = minishell->token;
-	tmp = NULL;
-	tmp2 = NULL;
-	i = 0;
-	len = 0;
+	(1) && (tmp_token = minishell->tokens, tmp = NULL, tmp2 = NULL, i = 0, len = 0);
 	while (tmp_token)
 	{
 		if (tmp_token->type == D_QUOTE)
@@ -105,17 +101,10 @@ void	qexp_handler(t_minishell *minishell)
 				{
 					if (!ft_isexpand(tmp_token->token[i]) || (ft_isexpand(tmp_token->token[i]) && ft_isexpand(tmp_token->token[i + 1]))
 						|| (ft_isexpand(tmp_token->token[i]) && !(tmp_token->token[i + 1])))
-					{
-						len =  get_len(tmp_token->token, i);
-						tmp = ft_substr(minishell, tmp_token->token, i, len);
-						i = i + len;
-					}
+							(1) && (len =  get_len(tmp_token->token, i), tmp = ft_substr(minishell, tmp_token->token, i, len), i = i + len);
 					else if (tmp_token->token[i] == '$' && tmp_token->token[i + 1] != '$')
 					{
-						i++;
-						str = ft_substr(minishell, tmp_token->token, i, get_lenexp(tmp_token->token, i));
-						i = i + get_lenexp(tmp_token->token, i);
-						tmp = ft_getenv(str, minishell);
+						(1) && (i++, str = ft_substr(minishell, tmp_token->token, i, get_lenexp(tmp_token->token, i)), i = i + get_lenexp(tmp_token->token, i), tmp = ft_getenv(str, minishell));
 						if (is_ambiguous(tmp) == true)
 							tmp_token->boole = true;
 					}

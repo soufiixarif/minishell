@@ -13,7 +13,8 @@
         "vector": "c",
         "chrono": "c",
         "ostream": "c",
-        "__node_handle": "c"
+        "__node_handle": "c",
+        "sstream": "c"
     },
     "workbench.colorCustomizations": {
         // "activityBar.background": "#083517",

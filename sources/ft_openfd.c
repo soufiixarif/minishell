@@ -6,11 +6,11 @@ int    ft_append(t_tokens *token)
 
     if(token->cmd->fd_fail)
         return -1;
-    fd = open(token->node, O_CREAT | O_RDONLY | O_APPEND, 0644);
+    fd = open(token->token, O_CREAT | O_RDONLY | O_APPEND, 0644);
     if(fd == -1)
     {
         token->cmd->fd_fail = true;
-        perror(token->node);
+        perror(token->token);
     }
     return(fd);
 }
@@ -21,11 +21,11 @@ int    ft_out(t_tokens *token)
 
     if(token->cmd->fd_fail)
         return -1;
-    fd = open(token->node, O_CREAT | O_RDWR, 0644);
+    fd = open(token->token, O_CREAT | O_RDWR, 0644);
     if(fd == -1)
     {
         token->cmd->fd_fail = true;
-        perror(token->node);
+        perror(token->token);
     }
     return(fd);
 }
@@ -36,11 +36,11 @@ int    ft_in(t_tokens *token)
 
     if(token->cmd->fd_fail)
         return -1;
-    fd = open(token->node, O_RDONLY, 0644);
+    fd = open(token->token, O_RDONLY, 0644);
     if(fd == -1)
     {
         token->cmd->fd_fail = true;
-        perror(token->node);
+        perror(token->token);
     }
     return(fd);
 }

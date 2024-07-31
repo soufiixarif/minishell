@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:14:17 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/26 22:40:32 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/31 11:39:33 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,16 @@ typedef enum e_type
 
 typedef struct s_command t_cmd;
 
-typedef struct s_token
+typedef struct s_tokens
 {
-	char	*token;
-	t_type	type;
-	bool	boole;
-	struct s_token *next;
-}	t_token;
+	t_cmd			*cmd;
+	char			*token;
+	t_type			type;
+	bool			boole;
+	int				t_idx;
+	int				fd;
+	struct s_tokens	*next;
+}	t_tokens;
 
 typedef struct s_garbage
 {
@@ -58,19 +61,19 @@ typedef struct s_garbage
 
 typedef struct s_syntax_err
 {
-	int	boole;
-	int	index;
+	bool	b;
+	int		index;
 }	t_syn_err;
 
-typedef struct s_tokens
-{
-	char			*node;
-	t_type			type;
-	int				t_idx;
-	t_cmd			*cmd;
-	int				fd;
-	struct s_tokens	*next;
-}	t_tokens;
+// typedef struct s_tokens
+// {
+// 	t_cmd			*cmd;
+// 	char			*node;
+// 	t_type			type;
+// 	int				t_idx;
+// 	int				fd;
+// 	struct s_tokens	*next;
+// }	t_tokens;
 
 typedef struct s_minishell t_minishell;
 
@@ -89,15 +92,15 @@ typedef struct s_command
 
 typedef struct s_minishell
 {
-	t_token		*token;
-	t_cmd		*cmd;
-	t_garbage	*global;
-	t_garbage	*local;
-	char		**env;
-	int			shlvl;
-	int			fd_max;
-	int			pipes;
-	bool		env_checker;
+	t_tokens		*tokens;
+	t_cmd			*cmd;
+	t_garbage		*global;
+	t_garbage		*local;
+	char			**env;
+	int				shlvl;
+	int				fd_max;// incriment when a fd opned
+	int				pipes;
+	bool			env_checker;
 }	t_minishell;
 
 
@@ -114,8 +117,6 @@ char 		**ft_getfullenv(t_minishell *minishell);
 char		**ft_setenv(t_minishell *minishell);
 char		*ft_getenv(char *var, t_minishell *minishell);
 int			ft_openhd_se(t_minishell *minishell, char *line, int *i);
-t_syn_err	s_quote(char *line);
-t_syn_err	d_quote(char *line);
 int			ft_isalnum(int c);
 int			ft_isblank(char c);
 int			ft_isstring(char c);
@@ -127,12 +128,19 @@ int			ft_ispipe(char c);
 int			ft_isin(char c);
 int			ft_isout(char c);
 bool		is_ambiguous(char *str);
-t_token		*ft_lstnew(t_minishell *minishell ,void *content, t_type type);
+bool		sd_handler(t_minishell *msh, char *line);
+void		rm_exp(t_minishell *minishell);
+void		rm_blank(t_minishell *minishell);
+t_tokens	*ft_lstnew(t_minishell *minishell ,void *content, t_type type);
 t_garbage	*ft_garnew(t_minishell *m, void *node);
+t_tokens	*ft_newtok(t_minishell *minishell, void *content, t_type type);
+t_cmd		*ft_newcmd(t_minishell *minishell, void *content);
 void		*ft_malloc(t_minishell *minishell ,t_garbage **garbage, size_t size);
 void		ft_free(t_garbage **garbage, int boole);
-void		ft_lstadd_back(t_token **lst, t_token *new);
+void		ft_lstadd_back(t_tokens **lst, t_tokens *new);
 void		ft_garadd_back(t_garbage **lst, t_garbage *new);
+void		ft_addtok_back(t_tokens **lst, t_tokens *new);
+void		ft_addcmd_back(t_cmd **lst, t_cmd *new);
 void		ft_garclear(t_garbage **lst);
 int			getlen_string(char *line, int index);
 int			getlen_sq(char *line, int index);
@@ -154,20 +162,23 @@ char		*get_out(t_minishell *minishell, char *line, int *index);
 char		*get_herdoc(t_minishell *minishell, char *line, int *index);
 char		*get_append(t_minishell *minishell, char *line, int *index);
 void		get_del(t_minishell *minishell);
-void		handle_op(t_minishell *minishell, char *line, int *index);
-void		handle_pipe(t_minishell *minishell, char *line, int index);
-void		handle_in(t_minishell *minishell, char *line, int *index);
-void		handle_out(t_minishell *minishell, char *line, int *index);
-void		handle_herdoc(t_minishell *minishell, char *line, int index);
-void		handle_append(t_minishell *minishell, char *line, int index);
-void		ft_tokenizer(t_minishell *minishell, char *line);
-void		syntax_errorb(t_minishell *minishell, char *line, int index);
-void		syntax_errora(t_minishell *minishell, char *line, int index);
+bool		handle_op(t_minishell *minishell, char *line, int *index);
+bool		handle_pipe(t_minishell *minishell, char *line, int index);
+bool		handle_in(t_minishell *minishell, char *line, int *index);
+bool		handle_out(t_minishell *minishell, char *line, int *index);
+bool		handle_herdoc(t_minishell *minishell, char *line, int index);
+bool		handle_append(t_minishell *minishell, char *line, int index);
+bool		ft_tokenizer(t_minishell *minishell, char *line);
+bool		syntax_errorb(t_minishell *minishell, char *line, int index);
+bool		syntax_errora(t_minishell *minishell, char *line, int index);
 void		open_heredocs(t_minishell *minishell, char *line, int n);
 void		token_handler(t_minishell *minishell);
 void		qexp_handler(t_minishell *minishell);
 void		expainding(t_minishell *minishell);
-void		parser(t_minishell *minishell, char *line);
+void		fill_tokens(t_minishell *minishell);
+void		fill_index(t_minishell *minishell);
+void		fill_cmd(t_minishell *minishell);
+bool		parser(t_minishell *minishell, char *line);
 size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize); //added here by soufiix
 
 // soufiix
@@ -206,8 +217,6 @@ char		*getlinepath(char *path, char *commande, t_cmd *cmd);
 char		*ft_strcpy(char *s1, char *s2);
 char		*ft_strcat(char *dest, char *src);
 void		put_stderr(char *s);
-
-
 
 
 #endif

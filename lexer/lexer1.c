@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser3.c                                          :+:      :+:    :+:   */
+/*   lexer1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/08 07:57:03 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/14 06:15:12 by kelmounj         ###   ########.fr       */
+/*   Created: 2024/07/27 10:09:02 by kelmounj          #+#    #+#             */
+/*   Updated: 2024/07/27 11:45:17 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../sources/minishell.h"
 
 int	getlen_string(char *line, int index)
 {
@@ -62,67 +62,6 @@ int	getlen_pipe(char *line, int index)
 	i = index;
 	count = 0;
 	while (line[i] && ft_ispipe(line[i]))
-	{
-		count++;
-		i++;
-	}
-	return (count);
-}
-
-int	getlen_in(char *line, int index)
-{
-	int		i;
-	int		count;
-
-	i = index;
-	count = 0;
-	while (line[i] && ft_isin(line[i]))
-	{
-		count++;
-		i++;
-	}
-	return (count);
-}
-
-int	getlen_out(char *line, int index)
-{
-	int		i;
-	int		count;
-
-	i = index;
-	count = 0;
-	while (line[i] && ft_isout(line[i]))
-	{
-		count++;
-		i++;
-	}
-	return (count);
-}
-
-int	getlen_sq(char *line, int index)
-{
-	int	i;
-	int	count;
-
-	i = index;
-	count = 0;
-	i++;
-	while (!ft_issnglqs(line[i]))
-	{
-		count++;
-		i++;
-	}
-	return (count);
-}
-int	getlen_dq(char *line, int index)
-{
-	int	i;
-	int	count;
-
-	i = index;
-	count = 0;
-	i++;
-	while (!ft_isdblqs(line[i]))
 	{
 		count++;
 		i++;

@@ -6,35 +6,36 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 10:20:25 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/15 16:57:03 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/31 11:31:31 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_token	*ft_lstnew(t_minishell *minishell, void *content, t_type type)
+t_tokens	*ft_lstnew(t_minishell *minishell, void *content, t_type type)
 {
-	t_token	*token;
+	t_tokens	*token;
 
-	token = (t_token *)ft_malloc(minishell, &minishell->local, sizeof(t_token));
+	token = (t_tokens *)ft_malloc(minishell, &minishell->local, sizeof(t_tokens));
+	token->fd = -1;
 	token->token = content;
 	token->type = type;
 	token->next = NULL;
 	return (token);
 }
 
-void	ft_lstadd_back(t_token **lst, t_token *new)
+void	ft_lstadd_back(t_tokens **lst, t_tokens *new)
 {
-	t_token	*tmp;
+	t_tokens	*tmp;
 
 	if (lst && new)
 	{
 		if (*lst)
 		{
 			tmp = *lst;
-			while (tmp -> next)
-				tmp = tmp -> next;
-			(tmp)-> next = new;
+			while (tmp->next)
+				tmp = tmp->next;
+			(tmp)->next = new;
 		}
 		else 
 			*lst = new;
@@ -75,15 +76,15 @@ void	ft_garadd_back(t_garbage **lst, t_garbage *new)
 void	ft_garclear(t_garbage **lst)
 {
 	t_garbage	*tmp;
+	t_garbage	*cur;
 
-	if (lst && *lst)
+	tmp = *lst;
+	while (tmp)
 	{
-		while (*lst)
-		{
-			tmp = (*lst)->next;
-			free((*lst)->node);
-			free(*lst);
-			*lst = tmp;
-		}
+		cur = tmp->next;
+		free(tmp->node);
+		free(tmp);
+		tmp = cur;
 	}
+	*lst = NULL;
 }

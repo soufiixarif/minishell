@@ -1,60 +1,53 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser6.c                                          :+:      :+:    :+:   */
+/*   parser0.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 13:52:19 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/22 08:54:19 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/31 14:37:03 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../sources/minishell.h"
 
 void	token_handler(t_minishell *minishell)
 {
 	get_del(minishell);
 	expainding(minishell);
 	qexp_handler(minishell);
-	// concat_exp(minishell);
+	rm_exp(minishell);
+	rm_blank(minishell);
+	// fill_tokens(minishell);
+	fill_index(minishell);
+	fill_cmd(minishell);
 }
 
-void	syntax_errorb(t_minishell *minishell, char *line, int index)
+bool	syntax_errorb(t_minishell *minishell, char *line, int index)
 {
-	printf("minishell: syntax error near unexpected token `%c'\n", line[index]);
+	bool	b;
+
+
+	if (line[index] == '\0')
+		printf("minishell: syntax error near unexpected token `newline'\n");
+	else
+		printf("minishell: syntax error near unexpected token `%c'\n", line[index]);
 	open_heredocs(minishell, line, index);
-	ft_free(&minishell->local, 0);
+	b = true;
 	//exit(258);
+	return (b);
 }
 
-void	syntax_errora(t_minishell *minishell, char *line, int index)
+bool	syntax_errora(t_minishell *minishell, char *line, int index)
 {
+	bool	b;
 	open_heredocs(minishell, line, index);
+	if (line[index] == '\0')
+		printf("minishell: syntax error near unexpected token `newline'\n");
+	else
 	printf("minishell: syntax error near unexpected token `%c'\n", line[index]);
-	ft_free(&minishell->local, 0);
+	b = true;
 	//exit(258);
+	return (b);
 }
-
-// cmd : cat Makefile -> | -> ls
-// iofiles : < input1 -> > out -> << 3 -> >> app -> > s -> < input2
-// fdin : 8
-// fdout : 7
-
-
-
-// cmd: < input1 cat $HOME > out >> app > s | < input2 ls
-
-// cmd = < input1 cat "/user/.." > out >> app > "a b" | < in ls
-
-// struct exec
-// {
-// 	cmd = < input1 cat "/user/.." > out >> app > "a b"
-// 	fdin = 0
-// 	fdout = 1
-// }
-
-
-// cmd = ls
-// fdin = 0
-// fdout = 1

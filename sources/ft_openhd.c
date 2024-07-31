@@ -80,7 +80,7 @@ void    ft_openhd(t_minishell *msh)
 				while(1)
 				{
 					line = readline(">");
-					if (!line || !ft_strcmp(line, token->next->node))
+					if (!line || !ft_strcmp(line, token->next->token))
 						break ;
 					store = ft_strjoin(msh, store, line);
 					store = ft_strjoin(msh, store, "\n");
@@ -96,6 +96,8 @@ void    ft_openhd(t_minishell *msh)
 	}
 }
 
+
+
 int    ft_openhd_se(t_minishell *minishell, char *line, int *i)
 {
 	int j;
@@ -104,7 +106,13 @@ int    ft_openhd_se(t_minishell *minishell, char *line, int *i)
 	j = (*i) + 2;
 	while (ft_isblank(line[j]))
 			j++;
-	del = get_string(minishell, line, &j);
+	if (ft_isstring(line[j]))
+		del = get_string(minishell, line, &j);
+	else if (ft_isdblqs(line[j]) || ft_issnglqs(line[j]))
+	{
+		j++;
+		del = get_string(minishell, line, &j);
+	}
 	while (1)
 	{
 		line = readline(">");

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execution.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 23:08:44 by sarif             #+#    #+#             */
-/*   Updated: 2024/07/26 20:37:53 by sarif            ###   ########.fr       */
+/*   Updated: 2024/07/31 12:55:27 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ void	args_maker(t_minishell *msh)
 			if (token->type != TEXT)
 				token = token->next;
 			else
-				commande->av[i++] = strdup(token->node);
+				commande->av[i++] = strdup(token->token);
 			token = token->next;
 		}
 		commande->av[i] = NULL;

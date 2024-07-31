@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser8.c                                          :+:      :+:    :+:   */
+/*   parser2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 18:06:16 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/26 22:47:24 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/07/31 11:30:12 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../sources/minishell.h"
 
 void	get_del(t_minishell *minishell)
 {
-	t_token	*tmp_token;
-	t_token	*tmp_token2;
+	t_tokens	*tmp_token;
+	t_tokens	*tmp_token2;
 	char	*tmp;
 	bool	b;
 
 	tmp = ft_strdup(minishell, &minishell->local , "");
-	tmp_token = minishell->token;
+	tmp_token = minishell->tokens;
 	b = false;
 	while (tmp_token)
 	{
@@ -67,11 +67,10 @@ bool	is_ambiguous(char *str)
 
 void	expainding(t_minishell *minishell)
 {
-	
-	t_token	*tmp_token;
+	t_tokens	*tmp_token;
 	char	*tmp;
 
-	tmp_token = minishell->token;
+	tmp_token = minishell->tokens;
 	while (tmp_token)
 	{
 		if (tmp_token->next && tmp_token->type == EXP)
@@ -87,4 +86,31 @@ void	expainding(t_minishell *minishell)
 		}
 		tmp_token = tmp_token->next;
 	}
+}
+char	*herexp(t_minishell *minishell, char *herdoc)
+{
+	int		i;
+	int		j;
+	char	*var;
+	char	*val;
+
+	i = 0;
+	j = 0;
+	var = NULL;
+	while (herdoc[i])
+	{
+		if (herdoc[i] == '$')
+		{
+			i++;
+			while (!ft_isexpand(herdoc[i]) && !ft_isblank(herdoc[i]))
+			{
+				var[j] = herdoc[i];
+				i++;
+				j++;
+			}
+			val = ft_getenv(var, minishell);
+		}
+		i++;
+	}
+	return (val);
 }
