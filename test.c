@@ -1,36 +1,26 @@
-#include <libc.h>
-#include <minishell.h>
+// #include "sources/minishell.h"
 
-int dschecker(char *str, int *index, char c)
-{
-    (*index)++;
-    while (str[*index])
-    {
-        if (str[*index] == c)
-            return(1);
-        (*index)++;
-    }
-    return(0);
-}
-int main(int ac, char **env)
-{
-    char *str = "\" heeey ' \" '";
-    printf("%s\n",str);
-    int b;
-    int i = 0;
-    char c;
+// int main()
+// {
+//     printf("OLDPWD%s\n",getcwd(NULL, 0));
+//     char *path = "/usr/bin/";
 
-    b = 0;
-    while(str[i])
-    {
-        if (str[i] == '\"' || str[i] == '\'')
-        {
-            c = str[i];
-            if (!dschecker(str, &i , str[i]))
-            {
-                printf("sytax error near to %c\n",c);
-            }
-        }
-        i++;
-    }
-}
+//     if (chdir(path) == -1)
+//         printf("bash: cd: %s: No such file or directory",path);
+//     else
+//         printf("%s\n",getcwd(NULL, 0));
+
+//     b = 0;
+//     while(str[i])
+//     {
+//         if (str[i] == '\"' || str[i] == '\'')
+//         {
+//             c = str[i];
+//             if (!dschecker(str, &i , str[i]))
+//             {
+//                 printf("sytax error near to %c\n",c);
+//             }
+//         }
+//         i++;
+//     }
+// }

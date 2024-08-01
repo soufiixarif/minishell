@@ -15,6 +15,8 @@ SRCS = sources/minishell.c lexer/lexer0.c lexer/lexer1.c lexer/lexer2.c lexer/le
 		sources/ft_openfd.c sources/ft_getnode.c sources/ft_printferror.c sources/ft_redirection.c\
 		sources/ft_data_init.c\
 		sources/fill_tok.c 
+		sources/ft_data_init.c  builtins/env.c builtins/handel_builtin.c builtins/exit.c builtins/pwd.c\
+		builtins/unset.c builtins/echo.c builtins/cd.c
 
 HEADERS = sources/minishell.h
 

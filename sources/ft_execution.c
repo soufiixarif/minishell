@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 23:08:44 by sarif             #+#    #+#             */
-/*   Updated: 2024/07/31 12:55:27 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/08/01 14:49:38 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char	*getlinepath(char *path, char *commande, t_cmd *cmd)
 
 	i = 0;
 	if (ft_strchr(commande, '/') != NULL)
-		return (strdup(commande));
+		return (strdup(commande));// forbiden function TO CHANGE IT LATER
 	envpath = ft_split(path, ':');
 	while (envpath[i])
 	{
@@ -80,35 +80,6 @@ char	*getlinepath(char *path, char *commande, t_cmd *cmd)
 	return (NULL);
 }
 
-void	execute_onecmd(t_cmd *cmd)
-{
-	t_cmd *commande;
-	char *path;
-	char *line;
-	pid_t pid;
-
-	commande = cmd;
-	if(!ft_openfd(commande))
-		exit(EXIT_FAILURE);
-	pid = fork();
-	if (pid == 0)
-	{
-		dup2(cmd->output,STDOUT_FILENO);
-		dup2(cmd->input,STDIN_FILENO);
-		path = ft_getenv("PATH", cmd->msh);
-		line = getlinepath(path, cmd->av[0], cmd);
-		if (execve(line,cmd->av,cmd->msh->env) == -1)
-		{
-			perror("Error: ");
-			exit(EXIT_FAILURE);
-		}
-	}
-	else
-	{
-		(close(cmd->input)) && close(cmd->output);
-		waitpid(pid, NULL, 0);
-	}
-}
 int	isbuiltin(char *av)
 {
 	char *builtin[8] = {"echo","cd","pwd","export","unset","env", "exit",NULL};
@@ -139,6 +110,36 @@ int	getavlen(t_cmd *cmd)
 	}
 	return(counter + 1);
 }
+void	execute_onecmd(t_cmd *cmd)
+{
+	t_cmd *commande;
+	char *path;
+	char *line;
+	pid_t pid;
+
+	commande = cmd;
+	if(!ft_openfd(commande))
+		exit(EXIT_FAILURE);
+	pid = fork();
+	if (pid == 0)
+	{
+		dup2(cmd->output,STDOUT_FILENO);
+		dup2(cmd->input,STDIN_FILENO);
+		path = ft_getenv("PATH", cmd->msh);
+		line = getlinepath(path, cmd->av[0], cmd);
+		if (execve(line,cmd->av,cmd->msh->env) == -1)
+		{
+			perror("Error: ");
+			exit(EXIT_FAILURE);
+		}
+	}
+	else
+	{
+		(close(cmd->input)) && close(cmd->output);
+		waitpid(pid, NULL, 0);
+	}
+}
+
 void	args_maker(t_minishell *msh)
 {
 	t_tokens *token;
@@ -166,11 +167,82 @@ void	args_maker(t_minishell *msh)
 void ft_onepipe(t_cmd	*cmd)
 {
 	
-	if (isbuiltin(cmd->av[0]));
-		// noforkbuilting(av);//TO DO
+	if (isbuiltin(cmd->av[0]))
+		handel_builtins(cmd->msh, cmd);//TO DO 
 	else if (!isbuiltin(cmd->av[0]))
 		execute_onecmd(cmd);
 }
+
+void	ft_redirection(t_cmd *cmd)
+{
+
+	if (cmd->input == 0 && cmd->c_idx != 0)
+		cmd->input = cmd->fd[0];
+	if (cmd->c_idx != cmd->msh->pipes - 1 && cmd->output == 1)
+		cmd->output = cmd->fd[1];
+	if (cmd->input != 0)
+		dup2(cmd->input,STDIN_FILENO);
+	if (cmd->output != 1)
+		dup2(cmd->output,STDOUT_FILENO);
+	if(cmd->next)
+		close(cmd->fd[1]);
+	if(cmd->input != 0)
+		close(cmd->input);
+	if(cmd->output != 1)
+		close(cmd->output);
+}
+void execute_childe(t_cmd *cmd)
+{
+	char *path;
+	char *line;
+	path = ft_getenv("PATH", cmd->msh);
+	line = getlinepath(path, cmd->av[0], cmd);
+	if (execve(line,cmd->av,cmd->msh->env) == -1)
+	{
+		perror("Error: ");
+		exit(EXIT_FAILURE);
+	}
+}
+
+void ft_multi_pipes(t_minishell *msh)
+{
+	int	i;
+	int pid_Store[msh->pipes];
+	int pid;
+	t_cmd	*commande;
+	t_cmd *tmp;
+
+	i = -1;
+	commande = msh->cmd;
+	tmp = NULL;
+	while(++i < msh->pipes)
+	{
+		pipe(commande->fd);
+		pid = fork();
+		if (pid == 0)
+		{
+			if(!ft_openfd(commande))
+				exit(1); // change it later
+			ft_redirection(commande);
+			execute_childe(commande);
+		}
+		close(commande->fd[1]);
+		if(tmp)
+			close(tmp->fd[0]);
+		if (commande->next)
+			commande->next->input = commande->fd[0];
+		pid_Store[i] = pid;
+		tmp = commande;
+		commande = commande->next;
+	}
+	close(tmp->fd[0]);
+	i = -1;
+	while (++i < msh->pipes)
+	{
+		waitpid(pid_Store[i],NULL,0);
+	}
+}
+
 void execution(t_minishell *ms)
 {
 	t_cmd *commande;
@@ -180,4 +252,6 @@ void execution(t_minishell *ms)
 	ms->pipes = ft_lstsize(commande);
 	if (ms->pipes == 1)
 		ft_onepipe(commande);
+	else
+		ft_multi_pipes(ms);
 }
