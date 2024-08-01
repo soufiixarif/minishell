@@ -52,8 +52,8 @@ void datainit(t_minishell *msh) {
     // cmd2->next = cmd3;
 
     // Initialize tokens for cmd1
-    cmd1->tokens = create_token("echo", TEXT, t_idx++,cmd1);
-    cmd1->tokens->next = create_token("-hhhn", TEXT, t_idx++,cmd1);
+    cmd1->tokens = create_token("cd", TEXT, t_idx++,cmd1);
+    cmd1->tokens->next = create_token("/usr", TEXT, t_idx++,cmd1);
     // cmd1->tokens->next->next = create_token("-nnnn", TEXT, t_idx++,cmd1);
     // cmd1->tokens->next->next->next = create_token("-nnnn", TEXT, t_idx++,cmd1);
     // cmd1->tokens->next->next->next->next = create_token("-nnnn", TEXT, t_idx++,cmd1);

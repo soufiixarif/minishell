@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:14:17 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/30 04:37:53 by sarif            ###   ########.fr       */
+/*   Updated: 2024/08/01 00:22:45 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,6 +219,15 @@ void	    ft_echo(t_minishell *msh, t_cmd *cmd);
 void		print_echo(char **av, int i);
 int			ft_isdigit(char c);
 int			isvalid_flag(char **av);
+void    	ft_cd(t_minishell *msh, t_cmd *cmd);
+void		cd_no_arg(t_minishell *msh, t_cmd *cmd);
+char		**set_oldpwd(t_minishell *msh, char *old_pwd);
+void		print_oldpwd(t_minishell *msh);
+void		get_to_dir(t_minishell *msh, t_cmd *cmd);
+
+
+
+
 
 
 

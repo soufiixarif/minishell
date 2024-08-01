@@ -1,9 +1,13 @@
-#include <libc.h>
-int main(int ac, char **env)
+#include "sources/minishell.h"
+
+int main()
 {
-    char *str = "/bin/kouki";
-    char *cmd[3] = {"kouki","-a",NULL};
-    if(execve(str, cmd, env) == -1)
-        perror(str);
+    printf("OLDPWD%s\n",getcwd(NULL, 0));
+    char *path = "/usr/bin/";
+
+    if (chdir(path) == -1)
+        printf("bash: cd: %s: No such file or directory",path);
+    else
+        printf("%s\n",getcwd(NULL, 0));
 
 }
