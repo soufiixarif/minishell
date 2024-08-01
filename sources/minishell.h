@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:14:17 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/08/01 14:51:04 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/08/01 16:09:47 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,6 +238,8 @@ void		cd_no_arg(t_minishell *msh, t_cmd *cmd);
 char		**set_oldpwd(t_minishell *msh, char *old_pwd);
 void		print_oldpwd(t_minishell *msh);
 void		get_to_dir(t_minishell *msh, t_cmd *cmd);
+char		*herexp(t_minishell *minishell, char *herdoc);
+
 
 
 

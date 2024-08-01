@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 18:06:16 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/08/01 14:27:30 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/08/02 00:01:10 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ char	*herexp(t_minishell *minishell, char *herdoc)
 	i = 0;
 	j = 0;
 	var = NULL;
+	val = NULL;
 	while (herdoc[i])
 	{
 		if (herdoc[i] == '$')

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execution.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 23:08:44 by sarif             #+#    #+#             */
-/*   Updated: 2024/08/01 14:49:38 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/08/01 23:30:22 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,11 +118,11 @@ void	execute_onecmd(t_cmd *cmd)
 	pid_t pid;
 
 	commande = cmd;
-	if(!ft_openfd(commande))
-		exit(EXIT_FAILURE);
 	pid = fork();
 	if (pid == 0)
 	{
+		if(!ft_openfd(commande))
+			exit(EXIT_FAILURE);
 		dup2(cmd->output,STDOUT_FILENO);
 		dup2(cmd->input,STDIN_FILENO);
 		path = ft_getenv("PATH", cmd->msh);
@@ -134,10 +134,7 @@ void	execute_onecmd(t_cmd *cmd)
 		}
 	}
 	else
-	{
-		(close(cmd->input)) && close(cmd->output);
 		waitpid(pid, NULL, 0);
-	}
 }
 
 void	args_maker(t_minishell *msh)
@@ -169,7 +166,7 @@ void ft_onepipe(t_cmd	*cmd)
 	
 	if (isbuiltin(cmd->av[0]))
 		handel_builtins(cmd->msh, cmd);//TO DO 
-	else if (!isbuiltin(cmd->av[0]))
+	else
 		execute_onecmd(cmd);
 }
 

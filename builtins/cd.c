@@ -81,12 +81,10 @@ void    cd_no_arg(t_minishell *msh, t_cmd *cmd)
 
 void    ft_cd(t_minishell *msh, t_cmd *cmd)
 {
-    printf("old pwd : %s\n", getcwd(NULL, 0));
     if(!cmd->av[1])
         cd_no_arg(msh, cmd);
     else if (!ft_strcmp(cmd->av[1],"-"))
         print_oldpwd(msh);
     else
         get_to_dir(msh, cmd);
-    printf("new pwd : %s\n", getcwd(NULL, 0));
 }

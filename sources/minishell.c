@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:07:03 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/08/01 14:50:27 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/08/01 23:36:16 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	main()
 		line = readline("Minishell🍉🔻$ ");
 		if (!line)
 			exit(0);
+		if(!line[0])
+			continue;
 		add_history(line);
 		if (parser(&minishell, line) == true)
 		{
@@ -44,8 +46,8 @@ int	main()
 		// 	}
 		// 	minishell.cmd = minishell.cmd->next;
 		// }
-		// ft_openhd(&minishell);
-		// execution(&minishell);
+		ft_openhd(&minishell);
+		execution(&minishell);
 		// while(minishell.tokens)
 		// {
 		// 	printf("token ==> %s\t", minishell.tokens->token);
