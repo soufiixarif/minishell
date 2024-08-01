@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:14:17 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/31 11:39:33 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/08/01 13:28:41 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int			ft_strcmp(char *s1, char *s2);
 char		*ft_itoa(t_minishell *minishell, int n);
 char		*ft_strchr(const char *s, int c);
 char		*ft_strtrim(t_minishell *minishell, char const *s1, char const *set);
-char		*ft_substr(t_minishell *minishell, char const *s, unsigned int start, size_t len);
+char		*_sub(t_minishell *minishell, char const *s, unsigned int start, size_t len);
 char 		**ft_getfullenv(t_minishell *minishell);
 char		**ft_setenv(t_minishell *minishell);
 char		*ft_getenv(char *var, t_minishell *minishell);
@@ -175,9 +175,11 @@ void		open_heredocs(t_minishell *minishell, char *line, int n);
 void		token_handler(t_minishell *minishell);
 void		qexp_handler(t_minishell *minishell);
 void		expainding(t_minishell *minishell);
-void		fill_tokens(t_minishell *minishell);
-void		fill_index(t_minishell *minishell);
+// void		fill_tokens(t_minishell *minishell);
+// void		fill_index(t_minishell *minishell);
 void		fill_cmd(t_minishell *minishell);
+void		token_cmd(t_minishell *minishell);
+void		token_index(t_minishell *minishell);
 bool		parser(t_minishell *minishell, char *line);
 size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize); //added here by soufiix
 

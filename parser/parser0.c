@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 13:52:19 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/31 14:37:03 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/08/01 12:45:51 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,21 @@ void	token_handler(t_minishell *minishell)
 	qexp_handler(minishell);
 	rm_exp(minishell);
 	rm_blank(minishell);
-	// fill_tokens(minishell);
-	fill_index(minishell);
 	fill_cmd(minishell);
+	token_cmd(minishell);
+	token_index(minishell);
 }
 
 bool	syntax_errorb(t_minishell *minishell, char *line, int index)
 {
 	bool	b;
+	int		i;
 
-
+	i = index;
 	if (line[index] == '\0')
 		printf("minishell: syntax error near unexpected token `newline'\n");
 	else
-		printf("minishell: syntax error near unexpected token `%c'\n", line[index]);
+		printf("minishell: syntax error near unexpected token `%c'\n", line[i]);
 	open_heredocs(minishell, line, index);
 	b = true;
 	//exit(258);
@@ -42,11 +43,14 @@ bool	syntax_errorb(t_minishell *minishell, char *line, int index)
 bool	syntax_errora(t_minishell *minishell, char *line, int index)
 {
 	bool	b;
+	int		i;
+
+	i = index;
 	open_heredocs(minishell, line, index);
 	if (line[index] == '\0')
 		printf("minishell: syntax error near unexpected token `newline'\n");
 	else
-	printf("minishell: syntax error near unexpected token `%c'\n", line[index]);
+		printf("minishell: syntax error near unexpected token `%c'\n", line[i]);
 	b = true;
 	//exit(258);
 	return (b);

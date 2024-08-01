@@ -6,13 +6,13 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 10:12:31 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/27 16:27:21 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/08/01 12:41:16 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../sources/minishell.h"
 
-char *get_string(t_minishell *minishell, char *line, int *index)
+char	*get_string(t_minishell *minishell, char *line, int *index)
 {
 	int		i;
 	int		j;
@@ -51,6 +51,7 @@ char	*get_blank(t_minishell *minishell, char *line, int *index)
 	*index = i;
 	return (res);
 }
+
 char	*get_op(t_minishell *minishell, char *line, int *index)
 {
 	int		i;

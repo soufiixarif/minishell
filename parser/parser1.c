@@ -6,35 +6,34 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 08:40:57 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/31 11:29:36 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/08/01 13:31:24 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../sources/minishell.h"
 
-char	*get_value(t_minishell *minishell, t_tokens **tmp_token, char *token, int *index)
-{
-	char	*str;
-	char	*tmp;
-	int		i;
+// char	*get_value(t_minishell *msh, t_tokens **token_t, char *token, int *idx)
+// {
+// 	char	*str;
+// 	char	*tmp;
+// 	int		i;
 
-	i = 0;
-	(*index)++;
-	tmp = NULL;
-	while (token[*index] && !ft_isexpand(token[*index]) && !ft_isblank(token[*index]))
-	{
-		tmp[i] = token[*index];
-		i++;
-		(*index)++;
-	}
-	if (ft_isexpand(token[*index]) || ft_isblank(token[*index]))
-		(*index)--;
-	str = ft_getenv(tmp, minishell);
-	if (is_ambiguous(str) == true)
-		(*tmp_token)->boole = true;
-	return(ft_strtrim(minishell, str, " \t"));
-	
-}
+// 	i = 0;
+// 	(*idx)++;
+// 	tmp = NULL;
+// 	while (token[*idx] && !ft_isexpand(token[*idx]) && !ft_isblank(token[*idx]))
+// 	{
+// 		tmp[i] = token[*idx];
+// 		i++;
+// 		(*idx)++;
+// 	}
+// 	if (ft_isexpand(token[*idx]) || ft_isblank(token[*idx]))
+// 		(*idx)--;
+// 	str = ft_getenv(tmp, msh);
+// 	if (is_ambiguous(str) == true)
+// 		(*token_t)->boole = true;
+// 	return(ft_strtrim(msh, str, " \t"));
+// }
 
 bool	if_exp(char *str)
 {
@@ -50,14 +49,14 @@ bool	if_exp(char *str)
 	return (false);
 }
 
-int	get_lenexp(char *token, int index)
+int	lnx(char *token, int index)
 {
 	int		i;
 	int		count;
 
 	i = index;
 	count = 0;
-	while (token[i] && (token[i] != '$' &&  token[i] != ' '))
+	while (token[i] && (token[i] != '$' && token[i] != ' '))
 	{
 		count++;
 		i++;
@@ -72,8 +71,9 @@ int	get_len(char *token, int index)
 
 	i = index;
 	count = 0;
-	while (token[i] && ((token[i] != '$') || (token[i] == '$' && token[i + 1] == '$')
-		|| (token[i] == '$' && !(token[i + 1]))))
+	while (token[i] && ((token[i] != '$')
+			|| (token[i] == '$' && token[i + 1] == '$')
+			|| (token[i] == '$' && !(token[i + 1]))))
 	{
 		count++;
 		i++;
@@ -81,38 +81,47 @@ int	get_len(char *token, int index)
 	return (count);
 }
 
-void	qexp_handler(t_minishell *minishell)
+void	helper_qexp(t_minishell *msh, t_tokens *tkn)
 {
-	t_tokens *tmp_token;
-	int		i;
-	int		len;
-	char	*tmp;
-	char	*tmp2;
-	char	*str;
+	char		*tmp;
+	char		*tmp2;
+	int			i;
+	int			len;
+	char		*str;
 
-	(1) && (tmp_token = minishell->tokens, tmp = NULL, tmp2 = NULL, i = 0, len = 0);
-	while (tmp_token)
+	(1) && (tmp = NULL, tmp2 = NULL, i = 0, len = 0);
+	while (tkn->token[i])
 	{
-		if (tmp_token->type == D_QUOTE)
+		if (!ft_isexpand(tkn->token[i]) || (ft_isexpand(tkn->token[i])
+				&& ft_isexpand(tkn->token[i + 1]))
+			|| (ft_isexpand(tkn->token[i])
+				&& !(tkn->token[i + 1])))
+			(1) && (len = get_len(tkn->token, i),
+					tmp = _sub(msh, tkn->token, i, len), i = i + len);
+		else if (tkn->token[i] == '$' && tkn->token[i + 1] != '$')
 		{
-			if (if_exp(tmp_token->token) == true)
-			{
-				while (tmp_token->token[i])
-				{
-					if (!ft_isexpand(tmp_token->token[i]) || (ft_isexpand(tmp_token->token[i]) && ft_isexpand(tmp_token->token[i + 1]))
-						|| (ft_isexpand(tmp_token->token[i]) && !(tmp_token->token[i + 1])))
-							(1) && (len =  get_len(tmp_token->token, i), tmp = ft_substr(minishell, tmp_token->token, i, len), i = i + len);
-					else if (tmp_token->token[i] == '$' && tmp_token->token[i + 1] != '$')
-					{
-						(1) && (i++, str = ft_substr(minishell, tmp_token->token, i, get_lenexp(tmp_token->token, i)), i = i + get_lenexp(tmp_token->token, i), tmp = ft_getenv(str, minishell));
-						if (is_ambiguous(tmp) == true)
-							tmp_token->boole = true;
-					}
-					tmp2 = ft_strjoin(minishell, tmp2, tmp);
-				}
-				tmp_token->token = tmp2;
-			}
+			(1) && (i++, str = _sub(msh, tkn->token, i, lnx(tkn->token, i)),
+			i = i + lnx(tkn->token, i), tmp = ft_getenv(str, msh));
+			if (is_ambiguous(tmp) == true)
+				tkn->boole = true;
 		}
-		tmp_token = tmp_token->next;
+		tmp2 = ft_strjoin(msh, tmp2, tmp);
+	}
+	tkn->token = tmp2;
+}
+
+void	qexp_handler(t_minishell *msh)
+{
+	t_tokens	*token_t;
+
+	token_t = msh->tokens;
+	while (token_t)
+	{
+		if (token_t->type == D_QUOTE)
+		{
+			if (if_exp(token_t->token) == true)
+				helper_qexp(msh, token_t);
+		}
+		token_t = token_t->next;
 	}
 }

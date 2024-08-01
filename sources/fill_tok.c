@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 17:45:44 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/31 15:01:13 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/08/01 11:33:56 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,20 +141,20 @@ void	rm_blank(t_minishell *minishell)
 // 	}
 // }
 
-void	fill_index(t_minishell *minishell)
-{
-	t_tokens	*tmp_token;
-	int		index;
+// void	fill_index(t_minishell *minishell)
+// {
+// 	t_tokens	*tmp_token;
+// 	int		index;
 
-	index = 0;
-	tmp_token = minishell->tokens;
-	while (tmp_token)
-	{
-		tmp_token->t_idx = index;
-		index++;
-		tmp_token = tmp_token->next;
-	}
-}
+// 	index = 0;
+// 	tmp_token = minishell->tokens;
+// 	while (tmp_token)
+// 	{
+// 		tmp_token->t_idx = index;
+// 		index++;
+// 		tmp_token = tmp_token->next;
+// 	}
+// }
 
 // void	set_cmd(t_minishell *minishell)
 // {
@@ -170,17 +170,17 @@ void	fill_index(t_minishell *minishell)
 // 	}
 // }
 
-void	get_cmd(t_minishell *minishell, t_tokens *token1, t_tokens *token2, t_cmd *cmd)
-{
-	t_tokens	*tmp;
-	tmp = token2;
-	cmd = ft_newcmd(minishell, token2);
-	ft_addcmd_back(&minishell->cmd, cmd);
-	tmp = token1;
-	if (token1->next->next)
-		token1 = token1->next->next;
-	tmp->next = NULL;
-}
+// void	get_cmd(t_minishell *minishell, t_tokens *token1, t_tokens *token2, t_cmd *cmd)
+// {
+// 	t_tokens	*tmp;
+// 	tmp = token2;
+// 	cmd = ft_newcmd(minishell, token2);
+// 	ft_addcmd_back(&minishell->cmd, cmd);
+// 	tmp = token1;
+// 	if (token1->next->next)
+// 		token1 = token1->next->next;
+// 	tmp->next = NULL;
+// }
 
 void	fill_cmd(t_minishell *minishell)
 {
@@ -188,20 +188,14 @@ void	fill_cmd(t_minishell *minishell)
 	t_tokens	*token2;
 	t_tokens	*token3;
 	t_cmd		*cmd;
+	int			index;
 
-	cmd = NULL;
-	token1 = minishell->tokens;
-	token2 = minishell->tokens;
-	// printf("here => %s\n", minishell->tokens->token);
-	// exit(0);
+	(1) && (cmd = NULL, index = 0, token1 = minishell->tokens,
+		token2 = minishell->tokens);
 	while (token1)
 	{
-		
 		while (token1 && token1->next && token1->next->type != PIPE)
-		{
 			token1 = token1->next;
-		}
-		
 		token3 = token1;
 		if (token1 && token1->next && token1->next->type == PIPE)
 			token1 = token1->next->next;
@@ -209,10 +203,48 @@ void	fill_cmd(t_minishell *minishell)
 			token1 = token1->next;
 		token3->next = NULL;
 		cmd = ft_newcmd(minishell, token2);
+		cmd->c_idx = index++;
 		ft_addcmd_back(&minishell->cmd, cmd);
-		// printf("%s | %s \n", token2->next->token, cmd->tokens->token);
 		token2 = token1;
-	
 	}
-	
+}
+
+void	token_cmd(t_minishell *minishell)
+{
+	t_cmd		*cmd;
+	t_tokens	*tokens;
+
+	cmd = minishell->cmd;
+	while (cmd)
+	{
+		tokens = cmd->tokens;
+		while (tokens)
+		{
+			tokens->cmd = cmd;
+			tokens = tokens->next;
+		}
+		cmd = cmd->next;
+	}
+}
+
+void	token_index(t_minishell *minishell)
+{
+	t_cmd		*cmd;
+	t_tokens	*tokens;
+	int			index;
+
+	index = 0;
+	cmd = minishell->cmd;
+	while (cmd)
+	{
+		tokens = cmd->tokens;
+		while (tokens)
+		{
+			tokens->t_idx = index;
+			index++;
+			tokens = tokens->next;
+		}
+		index = 0;
+		cmd = cmd->next;
+	}
 }

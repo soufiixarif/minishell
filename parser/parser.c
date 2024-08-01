@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 19:55:39 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/29 16:21:45 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/08/01 12:42:52 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 bool	parser(t_minishell *minishell, char *line)
 {
 	bool	b;
-	
+
 	b = false;
 	if (sd_handler(minishell, line) == true)
 		return (true);
-	else if(ft_tokenizer(minishell, line))
+	else if (ft_tokenizer(minishell, line))
 		return (true);
 	else
 		token_handler(minishell);

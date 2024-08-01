@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 16:47:16 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/26 22:48:15 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/08/01 14:03:39 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ char	*ft_strtrim(t_minishell *minishell, char const *s1, char const *set)
 	return (str);
 }
 
-char	*ft_substr(t_minishell *minishell, char const *s, unsigned int start, size_t len)
+char	*_sub(t_minishell *minishell, char const *s, unsigned int start, size_t len)
 {
 	char	*str;
 	size_t	i;

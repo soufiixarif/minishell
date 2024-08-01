@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:22:24 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/31 11:40:28 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/08/01 11:31:52 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,14 @@
 
 t_cmd	*ft_newcmd(t_minishell *minishell, void *content)
 {
-	t_cmd	*cmd;
+	t_cmd		*cmd;
 
 	cmd = (t_cmd *)ft_malloc(minishell, &minishell->local, sizeof(t_cmd));
+	cmd->msh = minishell;
 	cmd->tokens = content;
+	cmd->input = 0;
+	cmd->output = 1;
+	cmd->fd_fail = false;
 	cmd->next = NULL;
 	return (cmd);
 }

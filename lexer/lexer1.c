@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 10:09:02 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/27 11:45:17 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/08/01 12:39:47 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	getlen_string(char *line, int index)
 	}
 	return (count);
 }
+
 int	getlen_blank(char *line, int index)
 {
 	int		i;
@@ -40,6 +41,7 @@ int	getlen_blank(char *line, int index)
 	}
 	return (count);
 }
+
 int	getlen_op(char *line, int index)
 {
 	int		i;
@@ -54,6 +56,7 @@ int	getlen_op(char *line, int index)
 	}
 	return (count);
 }
+
 int	getlen_pipe(char *line, int index)
 {
 	int		i;

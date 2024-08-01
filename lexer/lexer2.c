@@ -6,13 +6,13 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 07:57:03 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/29 15:38:06 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/08/01 12:40:46 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../sources/minishell.h"
 
-int		getlen_in(char *line, int index)
+int	getlen_in(char *line, int index)
 {
 	int		i;
 	int		count;
@@ -27,7 +27,7 @@ int		getlen_in(char *line, int index)
 	return (count);
 }
 
-int		getlen_out(char *line, int index)
+int	getlen_out(char *line, int index)
 {
 	int		i;
 	int		count;
@@ -42,7 +42,7 @@ int		getlen_out(char *line, int index)
 	return (count);
 }
 
-int		getlen_sq(char *line, int index)
+int	getlen_sq(char *line, int index)
 {
 	int	i;
 	int	count;
@@ -57,7 +57,8 @@ int		getlen_sq(char *line, int index)
 	}
 	return (count);
 }
-int		getlen_dq(char *line, int index)
+
+int	getlen_dq(char *line, int index)
 {
 	int	i;
 	int	count;
