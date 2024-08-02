@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 00:59:20 by sarif             #+#    #+#             */
-/*   Updated: 2024/07/30 03:37:22 by sarif            ###   ########.fr       */
+/*   Updated: 2024/08/02 17:06:46 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void    sort_env(t_minishell *msh, int len)
         j = 0, swap = 0;
         while(j < len - i - 1)
         {
-            if(!msh->env[j] || ft_strcmp(msh->env[j], msh->env[j + 1]) > 0)
+            if(msh->env[j + 1] && (!msh->env[j] || ft_strcmp(msh->env[j], msh->env[j + 1]) > 0))
             {
                 tmp = msh->env[j + 1];
                 msh->env[j + 1] = msh->env[j];

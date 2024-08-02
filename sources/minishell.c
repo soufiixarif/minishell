@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:07:03 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/08/01 23:36:16 by sarif            ###   ########.fr       */
+/*   Updated: 2024/08/02 16:49:10 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ int	main()
 	char	*line;
 
 	// minishell.token = NULL;
-	minishell.tokens = NULL;
-	minishell.cmd = NULL;
-	minishell.global = NULL;
-	minishell.local = NULL;
 	minishell.env = ft_getfullenv(&minishell);
+	minishell.global = NULL;
 	while (1)
 	{
-		line = readline("Minishell🍉🔻$ ");
+		minishell.tokens = NULL;
+		minishell.cmd = NULL;
+		minishell.local = NULL;
+		line = readline("Minishell$ ");
 		if (!line)
 			exit(0);
 		if(!line[0])
@@ -72,6 +72,7 @@ int	main()
 		printf("\n------------------------------------------------\n");
 			minishell.cmd = minishell.cmd->next;
 		}
+		ft_free(&minishell.local,0);
 		free(line);
 	}
 }
