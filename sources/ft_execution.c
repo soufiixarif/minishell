@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execution.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 23:08:44 by sarif             #+#    #+#             */
-/*   Updated: 2024/08/01 23:30:22 by sarif            ###   ########.fr       */
+/*   Updated: 2024/08/02 10:31:23 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	getavlen(t_cmd *cmd)
 	token = cmd->tokens;
 	while(token)
 	{
-		if(token->type != TEXT)
+		if(token->next && token->type != TEXT)
 			token = token->next;
 		else
 			counter++;
@@ -151,7 +151,7 @@ void	args_maker(t_minishell *msh)
 		i = 0;
 		while (token)
 		{
-			if (token->type != TEXT)
+			if (token->next && token->type != TEXT)
 				token = token->next;
 			else
 				commande->av[i++] = strdup(token->token);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:07:03 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/08/01 23:36:16 by sarif            ###   ########.fr       */
+/*   Updated: 2024/08/02 10:35:59 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,20 +58,20 @@ int	main()
 		// 	minishell.tokens = minishell.tokens->next;
 		// }
 		minishell.tokens = NULL;
-		int i = 0;
-		while(minishell.cmd)
-		{
-			printf("c_index ==> %d\n", minishell.cmd->c_idx);
-			while (minishell.cmd->tokens)
-			{
-				printf("%d, tokens ==> %s\t",i++, minishell.cmd->tokens->token);
-				printf("type ==> %u\t", minishell.cmd->tokens->type);
-				printf("index ==> %d\t", minishell.cmd->tokens->t_idx);
-				minishell.cmd->tokens = minishell.cmd->tokens->next;
-			}
-		printf("\n------------------------------------------------\n");
-			minishell.cmd = minishell.cmd->next;
-		}
+		// int i = 0;
+		// while(minishell.cmd)
+		// {
+		// 	printf("c_index ==> %d\n", minishell.cmd->c_idx);
+		// 	while (minishell.cmd->tokens)
+		// 	{
+		// 		printf("%d, tokens ==> %s\t",i++, minishell.cmd->tokens->token);
+		// 		printf("type ==> %u\t", minishell.cmd->tokens->type);
+		// 		printf("index ==> %d\t", minishell.cmd->tokens->t_idx);
+		// 		minishell.cmd->tokens = minishell.cmd->tokens->next;
+		// 	}
+		// printf("\n------------------------------------------------\n");
+		// 	minishell.cmd = minishell.cmd->next;
+		// }
 		free(line);
 	}
 }
