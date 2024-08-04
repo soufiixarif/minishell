@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:14:17 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/08/01 16:09:47 by sarif            ###   ########.fr       */
+/*   Updated: 2024/08/03 20:51:27 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,7 +227,7 @@ void		ft_env(t_minishell *msh);
 void		ft_exit(t_minishell *msh, t_cmd *cmd);
 void    	ft_pwd(t_minishell *msh, t_cmd *cmd);
 void	    ft_unset(t_minishell *msh, t_cmd *cmd);
-void	    sort_env(t_minishell *msh, int len);
+void	    sort_env(char **env, int size);
 int			check_invalid_id(char *str);
 void	    ft_echo(t_minishell *msh, t_cmd *cmd);
 void		print_echo(char **av, int i);

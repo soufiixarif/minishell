@@ -10,7 +10,7 @@ void    get_to_dir(t_minishell *msh, t_cmd *cmd)
     else
     {
         msh->env = set_oldpwd(msh, old_pdw);
-        // sort_env(msh, ft_countline(msh->env));
+        sort_env(msh->env, ft_countline(msh->env));
     }
 }
 
@@ -31,7 +31,7 @@ void print_oldpwd(t_minishell *msh)
         {
             printf("%s\n",old_pwd);
             msh->env = set_oldpwd(msh, pwd);
-            // sort_env(msh, ft_countline(msh->env));
+            sort_env(msh->env, ft_countline(msh->env));
         }
         else
             perror(old_pwd);
@@ -72,7 +72,7 @@ void    cd_no_arg(t_minishell *msh, t_cmd *cmd)
         else
         {
             msh->env = set_oldpwd(msh, old_pwd);
-            // sort_env(msh, ft_countline(msh->env));
+            sort_env(msh->env, ft_countline(msh->env));
         }
     }
 }

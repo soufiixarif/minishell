@@ -6,11 +6,12 @@
 /*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 00:59:20 by sarif             #+#    #+#             */
-/*   Updated: 2024/08/02 17:06:46 by sarif            ###   ########.fr       */
+/*   Updated: 2024/08/03 20:54:09 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../sources/minishell.h"
+#include <string.h>
 
 int ft_isdigit(char c)
 {
@@ -29,33 +30,61 @@ int     check_invalid_id(char *str)
     }
     return (1);
 }
-void    sort_env(t_minishell *msh, int len)
+void    sort_env(char **env, int size)
 {
-    int i;
-    int j;
-    int swap;
-    char *tmp;
+     int i, j;
+    char *temp;
 
     i = 0;
-    while(i < len - 1)
+    while (i < size - 1) 
     {
-        j = 0, swap = 0;
-        while(j < len - i - 1)
+        j = 0;
+        while (j < size - 1) 
         {
-            if(msh->env[j + 1] && (!msh->env[j] || ft_strcmp(msh->env[j], msh->env[j + 1]) > 0))
+            if (env[j] == NULL) 
             {
-                tmp = msh->env[j + 1];
-                msh->env[j + 1] = msh->env[j];
-                msh->env[j] = tmp;
-                swap = 1;
+                temp = env[j];
+                env[j] = env[j + 1];
+                env[j + 1] = temp;
+            } 
+            else if (env[j + 1] != NULL && ft_strcmp(env[j], env[j + 1]) > 0) 
+            {
+                temp = env[j];
+                env[j] = env[j + 1];
+                env[j + 1] = temp;
             }
             j++;
         }
-        if(swap == 0)
-            break ;
         i++;
     }
 }
+// void    sort_env(t_minishell *msh, int len)
+// {
+//     int i;
+//     int j;
+//     int swap;
+//     char *tmp;
+
+//     i = 0;
+//     while(i < len - 1)
+//     {
+//         j = 0, swap = 0;
+//         while(j < len - i - 1)
+//         {
+//             if(msh->env[j + 1] && (!msh->env[j] || ft_strcmp(msh->env[j], msh->env[j + 1]) > 0))
+//             {
+//                 tmp = msh->env[j + 1];
+//                 msh->env[j + 1] = msh->env[j];
+//                 msh->env[j] = tmp;
+//                 swap = 1;
+//             }
+//             j++;
+//         }
+//         if(swap == 0)
+//             break ;
+//         i++;
+//     }
+// }
 void    ft_unset(t_minishell *msh, t_cmd *cmd)
 {
     int i;
@@ -75,7 +104,7 @@ void    ft_unset(t_minishell *msh, t_cmd *cmd)
         if(!ft_strncmp(cmd->av[1],msh->env[i],len) && msh->env[i][len] == '=')
         {
             msh->env[i] = NULL;
-            sort_env(msh, count_line);
+            sort_env(msh->env, count_line - 1);
             break;
         }
         i++;
