@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_setenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 20:50:23 by sarif             #+#    #+#             */
-/*   Updated: 2024/07/29 23:17:30 by sarif            ###   ########.fr       */
+/*   Updated: 2024/08/03 20:46:42 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ char **ft_setenv(t_minishell *minishell)
 	path = getcwd(NULL,0);
 	env[1] = ft_strjoin(minishell,  "PWD=", path);
 	free(path);
+	path = NULL;
 	env[2] = ft_strjoin(minishell, "SHLVL=",ft_itoa(minishell, minishell->shlvl));
 	env[3] = ft_strdup(minishell, &minishell->global, "_=/usr/bin/env");
 	env[4] = NULL;
