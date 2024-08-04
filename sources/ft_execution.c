@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 23:08:44 by sarif             #+#    #+#             */
-/*   Updated: 2024/08/02 10:31:23 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/08/04 09:57:52 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ void	args_maker(t_minishell *msh)
 		i = 0;
 		while (token)
 		{
-			if (token->next && token->type != TEXT)
+			if (token-> next && token->type != TEXT)
 				token = token->next;
 			else
 				commande->av[i++] = strdup(token->token);
