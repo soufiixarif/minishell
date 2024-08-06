@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 20:50:07 by sarif             #+#    #+#             */
-/*   Updated: 2024/07/15 20:50:09 by sarif            ###   ########.fr       */
+/*   Updated: 2024/08/05 01:12:36 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*ft_itoa(t_minishell *minishell, int n)
 
 	nb = (long)n;
 	len = ft_nbrlen(nb);
-	str = ft_malloc(minishell, &minishell->local, len + 1);
+	str = ft_malloc(minishell, &minishell->global, len + 1);
 	if (!str)
 		return (NULL);
 	str[len] = '\0';

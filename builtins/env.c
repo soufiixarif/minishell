@@ -6,11 +6,19 @@
 /*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 22:57:18 by sarif             #+#    #+#             */
-/*   Updated: 2024/07/30 00:55:41 by sarif            ###   ########.fr       */
+/*   Updated: 2024/08/05 06:49:18 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../sources/minishell.h"
+
+bool equalchr(char *str)
+{
+    while(*str)
+        if(*str == '=')
+            return(true);
+    return(false);
+}
 
 void    ft_env(t_minishell *msh)
 {
@@ -21,7 +29,10 @@ void    ft_env(t_minishell *msh)
     {
         if(!msh->env_checker && !ft_strncmp("PATH=",msh->env[i],5))
             i++;
-        printf("%s",msh->env[i]);
-        printf("\n");
+        if(equalchr(msh->env[i]))
+        {   
+            printf("%s",msh->env[i]);
+            printf("\n");
+        }
     }
 }

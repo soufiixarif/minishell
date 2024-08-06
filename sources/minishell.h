@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:14:17 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/08/03 20:51:27 by sarif            ###   ########.fr       */
+/*   Updated: 2024/08/05 06:54:56 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,15 +239,10 @@ char		**set_oldpwd(t_minishell *msh, char *old_pwd);
 void		print_oldpwd(t_minishell *msh);
 void		get_to_dir(t_minishell *msh, t_cmd *cmd);
 char		*herexp(t_minishell *minishell, char *herdoc);
-
-
-
-
-
-
-
-
-
-
+void    	ft_export(t_minishell *msh, t_cmd *cmd);
+void    	print_export(t_minishell *msh);
+void    	make_export(t_minishell *msh, t_cmd *cmd, bool plus, char *var);
+void    	update_export(t_minishell *msh, t_cmd *cmd, int i, bool plus);
+int     	check_invalid_id_export(char *str);
 
 #endif
