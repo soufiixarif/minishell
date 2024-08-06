@@ -2,9 +2,9 @@ NAME = minishell
 
 CC = cc
 
-FLAGS = -Wextra -Wall -Werror -I/Users/kelmounj/.brew/opt/readline/include  -g3 -fsanitize=address -g
+FLAGS = -Wextra -Wall -Werror -I/Users/kelmounj/.brew/opt/readline/include  #-g3 -fsanitize=address -g
 
-LDFLAGS = -lreadline -L/Users/kelmounj/.brew/opt/readline/lib  -g3  -fsanitize=address -g
+LDFLAGS = -lreadline -L/Users/kelmounj/.brew/opt/readline/lib  #-g3  -fsanitize=address -g
 
 SRCS = sources/minishell.c lexer/lexer0.c lexer/lexer1.c lexer/lexer2.c lexer/lexer3.c lexer/lexer4.c \
 		parser/parser.c parser/parser0.c parser/parser1.c parser/parser2.c \
@@ -13,7 +13,8 @@ SRCS = sources/minishell.c lexer/lexer0.c lexer/lexer1.c lexer/lexer2.c lexer/le
 		sources/is_utils3.c sources/ft_getfullenv.c sources/ft_getenv.c sources/ft_setenv.c \
 		sources/ft_itoa.c sources/ft_openhd.c sources/ft_execution.c sources/ft_split.c sources/ft_atoi.c \
 		sources/ft_openfd.c sources/ft_getnode.c sources/ft_printferror.c sources/ft_redirection.c\
-		sources/fill_tok.c builtins/env.c builtins/handel_builtin.c builtins/exit.c builtins/pwd.c\
+		sources/fill_tok.c\
+		sources/ft_data_init.c  builtins/env.c builtins/handel_builtin.c builtins/exit.c builtins/pwd.c\
 		builtins/unset.c builtins/echo.c builtins/cd.c
 
 HEADERS = sources/minishell.h

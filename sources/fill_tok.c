@@ -6,11 +6,44 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 17:45:44 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/08/01 11:33:56 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/08/06 17:07:01 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	stick_tok(t_minishell *msh)
+{
+	t_tokens	*tmp_t;
+	t_tokens	*tmp_t2;
+	char		*tmp;
+	
+	(1) && (tmp = ft_strdup(msh, &msh->local, ""), tmp_t = msh->tokens);
+	tmp_t2 = msh->tokens;
+	while (tmp_t)
+	{
+		if (tmp_t->type == TEXT || tmp_t->type == S_QUOTE || tmp_t->type == D_QUOTE)
+		{
+			tmp_t2 = tmp_t;
+			while (tmp_t && (tmp_t->type == TEXT || tmp_t->type == S_QUOTE || tmp_t->type == D_QUOTE))
+			{
+				tmp = ft_strjoin(msh, tmp, tmp_t->token);
+				tmp_t = tmp_t->next;
+			}
+			if (tmp_t && tmp_t->type == EXP && (tmp_t->next == NULL ||  tmp_t->next->type == BLANK))
+			{
+				tmp = ft_strjoin(msh, tmp, tmp_t->token);
+				tmp_t = tmp_t->next;
+			}
+			(1) && (tmp_t2->token = tmp, tmp_t2->next = tmp_t, );
+			tmp_t2->next = tmp_t;
+			tmp = NULL;
+		}
+		if (tmp_t && tmp_t->next)
+			tmp_t = tmp_t->next;
+	}
+}
+
 
 void	rm_exp(t_minishell *minishell)
 {
@@ -45,142 +78,6 @@ void	rm_blank(t_minishell *minishell)
 			tmp_token = tmp_token->next;
 	}
 }
-
-// void	add_tok0(t_minishell *minishell, t_tokens *token)
-// {
-// 	t_tokens	*tokens_tmp;
-
-// 	if (token->type == TEXT)
-// 	{
-// 		tokens_tmp = ft_newtok(minishell, token->token, TEXT);
-// 		ft_addtok_back(&minishell->tokens, tokens_tmp);
-// 	}
-// 	else if (token->type == S_QUOTE)
-// 	{
-// 		tokens_tmp = ft_newtok(minishell, token->token, S_QUOTE);
-// 		ft_addtok_back(&minishell->tokens, tokens_tmp);
-// 	}
-// 	else if (token->type == D_QUOTE)
-// 	{
-// 		tokens_tmp = ft_newtok(minishell, token->token, D_QUOTE);
-// 		ft_addtok_back(&minishell->tokens, tokens_tmp);
-// 	}
-// }
-
-// void	add_tok1(t_minishell *minishell, t_tokens *token)
-// {
-// 	t_tokens	*tokens_tmp;
-
-// 	if (token->type == IN)
-// 	{
-// 		tokens_tmp = ft_newtok(minishell, token->token, IN);
-// 		ft_addtok_back(&minishell->tokens, tokens_tmp);
-// 	}
-// 	else if (token->type == OUT)
-// 	{
-// 		tokens_tmp = ft_newtok(minishell, token->token, OUT);
-// 		ft_addtok_back(&minishell->tokens, tokens_tmp);
-// 	}
-// 	else if (token->type == HERDOC)
-// 	{
-// 		tokens_tmp = ft_newtok(minishell, token->token, HERDOC);
-// 		ft_addtok_back(&minishell->tokens, tokens_tmp);
-// 	}
-// 	else if (token->type == APPEND)
-// 	{
-// 		tokens_tmp = ft_newtok(minishell, token->token, APPEND);
-// 		ft_addtok_back(&minishell->tokens, tokens_tmp);
-// 	}
-// }
-// void	add_tok2(t_minishell *minishell, t_tokens *token)
-// {
-// 	t_tokens	*tokens_tmp;
-
-// 	if (token->type == Q_EXP)
-// 	{
-// 		tokens_tmp = ft_newtok(minishell, token->token, Q_EXP);
-// 		ft_addtok_back(&minishell->tokens, tokens_tmp);
-// 	}
-// 	else if (token->type == Q_DEL)
-// 	{
-// 		tokens_tmp = ft_newtok(minishell, token->token, Q_DEL);
-// 		ft_addtok_back(&minishell->tokens, tokens_tmp);
-// 	}
-// 	else if (token->type == DEL)
-// 	{
-// 		tokens_tmp = ft_newtok(minishell, token->token, DEL);
-// 		ft_addtok_back(&minishell->tokens, tokens_tmp);
-// 	}
-// 	else if (token->type == PIPE)
-// 	{
-// 		tokens_tmp = ft_newtok(minishell, token->token, PIPE);
-// 		ft_addtok_back(&minishell->tokens, tokens_tmp);
-// 	}
-// }
-
-// void	fill_tokens(t_minishell *minishell)
-// {
-// 	t_tokens		*tkn_t;
-
-// 	tkn_t = minishell->tokens;
-// 	while (tkn_t->next)
-// 	{
-// 		if (tkn_t->type == TEXT || tkn_t->type == S_QUOTE || tkn_t->type == D_QUOTE)
-// 		{
-// 			add_tok0(minishell, tkn_t);
-// 		}
-// 		else if (tkn_t->type == IN || tkn_t->type == OUT || tkn_t->type == HERDOC || tkn_t->type == APPEND)
-// 		{
-// 			add_tok1(minishell, tkn_t);
-// 		}
-// 		else if (tkn_t->type == Q_EXP || tkn_t->type == Q_DEL || tkn_t->type == DEL || tkn_t->type == PIPE)
-// 		{
-// 			add_tok2(minishell, tkn_t);
-// 		}
-// 		tkn_t = tkn_t->next;
-// 	}
-// }
-
-// void	fill_index(t_minishell *minishell)
-// {
-// 	t_tokens	*tmp_token;
-// 	int		index;
-
-// 	index = 0;
-// 	tmp_token = minishell->tokens;
-// 	while (tmp_token)
-// 	{
-// 		tmp_token->t_idx = index;
-// 		index++;
-// 		tmp_token = tmp_token->next;
-// 	}
-// }
-
-// void	set_cmd(t_minishell *minishell)
-// {
-// 	t_token	*tmp_token;
-
-// 	tmp_token = minishell->token;
-// 	while (tmp_token)
-// 	{
-// 		while (tmp_token->type != PIPE)
-// 		{
-// 			tmp_token->cmd
-// 		}
-// 	}
-// }
-
-// void	get_cmd(t_minishell *minishell, t_tokens *token1, t_tokens *token2, t_cmd *cmd)
-// {
-// 	t_tokens	*tmp;
-// 	tmp = token2;
-// 	cmd = ft_newcmd(minishell, token2);
-// 	ft_addcmd_back(&minishell->cmd, cmd);
-// 	tmp = token1;
-// 	if (token1->next->next)
-// 		token1 = token1->next->next;
-// 	tmp->next = NULL;
-// }
 
 void	fill_cmd(t_minishell *minishell)
 {

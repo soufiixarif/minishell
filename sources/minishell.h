@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:14:17 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/08/03 20:51:27 by sarif            ###   ########.fr       */
+/*   Updated: 2024/08/06 14:46:56 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_tokens
 	char			*token;
 	t_type			type;
 	bool			boole;
+	char			*ambg;
 	int				t_idx;
 	int				fd;
 	struct s_tokens	*next;
@@ -175,8 +176,7 @@ void		open_heredocs(t_minishell *minishell, char *line, int n);
 void		token_handler(t_minishell *minishell);
 void		qexp_handler(t_minishell *minishell);
 void		expainding(t_minishell *minishell);
-// void		fill_tokens(t_minishell *minishell);
-// void		fill_index(t_minishell *minishell);
+void		stick_tok(t_minishell *msh);
 void		fill_cmd(t_minishell *minishell);
 void		token_cmd(t_minishell *minishell);
 void		token_index(t_minishell *minishell);

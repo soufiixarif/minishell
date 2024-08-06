@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 09:11:48 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/08/03 20:40:56 by sarif            ###   ########.fr       */
+/*   Updated: 2024/08/05 22:14:02 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,10 @@ char	*ft_strdup(t_minishell *minishell, t_garbage **garbage, const char *s1)
 	int		len;
 
 	i = -1;
+	// if(s1)
+	// 	printf("===>%s\n",s1);
+	// else
+	// 	printf("NULL");
 	len = ft_strlen((char *)s1);
 	p = ft_malloc(minishell, garbage, len + 1);
 	while (++i < len && s1[i])

@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 13:52:19 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/08/01 12:45:51 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/08/06 16:37:15 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	token_handler(t_minishell *minishell)
 	get_del(minishell);
 	expainding(minishell);
 	qexp_handler(minishell);
+	stick_tok(minishell);
 	rm_exp(minishell);
 	rm_blank(minishell);
 	fill_cmd(minishell);

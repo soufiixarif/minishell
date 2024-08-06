@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 10:20:25 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/07/31 11:31:31 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/08/06 16:30:05 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_tokens	*ft_lstnew(t_minishell *minishell, void *content, t_type type)
 	token->fd = -1;
 	token->token = content;
 	token->type = type;
+	token->boole = false;
 	token->next = NULL;
 	return (token);
 }

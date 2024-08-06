@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:07:03 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/08/04 11:32:27 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/08/05 22:16:24 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,3 +76,14 @@ int	main()
 		free(line);
 	}
 }
+
+
+
+
+// ""ls ==> ls 
+// ls"" ==> ls
+// "l"s ==> ls
+// L"USER" ==> LUSER
+// $USER"USER" ==> kelmounjUSER
+// expand in heredoc
+// TO CONTINUE

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 18:06:16 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/08/02 00:01:10 by sarif            ###   ########.fr       */
+/*   Updated: 2024/08/06 17:01:07 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,35 @@ bool	is_ambiguous(char *str)
 	return (false);
 }
 
+void	handel_ambg(t_minishell *minishell, t_tokens *tokens, char *val)
+{
+	t_tokens	*tmp_t;
+	t_tokens	*new;
+	char		*var;
+	char		**splited;
+	int			i;
+
+	if (tokens->next)
+		tmp_t = tokens->next;
+	var = ft_strdup(minishell, &minishell->local, tokens->token);
+	splited = ft_split(val, ' ');
+	i = 0;
+	tokens->next = NULL;
+	tokens->ambg = ft_strdup(minishell, &minishell->local, var);
+	tokens->token = ft_strdup(minishell, &minishell->local, splited[i++]);
+	while (splited[i])
+	{
+		new = ft_lstnew(minishell, splited[i], TEXT);
+		new->boole = true;
+		new->ambg = ft_strdup(minishell, &minishell->local, var);
+		ft_lstadd_back(&tokens, new);
+		i++;
+	}
+	while (tokens)
+		tokens = tokens->next;
+	tokens = tmp_t;
+}
+
 void	expainding(t_minishell *minishell)
 {
 	t_tokens	*tmp_token;
@@ -88,7 +117,10 @@ void	expainding(t_minishell *minishell)
 			{
 				tmp = ft_getenv(tmp_token->token, minishell);
 				if (is_ambiguous(tmp) == true)
+				{
 					tmp_token->boole = true;
+					handel_ambg(minishell, tmp_token, tmp);
+				}
 				tmp_token->token = ft_strdup(minishell, &minishell->local, tmp);
 			}
 		}

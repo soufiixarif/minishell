@@ -1,33 +1,33 @@
-#include "minishell.h"
-#include <string.h>
-const char* get_type_name(t_type type) {
-    switch (type) {
-        case PIPE: return "PIPE";
-        case S_QUOTE: return "S_QUOTE";
-        case D_QUOTE: return "D_QUOTE";
-        case TEXT: return "TEXT";
-        case EXP: return "EXP";
-        case BLANK: return "BLANK";
-        case IN: return "IN";
-        case OUT: return "OUT";
-        case APPEND: return "APPEND";
-        case HERDOC: return "HERDOC";
-        case Q_DEL: return "Q_HERDOC";
-        case Q_EXP: return "Q_EXP";
-        case DEL: return "DEL";
-        default: return "UNKNOWN";
-    }
-}
-static t_tokens *create_token(const char *node, t_type type, int t_idx,t_cmd *cmd) {
-    t_tokens *new_token = malloc(sizeof(t_tokens));
-    new_token->token = strdup(node);
-    new_token->type = type;
-    new_token->t_idx = t_idx;
-    new_token->fd = -1;
-    new_token->next = NULL;
-    new_token->cmd = cmd;
-    return new_token;
-}
+// #include "minishell.h"
+// #include <string.h>
+// const char* get_type_name(t_type type) {
+//     switch (type) {
+//         case PIPE: return "PIPE";
+//         case S_QUOTE: return "S_QUOTE";
+//         case D_QUOTE: return "D_QUOTE";
+//         case TEXT: return "TEXT";
+//         case EXP: return "EXP";
+//         case BLANK: return "BLANK";
+//         case IN: return "IN";
+//         case OUT: return "OUT";
+//         case APPEND: return "APPEND";
+//         case HERDOC: return "HERDOC";
+//         case Q_DEL: return "Q_HERDOC";
+//         case Q_EXP: return "Q_EXP";
+//         case DEL: return "DEL";
+//         default: return "UNKNOWN";
+//     }
+// }
+// static t_tokens *create_token(const char *node, t_type type, int t_idx,t_cmd *cmd) {
+//     t_tokens *new_token = malloc(sizeof(t_tokens));
+//     new_token->token = strdup(node);
+//     new_token->type = type;
+//     new_token->t_idx = t_idx;
+//     new_token->fd = -1;
+//     new_token->next = NULL;
+//     new_token->cmd = cmd;
+//     return new_token;
+// }
 
 // static t_cmd *create_cmd(int c_idx, t_minishell *msh) {
 //     t_cmd *new_cmd = malloc(sizeof(t_cmd));
@@ -40,10 +40,10 @@ static t_tokens *create_token(const char *node, t_type type, int t_idx,t_cmd *cm
 //     return new_cmd;
 // }
 
-void datainit(t_minishell *msh) {
-    int c_idx = 0;
-    int t_idx = 0;
-    t_cmd *cmd1 = create_cmd(c_idx++, msh);
+// void datainit(t_minishell *msh) {
+//     int c_idx = 0;
+//     int t_idx = 0;
+//     t_cmd *cmd1 = create_cmd(c_idx++, msh);
     // t_cmd *cmd2 = create_cmd(c_idx++, msh);
     // t_cmd *cmd3 = create_cmd(c_idx++, msh);
 
@@ -52,8 +52,8 @@ void datainit(t_minishell *msh) {
 //     // cmd2->next = cmd3;
 
     // Initialize tokens for cmd1
-    cmd1->tokens = create_token("cd", TEXT, t_idx++,cmd1);
-    cmd1->tokens->next = create_token("/usr", TEXT, t_idx++,cmd1);
+    // cmd1->tokens = create_token("cd", TEXT, t_idx++,cmd1);
+    // cmd1->tokens->next = create_token("/usr", TEXT, t_idx++,cmd1);
     // cmd1->tokens->next->next = create_token("-nnnn", TEXT, t_idx++,cmd1);
     // cmd1->tokens->next->next->next = create_token("-nnnn", TEXT, t_idx++,cmd1);
     // cmd1->tokens->next->next->next->next = create_token("-nnnn", TEXT, t_idx++,cmd1);
@@ -98,4 +98,4 @@ void datainit(t_minishell *msh) {
     //     }
     //     cmd = cmd->next;
     // }
-}
+// }

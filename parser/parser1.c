@@ -6,34 +6,11 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 08:40:57 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/08/01 13:31:24 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/08/06 00:12:03 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../sources/minishell.h"
-
-// char	*get_value(t_minishell *msh, t_tokens **token_t, char *token, int *idx)
-// {
-// 	char	*str;
-// 	char	*tmp;
-// 	int		i;
-
-// 	i = 0;
-// 	(*idx)++;
-// 	tmp = NULL;
-// 	while (token[*idx] && !ft_isexpand(token[*idx]) && !ft_isblank(token[*idx]))
-// 	{
-// 		tmp[i] = token[*idx];
-// 		i++;
-// 		(*idx)++;
-// 	}
-// 	if (ft_isexpand(token[*idx]) || ft_isblank(token[*idx]))
-// 		(*idx)--;
-// 	str = ft_getenv(tmp, msh);
-// 	if (is_ambiguous(str) == true)
-// 		(*token_t)->boole = true;
-// 	return(ft_strtrim(msh, str, " \t"));
-// }
 
 bool	if_exp(char *str)
 {
@@ -107,7 +84,7 @@ void	helper_qexp(t_minishell *msh, t_tokens *tkn)
 		}
 		tmp2 = ft_strjoin(msh, tmp2, tmp);
 	}
-	tkn->token = tmp2;
+		tkn->token = tmp2;
 }
 
 void	qexp_handler(t_minishell *msh)
