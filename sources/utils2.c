@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 10:20:25 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/08/05 01:14:27 by sarif            ###   ########.fr       */
+/*   Updated: 2024/08/06 15:38:56 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	ft_garadd_back(t_garbage **lst, t_garbage *new)
 		if (*lst)
 		{
 			tmp = *lst;
-			while (tmp->next)
+			while (tmp && tmp->next)
 				tmp = tmp->next;
 			(tmp)->next = new;
 		}

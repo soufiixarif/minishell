@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 00:59:20 by sarif             #+#    #+#             */
-/*   Updated: 2024/08/03 20:54:09 by sarif            ###   ########.fr       */
+/*   Updated: 2024/08/06 16:35:54 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,22 +90,28 @@ void    ft_unset(t_minishell *msh, t_cmd *cmd)
     int i;
     int len;
     int count_line;
+    int j;
 
     i = 0;
+    j = 1;
     if (cmd->av[1] && !check_invalid_id(cmd->av[1]))
     {
         printf("bash: unset: \'%s\': not a valid identifier\n", cmd->av[1]);
-        return;   
+        return;
     }
-    len = ft_strlen(cmd->av[1]);
-    count_line = ft_countline(msh->env);
-    while(msh->env[i])
+    while(cmd->av[i])
     {
-        if(!ft_strncmp(cmd->av[1],msh->env[i],len) && msh->env[i][len] == '=')
+        j = 0;
+        len = ft_strlen(cmd->av[i]);
+        count_line = ft_countline(msh->env);
+        while(msh->env[j])
         {
-            msh->env[i] = NULL;
-            sort_env(msh->env, count_line - 1);
-            break;
+            if(!ft_strncmp(cmd->av[i],msh->env[j],len) && msh->env[j][len] == '=')
+            {
+                msh->env[j] = NULL;
+                sort_env(msh->env, count_line- 1);
+            }
+            j++;
         }
         i++;
     }

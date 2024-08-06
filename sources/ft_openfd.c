@@ -36,8 +36,6 @@ int    ft_in(t_tokens *token)
 
     if(token->cmd->fd_fail)
         return -1;
-    if(token->boole)
-        printf("minishell: %s: ambiguous redirect", token->)
     fd = open(token->token, O_RDONLY, 0644);
     if(fd == -1)
     {
