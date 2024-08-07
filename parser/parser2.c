@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 18:06:16 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/08/06 17:01:07 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/08/07 17:11:54 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,54 +105,115 @@ void	handel_ambg(t_minishell *minishell, t_tokens *tokens, char *val)
 void	expainding(t_minishell *minishell)
 {
 	t_tokens	*tmp_token;
+	t_tokens	*tmp_token2;
 	char		*tmp;
 
 	tmp_token = minishell->tokens;
 	while (tmp_token)
 	{
-		if (tmp_token->next && tmp_token->type == EXP)
+		tmp_token2 = tmp_token;
+		if (tmp_token2->next && tmp_token2->next->next && tmp_token2->next->type == EXP && tmp_token2->next->next->type == TEXT)
 		{
-			tmp_token = tmp_token->next;
-			if (tmp_token && (tmp_token->type == TEXT))
-			{
-				tmp = ft_getenv(tmp_token->token, minishell);
+			tmp_token2 = tmp_token2->next->next;
+				tmp = ft_getenv(tmp_token2->token, minishell);
 				if (is_ambiguous(tmp) == true)
 				{
-					tmp_token->boole = true;
-					handel_ambg(minishell, tmp_token, tmp);
+					tmp_token2->boole = true;
+					handel_ambg(minishell, tmp_token2, tmp);
 				}
-				tmp_token->token = ft_strdup(minishell, &minishell->local, tmp);
-			}
+				tmp_token2->token = ft_strdup(minishell, &minishell->local, tmp);
+			tmp_token->next = tmp_token2;
 		}
 		tmp_token = tmp_token->next;
 	}
 }
 
-char	*herexp(t_minishell *minishell, char *herdoc)
+// char	*herexp(t_minishell *minishell, char *herdoc)
+// {
+// 	int		i;
+// 	int		j;
+// 	char	*var;
+// 	char	*val;
+
+// 	i = 0;
+// 	j = 0;
+// 	var = NULL;
+// 	val = NULL;
+// 	while (herdoc[i])
+// 	{
+// 		if (herdoc[i] == '$')
+// 		{
+// 			i++;
+// 			while (!ft_isexpand(herdoc[i]) && !ft_isblank(herdoc[i]))
+// 			{
+// 				var[j] = herdoc[i];
+// 				i++;
+// 				j++;
+// 			}
+// 			val = ft_getenv(var, minishell);
+// 		}
+// 		i++;
+// 	}
+// 	return (val);
+// }
+
+static int	lnx(char *token, int index)
 {
 	int		i;
-	int		j;
-	char	*var;
-	char	*val;
+	int		count;
 
-	i = 0;
-	j = 0;
-	var = NULL;
-	val = NULL;
-	while (herdoc[i])
+	i = index;
+	count = 0;
+	while (token[i] && (token[i] != '$' && token[i] != ' '))
 	{
-		if (herdoc[i] == '$')
-		{
-			i++;
-			while (!ft_isexpand(herdoc[i]) && !ft_isblank(herdoc[i]))
-			{
-				var[j] = herdoc[i];
-				i++;
-				j++;
-			}
-			val = ft_getenv(var, minishell);
-		}
+		count++;
 		i++;
 	}
-	return (val);
+	return (count);
+}
+
+static int	get_len(char *token, int index)
+{
+	int		i;
+	int		count;
+
+	i = index;
+	count = 0;
+	while (token[i] && ((token[i] != '$')
+			|| (token[i] == '$' && token[i + 1] == '$')
+			|| (token[i] == '$' && !(token[i + 1]))))
+	{
+		count++;
+		i++;
+	}
+	return (count);
+}
+
+char	*herexp(t_minishell *msh, char *herdoc)
+{
+	char		*tmp;
+	char		*tmp2;
+	int			i;
+	int			len;
+	char		*str;
+
+	tmp = ft_strdup(msh, &msh->local, "");
+	tmp2 = ft_strdup(msh, &msh->local, "");
+	(1) && (i = 0, len = 0);
+	while (herdoc[i])
+	{
+		if (!ft_isexpand(herdoc[i]) || (ft_isexpand(herdoc[i])
+				&& ft_isexpand(herdoc[i + 1]))
+			|| (ft_isexpand(herdoc[i])
+				&& !(herdoc[i + 1])))
+			(1) && (len = get_len(herdoc, i),
+					tmp = _sub(msh, herdoc, i, len), i = i + len);
+		else if (herdoc[i] == '$' && herdoc[i + 1] != '$')
+		{
+			(1) && (i++, str = _sub(msh, herdoc, i, lnx(herdoc, i)),
+			i = i + lnx(herdoc, i), tmp = ft_getenv(str, msh));
+		}
+		tmp2 = ft_strjoin(msh, tmp2, tmp);
+	}
+	return(tmp2);
 }

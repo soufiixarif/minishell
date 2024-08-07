@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include "sources/minishell.h"
 
 // Function to sort environment variables and move NULLs to the bottom
 void sort_env(char **env, int size) {
@@ -28,38 +29,48 @@ void sort_env(char **env, int size) {
 }
 
 int main() {
-    char *env[] = {
-        "MallocNanoZone=0",
-        "USER=mac",
-        "COMMAND_MODE=unix2003",
-        "LOGNAME=mac",
-        NULL, // Let's say USER was unset and replaced by NULL
-        "PATH=/usr/local/bin:/usr/bin:/bin",
-        "HOME=/Users/mac",
-        "SHELL=/bin/zsh",
-        "TMPDIR=/var/folders/dr/cmhbxvn96hlgcxwr0mmc656c0000gn/T/",
-        "PWD=/Users/mac/Desktop/minishell",
-        "OLDPWD=/Users/mac/Desktop",
-        NULL // Terminator (end of array)
-    };
+
+    // char *env[] = {
+    //     "MallocNanoZone=0",
+    //     "USER=mac",
+    //     "COMMAND_MODE=unix2003",
+    //     "LOGNAME=mac",
+    //     NULL, // Let's say USER was unset and replaced by NULL
+    //     "PATH=/usr/local/bin:/usr/bin:/bin",
+    //     "HOME=/Users/mac",
+    //     "SHELL=/bin/zsh",
+    //     "TMPDIR=/var/folders/dr/cmhbxvn96hlgcxwr0mmc656c0000gn/T/",
+    //     "PWD=/Users/mac/Desktop/minishell",
+    //     "OLDPWD=/Users/mac/Desktop",
+    //     NULL // Terminator (end of array)
+    // };
 
     // Determine the size of the environment array
-    int size = 0;
-    while (env[size] != NULL || env[size + 1] != NULL) {
-        size++;
-    }
+    // int size = 0;
+    // while (env[size] != NULL || env[size + 1] != NULL) {
+    //     size++;
+    // }
 
     // Sort the environment variables and move NULLs to the bottom
-    sort_env(env, size);
+    // sort_env(env, size);
 
     // Print the sorted environment variables
-    int i = 0;
-    while (i < size) {
-        if (env[i] != NULL) {
-            printf("%s\n", env[i]);
-        }
-        i++;
-    }
+    // int i = 0;
+    // while (i < size) {
+    //     if (env[i] != NULL) {
+    //         printf("%s\n", env[i]);
+    //     }
+    //     i++;
+    // }
 
+    char    *str1;
+    char    *str2;
+    char    *str3;
+
+    str1 = strdup("hello");
+    str2 = strdup("");
+
+    str3 = strcat(str1, str2);
+    printf("(%s)\n", str3);
     return 0;
 }

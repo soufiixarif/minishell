@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 13:52:19 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/08/06 16:37:15 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/08/07 16:50:23 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,15 @@ void	token_handler(t_minishell *minishell)
 	get_del(minishell);
 	expainding(minishell);
 	qexp_handler(minishell);
-	stick_tok(minishell);
 	rm_exp(minishell);
+	stick_tok(minishell);
+	// while (minishell->tokens)
+	// {
+	// 	printf("(%s)\t", minishell->tokens->token);
+	// 	printf("(%u)\n", minishell->tokens->type);
+	// 	minishell->tokens = minishell->tokens->next;
+	// }
+	// exit(0);
 	rm_blank(minishell);
 	fill_cmd(minishell);
 	token_cmd(minishell);
