@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 23:08:44 by sarif             #+#    #+#             */
-/*   Updated: 2024/08/04 09:57:52 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/08/07 23:37:13 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,6 @@ void	args_maker(t_minishell *msh)
 }
 void ft_onepipe(t_cmd	*cmd)
 {
-	
 	if (isbuiltin(cmd->av[0]))
 		handel_builtins(cmd->msh, cmd);//TO DO 
 	else

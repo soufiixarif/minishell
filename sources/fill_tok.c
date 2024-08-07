@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 17:45:44 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/08/07 16:54:40 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/08/07 23:03:54 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void	stick_tok(t_minishell *msh)
 		}
 		if (tmp_t && tmp_t->next)
 			tmp_t = tmp_t->next;
+		else
+			break;
 	}
 }
 

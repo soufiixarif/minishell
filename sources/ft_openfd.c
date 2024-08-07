@@ -71,10 +71,7 @@ int ft_openfd(t_cmd *cmd)
 	while (token)
 	{
 		if (cmd->fd_fail)
-		{
-			printf("la waaalo mab9inach khdamin\n");
 			break;
-		}
 		if (token->type == IN)
 			cmd->input = ft_in(token->next);
 		else if(token->type == OUT)

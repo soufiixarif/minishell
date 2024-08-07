@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 08:40:57 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/08/06 00:12:03 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/08/07 23:47:29 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,6 @@ void	helper_qexp(t_minishell *msh, t_tokens *tkn)
 		{
 			(1) && (i++, str = _sub(msh, tkn->token, i, lnx(tkn->token, i)),
 			i = i + lnx(tkn->token, i), tmp = ft_getenv(str, msh));
-			if (is_ambiguous(tmp) == true)
-				tkn->boole = true;
 		}
 		tmp2 = ft_strjoin(msh, tmp2, tmp);
 	}
