@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 05:10:05 by sarif             #+#    #+#             */
-/*   Updated: 2024/08/08 05:44:16 by sarif            ###   ########.fr       */
+/*   Updated: 2024/08/08 22:46:44 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,16 +72,18 @@ int     check_invalid_id_export(char *str)
     int i;
 
     i = 0;
+    printf("identifier %s\n",str);
     len = ft_strlen(str);
-    if(ft_isdigit(*str))
+    if(ft_isdigit(*str) || *str == '+')
         return(0);
-    while(i < len - 2)
+    while(i < len - 1)
     {
         if (!(ft_isalnum(str[i]) || str[i] == '_'))
             return(0);
         i++;
     }
-    if (!((ft_isalnum(str[i]) || str[i] == '_' || str[i] == '+') && str[i + 1] == '='))
+    printf("char lakher %c\n", str[i]);
+    if (!(ft_isalnum(str[i]) || str[i] == '_' || str[i] == '+'))
             return(0);
     return (1);
 }
@@ -140,7 +142,7 @@ char *ft_getvariable(char *str)
     i = 0;
     while(str[i] && str[i] != '=')
         i++;
-    var = ft_substr(str,0,i + 1);
+    var = ft_substr(str,0,i);
     return (var);
 }
 
@@ -161,7 +163,6 @@ char **set_variable(t_minishell *msh, char *var, bool plus)
 
     i = -1;
 
-    printf("count line %d\n",ft_countline(msh->env));
     new_env = (char **)malloc(sizeof (char *) * (ft_countline(msh->env) + 2));
     while(msh->env[++i])
         new_env[i] = msh->env[i];
@@ -172,7 +173,6 @@ char **set_variable(t_minishell *msh, char *var, bool plus)
         new_env[i] = ft_strjoin_env(msh, get_var(var,plus),"=");// to change it later
         new_env[i] = ft_strjoin_env(msh, new_env[i], ft_get_value(var));
     }
-    printf("index is %d new_variable %s\n", i, new_env[i]);
     i++;
     new_env[i] = NULL;
     return(new_env);
@@ -194,7 +194,7 @@ void    export_var(t_minishell *msh, t_cmd *cmd, char *var)
     len = ft_strlen(variable);
     while(msh->env[i])
     {
-        if(!strncmp(var, msh->env[i],len) && msh->env[i][len] == '=')
+        if(!strcmp(variable, get_var(msh->env[i], false)))
         {
             if(plus)
                 msh->env[i] = ft_strjoin_env(msh, msh->env[i], ft_get_value(var));

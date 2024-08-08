@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 00:59:20 by sarif             #+#    #+#             */
-/*   Updated: 2024/08/07 02:43:27 by sarif            ###   ########.fr       */
+/*   Updated: 2024/08/08 20:48:53 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ void    sort_env(char **env, int size)
 void    ft_unset(t_minishell *msh, t_cmd *cmd)
 {
     int i;
-    int len;
     int count_line;
     int j;
 
@@ -102,11 +101,10 @@ void    ft_unset(t_minishell *msh, t_cmd *cmd)
     while(cmd->av[i])
     {
         j = 0;
-        len = ft_strlen(cmd->av[i]);
         count_line = ft_countline(msh->env);
         while(msh->env[j])
         {
-            if(!ft_strncmp(cmd->av[i],msh->env[j],len) && msh->env[j][len] == '=')
+            if(!ft_strcmp(cmd->av[i],get_var(msh->env[j], false)))
             {
                 msh->env[j] = NULL;
                 sort_env(msh->env, count_line- 1);

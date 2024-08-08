@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:14:17 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/08/08 05:01:55 by sarif            ###   ########.fr       */
+/*   Updated: 2024/08/08 22:45:43 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -244,8 +244,8 @@ void    	print_export(t_minishell *msh);
 int     	check_invalid_id_export(char *str);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
 int			ft_ispluseq(char *str);
-char *get_var(char *str, bool plus);
-char	*ft_strjoin_env(t_minishell *minishell, char const *s1, char const *s2);
-char **set_variable(t_minishell *msh, char *var, bool plus);
+char 		*get_var(char *str, bool plus);
+char		*ft_strjoin_env(t_minishell *minishell, char const *s1, char const *s2);
+char 		**set_variable(t_minishell *msh, char *var, bool plus);
 
 #endif
