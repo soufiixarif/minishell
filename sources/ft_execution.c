@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 23:08:44 by sarif             #+#    #+#             */
-/*   Updated: 2024/08/07 23:37:13 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/08/08 23:05:39 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ void	execute_onecmd(t_cmd *cmd)
 	}
 	else
 		waitpid(pid, NULL, 0);
+	
 }
 
 void	args_maker(t_minishell *msh)
