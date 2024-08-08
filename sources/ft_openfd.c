@@ -8,7 +8,7 @@ int    ft_append(t_tokens *token)
 		return -1;
 	if(token->boole)
 	{
-		printf("minishell: $%s: ambigious redirection\n",token->ambg);
+		printf("minishell: $%s: ambigious redirect\n",token->ambg);
 		token->cmd->fd_fail = true;
 		return(-1);
 	}
@@ -29,7 +29,7 @@ int    ft_out(t_tokens *token)
 		return -1;
 	if(token->boole)
 	{
-		printf("minishell: $%s: ambigious redirection\n",token->ambg);
+		printf("minishell: $%s: ambigious redirect\n",token->ambg);
 		token->cmd->fd_fail = true;
 		return(-1);
 	}
@@ -50,7 +50,7 @@ int    ft_in(t_tokens *token)
 		return -1;
 	if(token->boole)
 	{
-		printf("minishell: $%s: ambigious redirection\n",token->ambg);
+		printf("minishell: $%s: ambigious redirect\n",token->ambg);
 		token->cmd->fd_fail = true;
 		return(-1);
 	}

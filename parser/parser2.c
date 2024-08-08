@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 18:06:16 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/08/07 23:38:04 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/08/08 23:33:17 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,5 +215,5 @@ char	*herexp(t_minishell *msh, char *herdoc)
 		}
 		tmp2 = ft_strjoin(msh, tmp2, tmp);
 	}
-	return(tmp2);
+	return(free(herdoc), tmp2);
 }
