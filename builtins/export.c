@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 05:10:05 by sarif             #+#    #+#             */
-/*   Updated: 2024/08/08 22:46:44 by sarif            ###   ########.fr       */
+/*   Updated: 2024/08/09 00:31:42 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ int     check_invalid_id_export(char *str)
     int i;
 
     i = 0;
-    printf("identifier %s\n",str);
     len = ft_strlen(str);
     if(ft_isdigit(*str) || *str == '+')
         return(0);
@@ -82,7 +81,6 @@ int     check_invalid_id_export(char *str)
             return(0);
         i++;
     }
-    printf("char lakher %c\n", str[i]);
     if (!(ft_isalnum(str[i]) || str[i] == '_' || str[i] == '+'))
             return(0);
     return (1);
@@ -177,7 +175,16 @@ char **set_variable(t_minishell *msh, char *var, bool plus)
     new_env[i] = NULL;
     return(new_env);
 }
-
+int find_eq(char *str, char c)
+{
+    while(*str)
+    {
+        if(*str == c)
+            return(1);
+        str++;   
+    }
+    return(0);
+}
 void    export_var(t_minishell *msh, t_cmd *cmd, char *var)
 {
     int i;
@@ -191,11 +198,15 @@ void    export_var(t_minishell *msh, t_cmd *cmd, char *var)
     if(ft_ispluseq(var))
         plus = true;
     variable = get_var(var, plus);
+    if(!strcmp(variable, "PATH"))
+        msh->env_checker = true;
     len = ft_strlen(variable);
     while(msh->env[i])
     {
         if(!strcmp(variable, get_var(msh->env[i], false)))
         {
+            if(!find_eq(var, '='))
+                return ;
             if(plus)
                 msh->env[i] = ft_strjoin_env(msh, msh->env[i], ft_get_value(var));
             else

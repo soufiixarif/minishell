@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:14:17 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/08/08 23:09:54 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/08/09 00:25:12 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -263,5 +263,7 @@ int			ft_ispluseq(char *str);
 char 		*get_var(char *str, bool plus);
 char		*ft_strjoin_env(t_minishell *minishell, char const *s1, char const *s2);
 char 		**set_variable(t_minishell *msh, char *var, bool plus);
+char *ft_get_value(char *str);
+int find_eq(char *str, char c);
 
 #endif
