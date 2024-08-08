@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:14:17 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/08/08 18:13:24 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/08/08 23:09:54 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,50 +210,58 @@ size_t ft_strlcpy(char *dst, const char *src, size_t dstsize); // added here by 
 // char	*ft_itoa(int n);
 // int    ft_openhd(char *line, int *i);
 // int	ft_strcmp(char *s1, char *s2);
-void execution(t_minishell *ms);
-char **ft_split(char const *s, char c);
-int ft_atoi(const char *str);
-t_tokens *ft_getoken(t_minishell *msh, int t_idx, int c_idx);
-t_cmd *ft_getcmd(t_minishell *msh, int c_idx);
-void printfderror(char *bash, char *infile);
-void ft_openhd(t_minishell *msh);
-int ft_creatfd_forhd(t_minishell *msh, char **input);
-char *ft_getfile_name(t_minishell *msh);
-int ft_countline(char **environ);
-void datainit(t_minishell *msh);
-int ft_lstsize(t_cmd *lst);
-void args_maker(t_minishell *msh);
-void ft_onepipe(t_cmd *cmd);
-int getavlen(t_cmd *cmd);
-int isbuiltin(char *av);
-void execute_onecmd(t_cmd *cmd);
-int ft_openfd(t_cmd *cmd);
-int ft_in(t_tokens *token);
-int ft_out(t_tokens *token);
-int ft_append(t_tokens *token);
-char *getlinepath(char *path, char *commande, t_cmd *cmd);
-char *ft_strcpy(char *s1, char *s2);
-char *ft_strcat(char *dest, char *src);
-void put_stderr(char *s);
-void ft_multi_pipes(t_minishell *msh);
-void execute_childe(t_cmd *cmd);
-void ft_redirection(t_cmd *cmd);
-void handel_builtins(t_minishell *msh, t_cmd *cmd);
-void ft_env(t_minishell *msh);
-void ft_exit(t_minishell *msh, t_cmd *cmd);
-void ft_pwd(t_minishell *msh, t_cmd *cmd);
-void ft_unset(t_minishell *msh, t_cmd *cmd);
-void sort_env(char **env, int size);
-int check_invalid_id(char *str);
-void ft_echo(t_minishell *msh, t_cmd *cmd);
-void print_echo(char **av, int i);
-int ft_isdigit(char c);
-int isvalid_flag(char **av);
-void ft_cd(t_minishell *msh, t_cmd *cmd);
-void cd_no_arg(t_minishell *msh, t_cmd *cmd);
-char **set_oldpwd(t_minishell *msh, char *old_pwd);
-void print_oldpwd(t_minishell *msh);
-void get_to_dir(t_minishell *msh, t_cmd *cmd);
-char *herexp(t_minishell *minishell, char *herdoc);
+void		execution(t_minishell *ms);
+char		**ft_split(char const *s, char c);
+int			ft_atoi(const char *str);
+t_tokens	*ft_getoken(t_minishell *msh, int t_idx, int c_idx);
+t_cmd		*ft_getcmd(t_minishell *msh, int c_idx);
+void		printfderror(char *bash, char *infile);
+void    	ft_openhd(t_minishell *msh);
+int			ft_creatfd_forhd(t_minishell *msh, char **input);
+char		*ft_getfile_name(t_minishell *msh);
+int			ft_countline(char **environ);
+void		datainit(t_minishell *msh);
+int			ft_lstsize(t_cmd *lst);
+void		args_maker(t_minishell *msh);
+void		ft_onepipe(t_cmd	*cmd);
+int			getavlen(t_cmd *cmd);
+int			isbuiltin(char *av);
+void		execute_onecmd(t_cmd *cmd);
+int			ft_openfd(t_cmd *cmd);
+int			ft_in(t_tokens *token);
+int			ft_out(t_tokens *token);
+int			ft_append(t_tokens *token);
+char		*getlinepath(char *path, char *commande, t_cmd *cmd);
+char		*ft_strcpy(char *s1, char *s2);
+char		*ft_strcat(char *dest, char *src);
+void		put_stderr(char *s);
+void		ft_multi_pipes(t_minishell *msh);
+void		execute_childe(t_cmd *cmd);
+void		ft_redirection(t_cmd *cmd);
+void    	handel_builtins(t_minishell *msh, t_cmd *cmd);
+void		ft_env(t_minishell *msh);
+void		ft_exit(t_minishell *msh, t_cmd *cmd);
+void    	ft_pwd(t_minishell *msh, t_cmd *cmd);
+void	    ft_unset(t_minishell *msh, t_cmd *cmd);
+void	    sort_env(char **env, int size);
+int			check_invalid_id(char *str);
+void	    ft_echo(t_minishell *msh, t_cmd *cmd);
+void		print_echo(char **av, int i);
+int			ft_isdigit(char c);
+int			isvalid_flag(char **av);
+void    	ft_cd(t_minishell *msh, t_cmd *cmd);
+void		cd_no_arg(t_minishell *msh, t_cmd *cmd);
+char		**set_oldpwd(t_minishell *msh, char *old_pwd);
+void		print_oldpwd(t_minishell *msh);
+void		get_to_dir(t_minishell *msh, t_cmd *cmd);
+char		*herexp(t_minishell *minishell, char *herdoc);
+void    	ft_export(t_minishell *msh, t_cmd *cmd);
+void    	print_export(t_minishell *msh);
+int     	check_invalid_id_export(char *str);
+char		*ft_substr(char const *s, unsigned int start, size_t len);
+int			ft_ispluseq(char *str);
+char 		*get_var(char *str, bool plus);
+char		*ft_strjoin_env(t_minishell *minishell, char const *s1, char const *s2);
+char 		**set_variable(t_minishell *msh, char *var, bool plus);
 
 #endif

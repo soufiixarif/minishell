@@ -41,17 +41,29 @@ void print_oldpwd(t_minishell *msh)
 char    **set_oldpwd(t_minishell *msh, char *old_pwd)
 {
     int i;
+    int check;
     char **new_env;
 
     i = 0;
+    check = 0;
     new_env = (char **)malloc(sizeof (char *) * (ft_countline(msh->env) + 2));
     while(msh->env[i])
     {
-        new_env[i] = msh->env[i];
+        if (!ft_strncmp("OLDPWD=",msh->env[i],7))
+        {
+            new_env[i] = ft_strjoin(msh, "OLDPWD=", old_pwd);
+            check = 1;
+        }
+        else
+            new_env[i] = msh->env[i];
         i++;
     }
-    new_env[i] = ft_strjoin(msh, "OLDPWD=", old_pwd);
-    new_env[i + 1] = NULL;
+    if (!check)
+    {
+        new_env[i] = ft_strjoin(msh, "OLDPWD=", old_pwd);
+        i++;
+    }
+    new_env[i] = NULL;
     return(new_env);
 }
 

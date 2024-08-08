@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 00:59:20 by sarif             #+#    #+#             */
-/*   Updated: 2024/08/03 20:54:09 by sarif            ###   ########.fr       */
+/*   Updated: 2024/08/08 20:48:53 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int     check_invalid_id(char *str)
 }
 void    sort_env(char **env, int size)
 {
-     int i, j;
+    int i, j;
     char *temp;
 
     i = 0;
@@ -88,24 +88,28 @@ void    sort_env(char **env, int size)
 void    ft_unset(t_minishell *msh, t_cmd *cmd)
 {
     int i;
-    int len;
     int count_line;
+    int j;
 
     i = 0;
+    j = 1;
     if (cmd->av[1] && !check_invalid_id(cmd->av[1]))
     {
         printf("bash: unset: \'%s\': not a valid identifier\n", cmd->av[1]);
-        return;   
+        return;
     }
-    len = ft_strlen(cmd->av[1]);
-    count_line = ft_countline(msh->env);
-    while(msh->env[i])
+    while(cmd->av[i])
     {
-        if(!ft_strncmp(cmd->av[1],msh->env[i],len) && msh->env[i][len] == '=')
+        j = 0;
+        count_line = ft_countline(msh->env);
+        while(msh->env[j])
         {
-            msh->env[i] = NULL;
-            sort_env(msh->env, count_line - 1);
-            break;
+            if(!ft_strcmp(cmd->av[i],get_var(msh->env[j], false)))
+            {
+                msh->env[j] = NULL;
+                sort_env(msh->env, count_line- 1);
+            }
+            j++;
         }
         i++;
     }

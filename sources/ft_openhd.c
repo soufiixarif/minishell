@@ -92,7 +92,7 @@ void    ft_openhd(t_minishell *msh)
 				token->fd = ft_creatfd_forhd(msh, input);
 			}
 			token = token->next;
-		}
+		} 
 		cmd = cmd->next;
 	}
 }

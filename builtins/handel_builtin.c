@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handel_builtin.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 23:04:10 by sarif             #+#    #+#             */
-/*   Updated: 2024/07/31 22:43:03 by sarif            ###   ########.fr       */
+/*   Updated: 2024/08/08 00:54:42 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,6 @@ void    handel_builtins(t_minishell *msh, t_cmd *cmd)
         ft_echo(msh, cmd);
     if(!ft_strcmp(cmd->av[0],"cd"))
         ft_cd(msh, cmd);
+    if(!ft_strcmp(cmd->av[0],"export"))
+        ft_export(msh, cmd);
 }

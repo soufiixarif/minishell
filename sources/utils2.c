@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 10:20:25 by kelmounj          #+#    #+#             */
-/*   Updated: 2024/08/06 16:30:05 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/08/08 23:10:40 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	ft_garadd_back(t_garbage **lst, t_garbage *new)
 		if (*lst)
 		{
 			tmp = *lst;
-			while (tmp->next)
+			while (tmp && tmp->next)
 				tmp = tmp->next;
 			(tmp)->next = new;
 		}

@@ -6,7 +6,7 @@
 /*   By: kelmounj <kelmounj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 23:08:44 by sarif             #+#    #+#             */
-/*   Updated: 2024/08/08 23:05:39 by kelmounj         ###   ########.fr       */
+/*   Updated: 2024/08/08 23:10:09 by kelmounj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ char	*getlinepath(char *path, char *commande, t_cmd *cmd)
 		i++;
 	}
 	put_stderr(commande);
-	put_stderr(" : commande not found\n");
+	put_stderr(" : command not found\n");
 	exit(1);
 	return (NULL);
 }

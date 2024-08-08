@@ -16,6 +16,7 @@
         "__node_handle": "c",
         "sstream": "c",
         "types.h": "c"
+        // "readline.h": "c"
     },
     "workbench.colorCustomizations": {
         // "activityBar.background": "#083517",
