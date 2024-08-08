@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 00:59:20 by sarif             #+#    #+#             */
-/*   Updated: 2024/08/06 16:35:54 by sarif            ###   ########.fr       */
+/*   Updated: 2024/08/07 02:43:27 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int     check_invalid_id(char *str)
 }
 void    sort_env(char **env, int size)
 {
-     int i, j;
+    int i, j;
     char *temp;
 
     i = 0;

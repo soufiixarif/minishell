@@ -14,7 +14,8 @@
         "chrono": "c",
         "ostream": "c",
         "__node_handle": "c",
-        "sstream": "c"
+        "sstream": "c",
+        "readline.h": "c"
     },
     "workbench.colorCustomizations": {
         // "activityBar.background": "#083517",

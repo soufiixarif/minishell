@@ -82,8 +82,8 @@ void    ft_openhd(t_minishell *msh)
 					line = readline(">");
 					if (!line || !ft_strcmp(line, token->next->token))
 						break ;
-					// if(token->next->type == DEL)
-					// 	line = herexp(msh, line);
+					if(token->next->type == DEL)
+						line = herexp(msh, line);
 					store = ft_strjoin(msh, store, line);
 					store = ft_strjoin(msh, store, "\n");
 					free(line);
